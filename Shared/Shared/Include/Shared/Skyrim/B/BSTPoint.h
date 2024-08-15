@@ -9,6 +9,7 @@ namespace Skyrim
 	template <class T>
 	class BSTPointDefaultOperations
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<BSTPointDefaultOperations<float>>);
 
@@ -29,6 +30,7 @@ namespace Skyrim
 		public BSTPoint2Base<T>, // 0
 		public Operations        // ?
 	{
+	public:
 	};
 	static_assert(sizeof(BSTPoint2<float>) == 0x8);
 
@@ -51,6 +53,7 @@ namespace Skyrim
 		public BSTPoint3Base<T>, // 0
 		public Operations        // ?
 	{
+	public:
 	};
 	static_assert(sizeof(BSTPoint3<float>) == 0xC);
 }

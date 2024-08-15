@@ -28,6 +28,6 @@ namespace Skyrim
 
 	bool TESFile::IsSmallFile() const
 	{
-		return this->recordFlags.all(Skyrim::TESFile::RecordFlags::kSmallFile);
+		return this->recordFlags.all(RecordFlags::kSmallFile);
 	}
 }

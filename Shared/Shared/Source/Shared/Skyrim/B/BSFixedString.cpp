@@ -15,11 +15,27 @@ namespace Skyrim
 		this->Acquire();
 	}
 
-	BSFixedString::BSFixedString(const_pointer string)
+	BSFixedString::BSFixedString(const_pointer right)
 	{
-		if (string)
+		if (right)
 		{
-			this->Initialize(string);
+			this->Initialize(right);
+		}
+	}
+
+	BSFixedString::BSFixedString(const std::basic_string<value_type>& right)
+	{
+		if (!right.empty())
+		{
+			this->Initialize(right.c_str());
+		}
+	}
+
+	BSFixedString::BSFixedString(std::basic_string_view<value_type> right)
+	{
+		if (!right.empty())
+		{
+			this->Initialize(right.data());
 		}
 	}
 
@@ -52,13 +68,37 @@ namespace Skyrim
 		return *this;
 	}
 
-	BSFixedString& BSFixedString::operator=(const_pointer string)
+	BSFixedString& BSFixedString::operator=(const_pointer right)
 	{
 		this->Release();
 
-		if (string)
+		if (right)
 		{
-			this->Initialize(string);
+			this->Initialize(right);
+		}
+
+		return *this;
+	}
+
+	BSFixedString& BSFixedString::operator=(const std::basic_string<value_type>& right)
+	{
+		this->Release();
+
+		if (!right.empty())
+		{
+			this->Initialize(right.c_str());
+		}
+
+		return *this;
+	}
+
+	BSFixedString& BSFixedString::operator=(std::basic_string_view<value_type> right)
+	{
+		this->Release();
+
+		if (!right.empty())
+		{
+			this->Initialize(right.data());
 		}
 
 		return *this;

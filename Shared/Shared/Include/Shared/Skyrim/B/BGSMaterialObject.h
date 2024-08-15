@@ -20,6 +20,7 @@ namespace Skyrim
 		struct FileData
 		{
 		public:
+			// Member variables
 			char*         buffer;     // 0
 			std::uint32_t bufferSize; // 8
 		};

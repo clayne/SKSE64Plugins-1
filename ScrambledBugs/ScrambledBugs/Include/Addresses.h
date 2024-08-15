@@ -83,7 +83,7 @@ namespace ScrambledBugs::Addresses
 		namespace PowerCooldowns
 		{
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x6309C0 (37794), 1.6.318.0: SkyrimSE.exe + 0x6567B0</summary>
-			inline const std::uintptr_t SaveCastPowers{ Relocation::AddressLibrary::GetSingleton().GetAddress(38743) }; // Actor::SaveCastPowers
+			inline const std::uintptr_t SaveCastPowerItems{ Relocation::AddressLibrary::GetSingleton().GetAddress(38743) }; // Actor::SaveCastPowerItems
 		}
 
 		namespace ProjectileFadeDuration

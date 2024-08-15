@@ -35,7 +35,7 @@ namespace SKSE
 		bool          WriteRecordData(const void* buffer, std::uint32_t length) const;
 
 		template <class T>
-			requires(!std::is_pointer_v<T>)
+			requires(std::negation_v<std::is_pointer<T>>)
 		std::uint32_t ReadRecordData(T& recordData) const
 		{
 			return this->ReadRecordData(std::addressof(recordData), sizeof(T));
@@ -49,7 +49,7 @@ namespace SKSE
 		}
 
 		template <class T>
-			requires(!std::is_pointer_v<T>)
+			requires(std::negation_v<std::is_pointer<T>>)
 		bool WriteRecord(std::uint32_t type, std::uint32_t version, const T& record) const
 		{
 			return this->WriteRecord(type, version, std::addressof(record), sizeof(T));
@@ -63,7 +63,7 @@ namespace SKSE
 		}
 
 		template <class T>
-			requires(!std::is_pointer_v<T>)
+			requires(std::negation_v<std::is_pointer<T>>)
 		bool WriteRecordData(const T& recordData) const
 		{
 			return this->WriteRecordData(std::addressof(recordData), sizeof(T));

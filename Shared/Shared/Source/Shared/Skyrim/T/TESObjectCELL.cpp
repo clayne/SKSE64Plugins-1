@@ -29,6 +29,6 @@ namespace Skyrim
 
 	bool TESObjectCELL::IsAttached() const
 	{
-		return this->cellState == TESObjectCELL::State::kAttached;
+		return this->cellState == State::kAttached;
 	}
 }

@@ -10,10 +10,10 @@ namespace Skyrim
 	{
 	public:
 		// Member variables
-		float w;
-		float x;
-		float y;
-		float z;
+		float w; // 0
+		float x; // 4
+		float y; // 8
+		float z; // C
 	};
 	static_assert(offsetof(NiQuaternion, w) == 0x0);
 	static_assert(offsetof(NiQuaternion, x) == 0x4);

@@ -335,8 +335,8 @@ namespace Skyrim
 		}
 
 		// Member variables
-		size_type capacity_ : 31 { 0 }; // 0
-		size_type local_    : 1 { 1 };  // 0
+		size_type capacity_ : 31 { 0 }; // 0 (0, 0)
+		size_type local_    : 1 { 1 };  // 0 (0, 31)
 		union
 		{
 		public:

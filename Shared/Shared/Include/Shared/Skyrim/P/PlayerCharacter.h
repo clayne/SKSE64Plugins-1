@@ -264,8 +264,8 @@ namespace Skyrim
 
 		// Member variables
 		std::uint64_t                                                unknown3E0;                        // 3D8, 3E0
-		BSTHashMap<const TESFaction*, CrimeGold>                     crimeGold;                         // 3E0, 3E8
-		BSTHashMap<const TESFaction*, StolenItemValue>               stolenItemValue;                   // 410, 418
+		BSTHashMap<TESFaction*, CrimeGold>                           crimeGold;                         // 3E0, 3E8
+		BSTHashMap<TESFaction*, StolenItemValue>                     stolenItemValue;                   // 410, 418
 		ObjectReferenceHandle                                        travelCommandLocationMarkerHandle; // 440, 448
 		std::uint32_t                                                unknown44C;                        // 444, 44C
 		std::uint64_t                                                unknown450;                        // 448, 450

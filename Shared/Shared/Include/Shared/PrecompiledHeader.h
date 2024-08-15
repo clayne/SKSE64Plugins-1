@@ -34,7 +34,7 @@
 #include <span>            // std::span
 #include <sstream>         // std::wistringstream
 #include <string.h>        // _stricmp, _wcsicmp
-#include <string>          // std::char_traits, std::getline, std::stoi, std::string, std::wstring
+#include <string>          // std::basic_string, std::char_traits, std::getline, std::stoi, std::string, std::wstring
 #include <string_view>     // std::basic_string_view, std::string_view
 #include <type_traits>     // Metaprogramming library
 #include <utility>         // std::exchange, std::forward, std::make_pair, std::move, std::pair

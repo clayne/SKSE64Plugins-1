@@ -153,7 +153,7 @@ namespace Skyrim
 		virtual void Unknown13(TESForm*) override;                         // 13
 
 		// Member variables
-		BSTHashMap<const TESNPC*, std::uint32_t>*  crimeGold;             // 50
+		BSTHashMap<TESNPC*, std::uint32_t>*        crimeGold;             // 50
 		Utility::Enumeration<Flags, std::uint32_t> factionFlags;          // 58
 		std::uint32_t                              padding5C;             // 5C
 		TrackCrime                                 trackCrime;            // 60

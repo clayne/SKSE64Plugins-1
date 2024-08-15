@@ -209,6 +209,24 @@ namespace Skyrim
 		return hash;
 	}
 
+	UPInt GString::BernsteinHashFunctionCaseInsensitive(const void* dataInput, UPInt size, UPInt seed)
+	{
+		UPInt        hash;
+		std::uint8_t byte{ 0 };
+
+		for (hash = seed; size; hash = byte ^ (33 * hash))
+		{
+			byte = static_cast<const std::uint8_t*>(dataInput)[--size];
+
+			if (byte - 65 <= 25)
+			{
+				byte += 32;
+			}
+		}
+
+		return hash;
+	}
+
 	GString* GString::Constructor(const_pointer string)
 	{
 		auto* function{ reinterpret_cast<

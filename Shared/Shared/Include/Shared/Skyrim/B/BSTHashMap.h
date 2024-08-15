@@ -25,14 +25,14 @@ namespace Skyrim
 		using value_type      = typename Traits::value_type;
 		using size_type       = std::uint32_t;
 		using difference_type = std::int32_t;
-		using hasher          = Hash;
+		using hash            = Hash;
 		using key_equal       = KeyEqual;
 		using reference       = value_type&;
 		using const_reference = const value_type&;
 		using pointer         = value_type*;
 		using const_pointer   = const value_type*;
 
-		static_assert(std::is_invocable_r_v<size_type, hasher, const key_type&>);
+		static_assert(std::is_invocable_r_v<size_type, hash, const key_type&>);
 		static_assert(std::is_invocable_r_v<bool, key_equal, const key_type&, const key_type&>);
 
 	private:
@@ -42,23 +42,17 @@ namespace Skyrim
 			entry_type()                  = default;
 			entry_type(const entry_type&) = delete;
 
-			/* CommonLibSSE moves the right entry instead of the stolen right entry */
 			entry_type(entry_type&& right)
-				noexcept(
-					std::is_nothrow_move_constructible_v<value_type> &&
-					std::is_nothrow_destructible_v<value_type>)
 			{
 				if (right.has_value())
 				{
 					auto* next = right.next;
 
-					this->emplace(std::move(right.steal()), next);
+					this->emplace(std::move(right.move()), next);
 				}
 			}
 
 			~entry_type()
-				noexcept(
-					std::is_nothrow_destructible_v<value_type>)
 			{
 				this->destroy();
 			}
@@ -66,9 +60,6 @@ namespace Skyrim
 			entry_type& operator=(const entry_type&) = delete;
 
 			entry_type& operator=(entry_type&& right)
-				noexcept(
-					std::is_nothrow_move_constructible_v<value_type> &&
-					std::is_nothrow_destructible_v<value_type>)
 			{
 				if (this != std::addressof(right))
 				{
@@ -78,7 +69,7 @@ namespace Skyrim
 					{
 						auto* next = right.next;
 
-						this->emplace(std::move(right.steal()), next);
+						this->emplace(std::move(right.move()), next);
 					}
 				}
 
@@ -87,8 +78,6 @@ namespace Skyrim
 
 			// Member functions
 			void destroy()
-				noexcept(
-					std::is_nothrow_destructible_v<value_type>)
 			{
 				if (this->has_value())
 				{
@@ -98,30 +87,22 @@ namespace Skyrim
 				}
 			}
 
-			/* CommonLibSSE checks whether the value is nothrow constructible instead of whether the value is nothrow move constructible and nothrow destructible */
-			template <class Argument>
-			void emplace(Argument&& value, const entry_type* next)
-				noexcept(
-					std::is_nothrow_move_constructible_v<value_type, Argument> &&
-					std::is_nothrow_destructible_v<value_type>)
-				requires(std::same_as<std::decay_t<Argument>, value_type>)
+			void emplace(value_type&& value, entry_type* next)
 			{
 				this->destroy();
 
-				std::construct_at(std::addressof(this->value), std::forward<Argument>(value));
+				std::construct_at(std::addressof(this->value), std::forward<value_type>(value));
 
-				this->next = const_cast<entry_type*>(next);
+				this->next = next;
 			}
 
-			bool has_value() const noexcept
+			constexpr bool has_value() const noexcept
 			{
-				return this->next != nullptr;
+				return this->next;
 			}
 
-			value_type steal()
-				noexcept(
-					std::is_nothrow_move_constructible_v<value_type> &&
-					std::is_nothrow_destructible_v<value_type>)
+			/* CommonLibSSE moves the entry instead of the moved entry */
+			value_type move()
 			{
 				value_type value(std::move(this->value));
 
@@ -133,10 +114,12 @@ namespace Skyrim
 			// Member variables
 			union
 			{
+			public:
+				// Member variables
 				value_type value;
 				std::byte  buffer[sizeof(value_type)]{ std::byte{ 0 } };
-			};
-			entry_type* next{ nullptr };
+			}; // 0
+			entry_type* next{ nullptr }; // ?
 		};
 
 		template <class U>
@@ -148,51 +131,83 @@ namespace Skyrim
 			using pointer           = value_type*;
 			using iterator_category = std::forward_iterator_tag;
 
-			iterator()                = default;
-			iterator(const iterator&) = delete;
+			constexpr iterator() noexcept                = default;
+			constexpr iterator(const iterator&) noexcept = default;
+			constexpr iterator(iterator&&) noexcept      = default;
+
+			constexpr ~iterator() noexcept = default;
+
+			constexpr iterator& operator=(const iterator&) noexcept = default;
+			constexpr iterator& operator=(iterator&&) noexcept      = default;
 
 			template <class V>
-			iterator(const iterator<V>& right) noexcept
-				requires(std::convertible_to<typename iterator<V>::reference, reference>)
+			constexpr iterator(const iterator<V>& right) noexcept
+				requires(std::is_convertible_v<std::iter_reference_t<iterator<V>>, std::iter_reference_t<iterator>>)
 				:
-				head_(right.head_),
-				tail_(right.tail_)
+				begin_(right.begin_),
+				end_(right.end_)
 			{
 			}
 
-			~iterator() = default;
-
-			iterator& operator=(const iterator&) = delete;
+			template <class V>
+			constexpr iterator(iterator<V>&& right) noexcept
+				requires(std::is_convertible_v<std::iter_reference_t<iterator<V>>, std::iter_reference_t<iterator>>)
+				:
+				begin_(std::move(right.begin_)),
+				end_(std::move(right.end_))
+			{
+			}
 
 			template <class V>
-			iterator& operator=(const iterator<V>& right) noexcept
-				requires(std::convertible_to<typename iterator<V>::reference, reference>)
+			constexpr iterator& operator=(const iterator<V>& right) noexcept
+				requires(std::is_convertible_v<std::iter_reference_t<iterator<V>>, std::iter_reference_t<iterator>>)
 			{
-				this->head_ = right.head_;
-				this->tail_ = right.tail_;
+				this->begin_ = right.begin_;
+				this->end_   = right.end_;
+
+				return *this;
+			}
+
+			template <class V>
+			constexpr iterator& operator=(iterator<V>&& right) noexcept
+				requires(std::is_convertible_v<std::iter_reference_t<iterator<V>>, std::iter_reference_t<iterator>>)
+			{
+				this->begin_ = std::move(right.begin_);
+				this->end_   = std::move(right.end_);
 
 				return *this;
 			}
 
 			// Member functions
-			reference operator*() const noexcept
+			constexpr reference operator*() const noexcept
 			{
-				return this->head_->value;
+				return this->begin_->value;
 			}
 
-			pointer operator->() const noexcept
+			constexpr pointer operator->() const noexcept
 			{
-				return std::addressof(this->head_->value);
+				return std::addressof(this->operator*());
 			}
 
 			template <class V>
-			bool operator==(const iterator<V>& right) const noexcept
-				requires(std::convertible_to<typename iterator<V>::reference, reference>)
+			constexpr bool operator==(const iterator<V>& right) const noexcept
+				requires(std::disjunction_v<
+					std::is_convertible<std::iter_reference_t<iterator<V>>, std::iter_reference_t<iterator>>,
+					std::is_convertible<std::iter_reference_t<iterator>, std::iter_reference_t<iterator<V>>>>)
 			{
-				return this->head_ == right.head_;
+				return this->begin_ == right.begin_;
 			}
 
-			iterator& operator++() noexcept
+			template <class V>
+			constexpr bool operator!=(const iterator<V>& right) const noexcept
+				requires(std::disjunction_v<
+					std::is_convertible<std::iter_reference_t<iterator<V>>, std::iter_reference_t<iterator>>,
+					std::is_convertible<std::iter_reference_t<iterator>, std::iter_reference_t<iterator<V>>>>)
+			{
+				return !this->operator==(right);
+			}
+
+			constexpr iterator& operator++() noexcept
 			{
 				this->seek();
 
@@ -200,11 +215,11 @@ namespace Skyrim
 			}
 
 			/* CommonLibSSE increments a value instead of a reference */
-			iterator operator++(int) noexcept
+			constexpr iterator operator++(int) noexcept
 			{
 				iterator iterator(*this);
 
-				++(*this);
+				this->operator++();
 
 				return iterator;
 			}
@@ -212,43 +227,40 @@ namespace Skyrim
 		protected:
 			friend class BSTScatterTable;
 
-			iterator(entry_type* head, entry_type* tail) noexcept :
-				head_(head),
-				tail_(tail)
+			constexpr iterator(entry_type* begin, entry_type* end) noexcept :
+				begin_(begin),
+				end_(end)
 			{
-				if (this->iterable() && !this->head_->has_value())
+				if (this->iterable() && !this->begin_->has_value())
 				{
 					this->seek();
 				}
 			}
 
 			// Member functions
-			entry_type* get_entry() const noexcept
+			constexpr entry_type* get_entry() const noexcept
 			{
-				return this->head_;
+				return this->begin_;
 			}
 
 		private:
-			template <class>
-			friend class iterator;
-
 			// Member functions
-			bool iterable() const noexcept
+			constexpr bool iterable() const noexcept
 			{
-				return this->head_ && this->tail_ && this->head_ != this->tail_;
+				return this->begin_ && this->end_ && this->begin_ != this->end_;
 			}
 
-			void seek() noexcept
+			constexpr void seek() noexcept
 			{
 				do
 				{
-					++this->head_;
-				} while (this->head_ != this->tail_ && !this->head_->has_value());
+					++this->begin_;
+				} while (this->begin_ != this->end_ && !this->begin_->has_value());
 			}
 
 			// Member variables
-			entry_type* head_{ nullptr };
-			entry_type* tail_{ nullptr };
+			entry_type* begin_{ nullptr }; // 0
+			entry_type* end_{ nullptr };   // 8
 		};
 
 	public:
@@ -262,7 +274,7 @@ namespace Skyrim
 		}
 
 		BSTScatterTable(BSTScatterTable&& right) noexcept
-			requires(std::same_as<typename allocator_type::propagate_on_container_move_assignment, std::true_type>)
+			requires(std::is_same_v<typename allocator_type::propagate_on_container_move_assignment, std::true_type>)
 			:
 			capacity_(std::exchange(right.capacity_, 0)),
 			free_(std::exchange(right.free_, 0)),
@@ -289,7 +301,7 @@ namespace Skyrim
 		}
 
 		BSTScatterTable& operator=(BSTScatterTable&& right)
-			requires(std::same_as<typename allocator_type::propagate_on_container_move_assignment, std::true_type>)
+			requires(std::is_same_v<typename allocator_type::propagate_on_container_move_assignment, std::true_type>)
 		{
 			if (this != std::addressof(right))
 			{
@@ -306,42 +318,42 @@ namespace Skyrim
 		}
 
 		// Member functions
-		iterator<value_type> begin() noexcept
+		constexpr iterator<value_type> begin() noexcept
 		{
 			return this->make_iterator<iterator<value_type>>(this->get_entries());
 		}
 
-		iterator<const value_type> begin() const noexcept
+		constexpr iterator<const value_type> begin() const noexcept
 		{
 			return this->make_iterator<iterator<const value_type>>(this->get_entries());
 		}
 
-		iterator<const value_type> cbegin() const noexcept
+		constexpr iterator<const value_type> cbegin() const noexcept
 		{
 			return this->begin();
 		}
 
-		iterator<value_type> end() noexcept
+		constexpr iterator<value_type> end() noexcept
 		{
 			return this->make_iterator<iterator<value_type>>();
 		}
 
-		iterator<const value_type> end() const noexcept
+		constexpr iterator<const value_type> end() const noexcept
 		{
 			return this->make_iterator<iterator<const value_type>>();
 		}
 
-		iterator<const value_type> cend() const noexcept
+		constexpr iterator<const value_type> cend() const noexcept
 		{
 			return this->end();
 		}
 
-		bool empty() const noexcept
+		constexpr bool empty() const noexcept
 		{
 			return this->size() == 0;
 		}
 
-		size_type size() const noexcept
+		constexpr size_type size() const noexcept
 		{
 			return this->capacity_ - this->free_;
 		}
@@ -369,19 +381,19 @@ namespace Skyrim
 
 		template <class... Arguments>
 		std::pair<iterator<value_type>, bool> emplace(Arguments&&... arguments)
-			requires(std::constructible_from<value_type, Arguments...>)
+			requires(std::is_constructible_v<value_type, Arguments...>)
 		{
 			return this->insert(value_type(std::forward<Arguments>(arguments)...));
 		}
 
 		iterator<value_type> erase(iterator<value_type> position)
 		{
-			return this->do_erase(position);
+			return this->erase_implementation(position);
 		}
 
 		iterator<value_type> erase(iterator<const value_type> position)
 		{
-			return this->do_erase(position);
+			return this->erase_implementation(position);
 		}
 
 		/* CommonLibSSE returns that an entry was not removed if the next iterator is the end */
@@ -401,33 +413,36 @@ namespace Skyrim
 
 		iterator<value_type> find(const key_type& key)
 		{
-			return this->do_find<iterator<value_type>>(key);
+			return this->find_implementation<iterator<value_type>>(key);
 		}
 
 		iterator<const value_type> find(const key_type& key) const
 		{
-			return this->do_find<iterator<const value_type>>(key);
+			return this->find_implementation<iterator<const value_type>>(key);
 		}
 
 		std::pair<iterator<value_type>, bool> insert(const value_type& value)
 		{
-			return this->do_insert(value);
+			return this->insert_implementation(value);
 		}
 
+		/* CommonLibSSE moves instead of forwarding values */
 		std::pair<iterator<value_type>, bool> insert(value_type&& value)
 		{
-			return this->do_insert(std::forward<value_type>(value));
+			return this->insert_implementation(std::forward<value_type>(value));
 		}
 
 		template <std::input_iterator InputIterator>
-		void insert(InputIterator head, InputIterator tail)
-			requires(std::convertible_to<std::iter_reference_t<InputIterator>, const_reference>)
+		void insert(InputIterator begin, InputIterator end)
+			requires(std::disjunction_v<
+				std::is_convertible<std::iter_reference_t<InputIterator>, const value_type&>,
+				std::is_convertible<std::iter_reference_t<InputIterator>, value_type &&>>)
 		{
-			this->reserve(this->size() + static_cast<size_type>(std::distance(head, tail)));
+			this->reserve(this->size() + static_cast<size_type>(std::distance(begin, end)));
 
-			for (; head != tail; ++head)
+			for (; begin != end; ++begin)
 			{
-				this->insert(std::move(*head));
+				this->insert(std::forward<value_type>(*begin));
 			}
 		}
 
@@ -441,16 +456,17 @@ namespace Skyrim
 			auto  oldCapacity = this->capacity_;
 			auto* oldEntries  = this->get_entries();
 
-			auto newCapacity = std::max(std::bit_ceil<std::size_t>(count), static_cast<std::size_t>(allocator_type::minimum_size()));
+			auto capacity = std::max<std::size_t>(std::bit_ceil<std::size_t>(count), allocator_type::minimum_size());
 
-			if (newCapacity > std::numeric_limits<size_type>::max()) // 1U << 31
+			if (capacity > std::numeric_limits<size_type>::max()) // 1U << 31
 			{
 				throw std::bad_alloc{};
 			}
 
-			auto* newEntries = this->allocate(static_cast<size_type>(newCapacity));
+			auto  newCapacity = static_cast<size_type>(capacity);
+			auto* newEntries  = this->allocate(newCapacity);
 
-			/* Reinsert entries because their indexes depend on the capacity of the allocation */
+			/* The indexes of entries depend on the capacity of the allocation and so must be reinserted */
 			if (newEntries == oldEntries)
 			{
 				std::uninitialized_default_construct_n(oldEntries + oldCapacity, newCapacity - oldCapacity);
@@ -465,7 +481,7 @@ namespace Skyrim
 
 					if (entry.has_value())
 					{
-						values.emplace_back(std::move(entry.steal()));
+						values.emplace_back(std::move(entry.move()));
 					}
 				}
 
@@ -495,7 +511,7 @@ namespace Skyrim
 
 						if (entry.has_value())
 						{
-							this->insert(std::move(entry.steal()));
+							this->insert(std::move(entry.move()));
 						}
 					}
 
@@ -508,7 +524,7 @@ namespace Skyrim
 
 	private:
 		// Non-member functions
-		static const key_type& unwrap_key(const value_type& value) noexcept
+		static constexpr const key_type& unwrap_key(const value_type& value) noexcept
 		{
 			return traits_type::unwrap_key(value);
 		}
@@ -524,29 +540,29 @@ namespace Skyrim
 			this->allocator_.deallocate_bytes(entry);
 		}
 
-		entry_type* get_entries() const noexcept
+		constexpr entry_type* get_entries() const noexcept
 		{
 			return static_cast<entry_type*>(this->allocator_.get_entries());
 		}
 
-		void set_entries(entry_type* entries) noexcept
+		constexpr void set_entries(entry_type* entries) noexcept
 		{
 			this->allocator_.set_entries(entries);
 		}
 
-		iterator<value_type> do_erase(iterator<const value_type> position)
+		iterator<value_type> erase_implementation(iterator<const value_type> position)
 		{
 			auto* entry = position.get_entry();
 
-			/* The entry is the last in a chain */
+			/* The entry is the tail of a chain */
 			if (entry->next == this->sentinel_)
 			{
-				auto* firstEntry = std::addressof(this->get_entry_for(BSTScatterTable::unwrap_key(entry->value)));
+				auto* headEntry = std::addressof(this->get_head_entry(BSTScatterTable::unwrap_key(entry->value)));
 
-				/* The entry is not the first in the chain */
-				if (firstEntry != entry)
+				/* The entry is not the head of the chain */
+				if (headEntry != entry)
 				{
-					auto* previousEntry = firstEntry;
+					auto* previousEntry = headEntry;
 
 					while (previousEntry->next != entry)
 					{
@@ -558,7 +574,7 @@ namespace Skyrim
 
 				entry->destroy();
 			}
-			/* The entry is not the last in a chain */
+			/* The entry is not the tail of a chain */
 			else
 			{
 				*entry = std::move(*entry->next);
@@ -566,27 +582,24 @@ namespace Skyrim
 
 			++this->free_;
 
-			return this->make_iterator<iterator<value_type>>(entry + 1);
+			return this->make_iterator<iterator<value_type>>(++entry);
 		}
 
 		template <class Iterator>
-		Iterator do_find(const key_type& key) const
-			noexcept(
-				noexcept(this->hash_function(key)) &&
-				noexcept(this->key_eq(key, key)))
+		Iterator find_implementation(const key_type& key) const
 		{
 			if (this->empty())
 			{
 				return this->make_iterator<Iterator>();
 			}
 
-			auto* entry = std::addressof(this->get_entry_for(key));
+			auto* entry = std::addressof(this->get_head_entry(key));
 
 			if (entry->has_value())
 			{
 				do
 				{
-					if (this->key_eq(BSTScatterTable::unwrap_key(entry->value), key))
+					if (this->key_equal_function(BSTScatterTable::unwrap_key(entry->value), key))
 					{
 						return this->make_iterator<Iterator>(entry);
 					}
@@ -600,9 +613,7 @@ namespace Skyrim
 			return this->make_iterator<Iterator>();
 		}
 
-		template <class Argument>
-		std::pair<iterator<value_type>, bool> do_insert(Argument&& value)
-			requires(std::same_as<std::decay_t<Argument>, value_type>)
+		std::pair<iterator<value_type>, bool> insert_implementation(value_type&& value)
 		{
 			auto position = this->find(BSTScatterTable::unwrap_key(value));
 
@@ -616,29 +627,29 @@ namespace Skyrim
 				this->reserve(this->capacity_ + 1);
 			}
 
-			auto* entry = std::addressof(this->get_entry_for(BSTScatterTable::unwrap_key(value)));
+			auto* entry = std::addressof(this->get_head_entry(BSTScatterTable::unwrap_key(value)));
 
-			/* The entry has a value */
+			/* The old entry has a value */
 			if (entry->has_value())
 			{
-				auto* freeEntry  = std::addressof(this->get_free_entry());
-				auto* firstEntry = std::addressof(this->get_entry_for(BSTScatterTable::unwrap_key(entry->value)));
+				auto* freeEntry = std::addressof(this->get_free_entry());
+				auto* headEntry = std::addressof(this->get_head_entry(BSTScatterTable::unwrap_key(entry->value)));
 
-				/* The entry is the first in a chain */
-				/* Make the entry the next in the chain */
-				if (firstEntry == entry)
+				/* The old entry is the head of the old chain */
+				/* Make the new entry the next in the old chain */
+				if (headEntry == entry)
 				{
-					freeEntry->emplace(std::forward<Argument>(value), std::exchange(entry->next, freeEntry));
+					freeEntry->emplace(std::forward<value_type>(value), std::exchange(entry->next, freeEntry));
 					--this->free_;
 
 					return std::make_pair(this->make_iterator<iterator<value_type>>(freeEntry), true);
 				}
-				/* The entry is not the first in a chain */
-				/* Move the old value to a new entry and move the new value to the old entry */
-				/* Make the old entry the first in a new chain */
+				/* The old entry is not the head of the old chain */
+				/* Move the old value to a new entry in the old chain and move the new value to the old entry in a new chain */
+				/* Make the old entry the head of the new chain */
 				else
 				{
-					auto* previousEntry = firstEntry;
+					auto* previousEntry = headEntry;
 
 					while (previousEntry->next != entry)
 					{
@@ -648,17 +659,17 @@ namespace Skyrim
 					*freeEntry          = std::move(*entry);
 					previousEntry->next = freeEntry;
 
-					entry->emplace(std::forward<Argument>(value), this->sentinel_);
+					entry->emplace(std::forward<value_type>(value), const_cast<entry_type*>(this->sentinel_));
 					--this->free_;
 
 					return std::make_pair(this->make_iterator<iterator<value_type>>(entry), true);
 				}
 			}
-			/* The entry has no value */
-			/* Make the entry the first in a new chain */
+			/* The old entry has no value */
+			/* Make the old entry the head of a new chain */
 			else
 			{
-				entry->emplace(std::forward<Argument>(value), this->sentinel_);
+				entry->emplace(std::forward<value_type>(value), const_cast<entry_type*>(this->sentinel_));
 				--this->free_;
 
 				return std::make_pair(this->make_iterator<iterator<value_type>>(entry), true);
@@ -680,17 +691,7 @@ namespace Skyrim
 			}
 		}
 
-		entry_type& get_entry_for(const key_type& key) const
-			noexcept(
-				noexcept(this->hash_function(key)))
-		{
-			auto hash  = this->hash_function(key);
-			auto index = hash % this->capacity_;
-
-			return this->get_entries()[index];
-		}
-
-		entry_type& get_free_entry() noexcept
+		constexpr entry_type& get_free_entry() noexcept
 		{
 			auto* entries = this->get_entries();
 
@@ -704,32 +705,41 @@ namespace Skyrim
 			return entries[this->good_];
 		}
 
-		size_type hash_function(const key_type& key) const
-			noexcept(
-				std::is_nothrow_constructible_v<hasher> &&
-				std::is_nothrow_invocable_v<hasher, const key_type&>)
+		entry_type& get_head_entry(const key_type& key) const
 		{
-			return static_cast<size_type>(hasher()(key));
+			return this->get_entries()[this->hash_function(key) % this->capacity_];
 		}
 
-		bool key_eq(const key_type& left, const key_type& right) const
+		size_type hash_function(const key_type& key) const
 			noexcept(
-				std::is_nothrow_constructible_v<key_equal> &&
-				std::is_nothrow_invocable_v<key_equal, const key_type&, const key_type&>)
+				std::conjunction_v<
+					std::is_nothrow_constructible<hash>,
+					std::is_nothrow_invocable_r<size_type, hash, const key_type&>,
+					std::is_nothrow_destructible<hash>>)
+		{
+			return static_cast<size_type>(hash()(key));
+		}
+
+		bool key_equal_function(const key_type& left, const key_type& right) const
+			noexcept(
+				std::conjunction_v<
+					std::is_nothrow_constructible<key_equal>,
+					std::is_nothrow_invocable_r<bool, key_equal, const key_type&, const key_type&>,
+					std::is_nothrow_destructible<key_equal>>)
 		{
 			return static_cast<bool>(key_equal()(left, right));
 		}
 
 		template <class Iterator>
-		Iterator make_iterator() const noexcept
+		constexpr Iterator make_iterator() const noexcept
 		{
 			return Iterator(this->get_entries() + this->capacity_, this->get_entries() + this->capacity_);
 		}
 
 		template <class Iterator>
-		Iterator make_iterator(entry_type* head) const noexcept
+		constexpr Iterator make_iterator(entry_type* begin) const noexcept
 		{
-			return Iterator(head, this->get_entries() + this->capacity_);
+			return Iterator(begin, this->get_entries() + this->capacity_);
 		}
 
 		// Non-member variables
@@ -740,7 +750,7 @@ namespace Skyrim
 		std::uint32_t     padding8_{ 0 };                                                              // 8
 		size_type         capacity_{ 0 };                                                              // C, number of entries (always a power of 2)
 		size_type         free_{ 0 };                                                                  // 10, number of free entries
-		size_type         good_{ 0 };                                                                  // 14, last free index
+		size_type         good_{ 0 };                                                                  // 14, next free index
 		const entry_type* sentinel_{ reinterpret_cast<const entry_type*>(BSTScatterTable::SENTINEL) }; // 18, signals end of chain
 		allocator_type    allocator_;                                                                  // 20
 	};
@@ -754,7 +764,7 @@ namespace Skyrim
 		using value_type  = BSTTuple<const key_type, mapped_type>;
 
 		// Non-member functions
-		static const key_type& unwrap_key(const value_type& value) noexcept
+		static constexpr const key_type& unwrap_key(const value_type& value) noexcept
 		{
 			return value.first;
 		}
@@ -769,7 +779,7 @@ namespace Skyrim
 		using value_type  = key_type;
 
 		// Non-member functions
-		static const key_type& unwrap_key(const value_type& value) noexcept
+		static constexpr const key_type& unwrap_key(const value_type& value) noexcept
 		{
 			return value;
 		}
@@ -782,19 +792,19 @@ namespace Skyrim
 		using size_type                              = std::uint32_t;
 		using propagate_on_container_move_assignment = std::true_type;
 
-		BSTScatterTableHeapAllocator()                                    = default;
-		BSTScatterTableHeapAllocator(const BSTScatterTableHeapAllocator&) = delete;
+		constexpr BSTScatterTableHeapAllocator() noexcept                                    = default;
+		constexpr BSTScatterTableHeapAllocator(const BSTScatterTableHeapAllocator&) noexcept = delete;
 
-		BSTScatterTableHeapAllocator(BSTScatterTableHeapAllocator&& right) noexcept :
+		constexpr BSTScatterTableHeapAllocator(BSTScatterTableHeapAllocator&& right) noexcept :
 			entries_(std::exchange(right.entries_, nullptr))
 		{
 		}
 
-		~BSTScatterTableHeapAllocator() = default;
+		constexpr ~BSTScatterTableHeapAllocator() noexcept = default;
 
-		BSTScatterTableHeapAllocator& operator=(const BSTScatterTableHeapAllocator&) = delete;
+		constexpr BSTScatterTableHeapAllocator& operator=(const BSTScatterTableHeapAllocator&) noexcept = delete;
 
-		BSTScatterTableHeapAllocator& operator=(BSTScatterTableHeapAllocator&& right) noexcept
+		constexpr BSTScatterTableHeapAllocator& operator=(BSTScatterTableHeapAllocator&& right) noexcept
 		{
 			if (this != std::addressof(right))
 			{
@@ -829,12 +839,12 @@ namespace Skyrim
 			Skyrim::free(entries);
 		}
 
-		void* get_entries() const noexcept
+		constexpr void* get_entries() const noexcept
 		{
 			return this->entries_;
 		}
 
-		void set_entries(void* entries) noexcept
+		constexpr void set_entries(void* entries) noexcept
 		{
 			this->entries_ = static_cast<std::byte*>(entries);
 		}
@@ -858,14 +868,14 @@ namespace Skyrim
 			using size_type                              = std::uint32_t;
 			using propagate_on_container_move_assignment = std::false_type;
 
-			Allocator()                 = default;
-			Allocator(const Allocator&) = delete;
-			Allocator(Allocator&&)      = delete;
+			constexpr Allocator() noexcept                 = default;
+			constexpr Allocator(const Allocator&) noexcept = delete;
+			constexpr Allocator(Allocator&&) noexcept      = delete;
 
-			~Allocator() = default;
+			constexpr ~Allocator() noexcept = default;
 
-			Allocator& operator=(const Allocator&) = delete;
-			Allocator& operator=(Allocator&&)      = delete;
+			constexpr Allocator& operator=(const Allocator&) noexcept = delete;
+			constexpr Allocator& operator=(Allocator&&) noexcept      = delete;
 
 			// Non-member functions
 			static constexpr size_type minimum_size() noexcept
@@ -891,12 +901,12 @@ namespace Skyrim
 			{
 			}
 
-			void* get_entries() const noexcept
+			constexpr void* get_entries() const noexcept
 			{
 				return this->entries_;
 			}
 
-			void set_entries(void* entries) noexcept
+			constexpr void set_entries(void* entries) noexcept
 			{
 				this->entries_ = static_cast<std::byte*>(entries);
 			}
@@ -949,12 +959,12 @@ namespace Skyrim
 			this->allocator_->Deallocate(entries);
 		}
 
-		void* get_entries() const noexcept
+		constexpr void* get_entries() const noexcept
 		{
 			return this->entries_;
 		}
 
-		void set_entries(void* entries) noexcept
+		constexpr void set_entries(void* entries) noexcept
 		{
 			this->entries_ = static_cast<std::byte*>(entries);
 		}

@@ -19,7 +19,7 @@ namespace Skyrim
 
 		// Override (NiCollisionObject)
 		virtual const NiRTTI*         GetRTTI() const override;                       // 2
-		virtual bhkNiCollisionObject* AsBhkNiCollisionObject() override;              // 12
+		virtual bhkNiCollisionObject* AsNetImmerseCollisionObject() override;         // 12
 		virtual void                  LoadBinary(NiStream& stream) override;          // 18
 		virtual void                  LinkObject(NiStream& stream) override;          // 19
 		virtual bool                  RegisterStreamables(NiStream& stream) override; // 1A

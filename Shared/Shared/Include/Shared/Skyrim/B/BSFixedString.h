@@ -28,42 +28,18 @@ namespace Skyrim
 			right.data_ = nullptr;
 		}
 
-		BSFixedString(const_pointer string);
-
-		template <class T>
-			requires(std::is_convertible_v<const T&, std::basic_string_view<value_type>> && !std::is_convertible_v<const T&, const_pointer>)
-		BSFixedString(const T& string)
-		{
-			auto stringView = static_cast<std::basic_string_view<value_type>>(string);
-
-			if (!stringView.empty())
-			{
-				this->Initialize(stringView.data());
-			}
-		}
+		BSFixedString(const_pointer right);
+		BSFixedString(const std::basic_string<value_type>& right);
+		BSFixedString(std::basic_string_view<value_type> right);
 
 		~BSFixedString();
 
 		BSFixedString& operator=(const BSFixedString& right);
 		BSFixedString& operator=(BSFixedString&& right);
 
-		BSFixedString& operator=(const_pointer string);
-
-		template <class T>
-			requires(std::is_convertible_v<const T&, std::basic_string_view<value_type>> && !std::is_convertible_v<const T&, const_pointer>)
-		BSFixedString& operator=(const T& string)
-		{
-			auto stringView = static_cast<std::basic_string_view<value_type>>(string);
-
-			this->Release();
-
-			if (!stringView.empty())
-			{
-				this->Initialize(stringView.data());
-			}
-
-			return *this;
-		}
+		BSFixedString& operator=(const_pointer right);
+		BSFixedString& operator=(const std::basic_string<value_type>& right);
+		BSFixedString& operator=(std::basic_string_view<value_type> right);
 
 		// Element access
 		constexpr const_reference operator[](size_type index) const noexcept { return this->data()[index]; }
@@ -105,47 +81,20 @@ namespace Skyrim
 		friend constexpr bool operator==(const BSFixedString& left, const BSFixedString& right) noexcept { return left.data_ == right.data_; }
 		friend constexpr bool operator!=(const BSFixedString& left, const BSFixedString& right) noexcept { return !(left == right); }
 
-		friend bool operator==(const BSFixedString& left, const_pointer right)
-		{
-			if (!left.data_)
-			{
-				return !right;
-			}
-
-			return right ? ::_stricmp(left.data_, right) == 0 : false;
-		}
-
+		friend bool operator==(const BSFixedString& left, const_pointer right) { return ::_stricmp(left.data(), right ? right : BSFixedString::EMPTY) == 0; }
 		friend bool operator!=(const BSFixedString& left, const_pointer right) { return !(left == right); }
 		friend bool operator==(const_pointer left, const BSFixedString& right) { return right == left; }
 		friend bool operator!=(const_pointer left, const BSFixedString& right) { return !(left == right); }
 
-		template <class T>
-			requires(std::is_convertible_v<const T&, std::basic_string_view<value_type>> && !std::is_convertible_v<const T&, const_pointer>)
-		friend bool operator==(const BSFixedString& left, const T& right)
-		{
-			return left == static_cast<std::basic_string_view<value_type>>(right).data();
-		}
+		friend bool operator==(const BSFixedString& left, const std::basic_string<value_type>& right) { return left == right.c_str(); }
+		friend bool operator!=(const BSFixedString& left, const std::basic_string<value_type>& right) { return !(left == right); }
+		friend bool operator==(const std::basic_string<value_type>& left, const BSFixedString& right) { return right == left; }
+		friend bool operator!=(const std::basic_string<value_type>& left, const BSFixedString& right) { return !(left == right); }
 
-		template <class T>
-			requires(std::is_convertible_v<const T&, std::basic_string_view<value_type>> && !std::is_convertible_v<const T&, const_pointer>)
-		friend bool operator!=(const BSFixedString& left, const T& right)
-		{
-			return !(left == right);
-		}
-
-		template <class T>
-			requires(std::is_convertible_v<const T&, std::basic_string_view<value_type>> && !std::is_convertible_v<const T&, const_pointer>)
-		friend bool operator==(const T& left, const BSFixedString& right)
-		{
-			return right == left;
-		}
-
-		template <class T>
-			requires(std::is_convertible_v<const T&, std::basic_string_view<value_type>> && !std::is_convertible_v<const T&, const_pointer>)
-		friend bool operator!=(const T& left, const BSFixedString& right)
-		{
-			return !(left == right);
-		}
+		friend bool operator==(const BSFixedString& left, std::basic_string_view<value_type> right) { return left == right.data(); }
+		friend bool operator!=(const BSFixedString& left, std::basic_string_view<value_type> right) { return !(left == right); }
+		friend bool operator==(std::basic_string_view<value_type> left, const BSFixedString& right) { return right == left; }
+		friend bool operator!=(std::basic_string_view<value_type> left, const BSFixedString& right) { return !(left == right); }
 
 	private:
 		static constexpr value_type EMPTY[]{ 0 };
@@ -177,7 +126,7 @@ namespace Skyrim
 		struct BSCRC32<BSFixedString>
 		{
 		public:
-			inline std::uint32_t operator()(const BSFixedString& key) const noexcept
+			inline constexpr std::uint32_t operator()(const BSFixedString& key) const noexcept
 			{
 				return BSCRC32<BSFixedString::const_pointer>()(key.data());
 			}

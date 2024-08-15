@@ -34,8 +34,8 @@ namespace Skyrim
 			{
 			}
 
-			const reference operator*() const noexcept { return *this->current_; }
-			const pointer   operator->() const noexcept { return this->current_; }
+			constexpr reference operator*() const noexcept { return *this->current_; }
+			constexpr pointer   operator->() const noexcept { return std::addressof(this->operator*()); }
 
 			friend constexpr bool operator==(const iterator& left, const iterator& right) noexcept { return left.current_ == right.current_; }
 			friend constexpr bool operator!=(const iterator& left, const iterator& right) noexcept { return !(left == right); }
@@ -51,7 +51,7 @@ namespace Skyrim
 			{
 				iterator iterator(*this);
 
-				++(*this);
+				this->operator++();
 
 				return iterator;
 			}

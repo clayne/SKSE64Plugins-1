@@ -23,18 +23,18 @@ namespace Skyrim
 		{
 		}
 
+		friend constexpr bool operator==(const Color& left, const Color& right) noexcept { return (left.red == right.red) && (left.green == right.green) && (left.blue == right.blue) && (left.alpha == right.alpha); }
+		friend constexpr bool operator!=(const Color& left, const Color& right) noexcept { return !(left == right); }
+
 		// Member variables
-		std::uint8_t red{ 0 };
-		std::uint8_t green{ 0 };
-		std::uint8_t blue{ 0 };
-		std::uint8_t alpha{ 0 };
+		std::uint8_t red{ 0 };   // 0
+		std::uint8_t green{ 0 }; // 1
+		std::uint8_t blue{ 0 };  // 2
+		std::uint8_t alpha{ 0 }; // 3
 	};
 	static_assert(offsetof(Color, red) == 0x0);
 	static_assert(offsetof(Color, green) == 0x1);
 	static_assert(offsetof(Color, blue) == 0x2);
 	static_assert(offsetof(Color, alpha) == 0x3);
 	static_assert(sizeof(Color) == 0x4);
-
-	constexpr bool operator==(const Color& left, const Color& right) noexcept { return (left.red == right.red) && (left.green == right.green) && (left.blue == right.blue) && (left.alpha == right.alpha); }
-	constexpr bool operator!=(const Color& left, const Color& right) noexcept { return !(left == right); }
 }

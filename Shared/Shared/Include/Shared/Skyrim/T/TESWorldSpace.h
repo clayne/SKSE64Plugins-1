@@ -63,7 +63,7 @@ namespace Skyrim
 		struct BSCRC32<CellID>
 		{
 		public:
-			inline std::uint32_t operator()(CellID key) const noexcept
+			inline constexpr std::uint32_t operator()(CellID key) const noexcept
 			{
 				return BSCRC32<std::uint32_t>()(reinterpret_cast<const std::uint32_t&>(key));
 			}

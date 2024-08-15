@@ -65,8 +65,8 @@ namespace Skyrim
 	float TESObjectREFR::GetDistanceSquared(TESObjectREFR* target, bool ignoreDisabled, bool ignoreWorldSpace) const
 	{
 		if (target &&
-			(Utility::Enumeration<TESObjectREFR::RecordFlags, std::uint32_t>(target->recordFlags).none(TESObjectREFR::RecordFlags::kDisabled) || ignoreDisabled) &&
-			(Utility::Enumeration<TESObjectREFR::RecordFlags, std::uint32_t>(target->recordFlags).none(TESObjectREFR::RecordFlags::kDeleted)) &&
+			(Utility::Enumeration<RecordFlags, std::uint32_t>(static_cast<RecordFlags>(target->recordFlags)).none(RecordFlags::kDisabled) || ignoreDisabled) &&
+			(Utility::Enumeration<RecordFlags, std::uint32_t>(static_cast<RecordFlags>(target->recordFlags)).none(RecordFlags::kDeleted)) &&
 			(ignoreWorldSpace || this->SameWorldSpace(target, true)))
 		{
 			return this->GetDistanceSquared(target);
@@ -125,7 +125,7 @@ namespace Skyrim
 
 	bool TESObjectREFR::Is3DLoaded() const
 	{
-		return this->GetThirdPerson3D() != nullptr;
+		return this->GetThirdPerson3D();
 	}
 
 	bool TESObjectREFR::IsCrimeToActivate() const

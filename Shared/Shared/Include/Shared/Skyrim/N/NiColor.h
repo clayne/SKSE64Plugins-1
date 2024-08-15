@@ -23,18 +23,18 @@ namespace Skyrim
 		{
 		}
 
+		friend constexpr bool operator==(const NiColor& left, const NiColor& right) noexcept { return (left.red == right.red) && (left.green == right.green) && (left.blue == right.blue); }
+		friend constexpr bool operator!=(const NiColor& left, const NiColor& right) noexcept { return !(left == right); }
+
 		// Member variables
-		float red{ 0.0F };
-		float green{ 0.0F };
-		float blue{ 0.0F };
+		float red{ 0.0F };   // 0
+		float green{ 0.0F }; // 4
+		float blue{ 0.0F };  // 8
 	};
 	static_assert(offsetof(NiColor, red) == 0x0);
 	static_assert(offsetof(NiColor, green) == 0x4);
 	static_assert(offsetof(NiColor, blue) == 0x8);
 	static_assert(sizeof(NiColor) == 0xC);
-
-	constexpr bool operator==(const NiColor& left, const NiColor& right) noexcept { return (left.red == right.red) && (left.green == right.green) && (left.blue == right.blue); }
-	constexpr bool operator!=(const NiColor& left, const NiColor& right) noexcept { return !(left == right); }
 
 	class NiColorA
 	{
@@ -53,18 +53,18 @@ namespace Skyrim
 		{
 		}
 
+		friend constexpr bool operator==(const NiColorA& left, const NiColorA& right) noexcept { return (left.red == right.red) && (left.green == right.green) && (left.blue == right.blue) && (left.alpha == right.alpha); }
+		friend constexpr bool operator!=(const NiColorA& left, const NiColorA& right) noexcept { return !(left == right); }
+
 		// Member variables
-		float red{ 0.0F };
-		float green{ 0.0F };
-		float blue{ 0.0F };
-		float alpha{ 0.0F };
+		float red{ 0.0F };   // 0
+		float green{ 0.0F }; // 4
+		float blue{ 0.0F };  // 8
+		float alpha{ 0.0F }; // C
 	};
 	static_assert(offsetof(NiColorA, red) == 0x0);
 	static_assert(offsetof(NiColorA, green) == 0x4);
 	static_assert(offsetof(NiColorA, blue) == 0x8);
 	static_assert(offsetof(NiColorA, alpha) == 0xC);
 	static_assert(sizeof(NiColorA) == 0x10);
-
-	constexpr bool operator==(const NiColorA& left, const NiColorA& right) noexcept { return (left.red == right.red) && (left.green == right.green) && (left.blue == right.blue) && (left.alpha == right.alpha); }
-	constexpr bool operator!=(const NiColorA& left, const NiColorA& right) noexcept { return !(left == right); }
 }

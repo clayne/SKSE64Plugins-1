@@ -34,27 +34,27 @@ namespace Skyrim
 		virtual ~BSTempEffect() override; // 0
 
 		// Override (NiObject)
-		virtual const NiRTTI*                 GetRTTI() const override;                  // 2
-		virtual NiNode*                       AsNiNode() override;                       // 3
-		virtual NiSwitchNode*                 AsNiSwitchNode() override;                 // 4
-		virtual BSFadeNode*                   AsBSFadeNode() override;                   // 5
-		virtual BSMultiBoundNode*             AsBSMultipleBoundNode() override;          // 6
-		virtual BSGeometry*                   AsBSGeometry() override;                   // 7
-		virtual NiTriStrips*                  AsNiTriangleStrips() override;             // 8
-		virtual BSTriShape*                   AsBSTriangleShape() override;              // 9
-		virtual BSSegmentedTriShape*          AsBSSegmentedTriangleShape() override;     // A
-		virtual BSSubIndexTriShape*           AsBSSubIndexTriangleShape() override;      // B
-		virtual BSDynamicTriShape*            AsBSDynamicTriangleShape() override;       // C
-		virtual NiGeometry*                   AsNiGeometry() override;                   // D
-		virtual NiTriBasedGeom*               AsNiTriangleBasedGeometry() override;      // E
-		virtual NiTriShape*                   AsNiTriangleShape() override;              // F
-		virtual NiParticles*                  AsNiParticles() override;                  // 10
-		virtual BSLines*                      AsBSLines() override;                      // 11
-		virtual bhkNiCollisionObject*         AsBhkNiCollisionObject() override;         // 12
-		virtual bhkBlendCollisionObject*      AsBhkBlendCollisionObject() override;      // 13
-		virtual bhkAttachmentCollisionObject* AsBhkAttachmentCollisionObject() override; // 14
-		virtual bhkRigidBody*                 AsBhkRigidBody() override;                 // 15
-		virtual bhkLimitedHingeConstraint*    AsBhkLimitedHingeConstraint() override;    // 16
+		virtual const NiRTTI*                 GetRTTI() const override;                     // 2
+		virtual NiNode*                       AsNetImmerseNode() override;                  // 3
+		virtual NiSwitchNode*                 AsNetImmerseSwitchNode() override;            // 4
+		virtual BSFadeNode*                   AsFadeNode() override;                        // 5
+		virtual BSMultiBoundNode*             AsMultipleBoundNode() override;               // 6
+		virtual BSGeometry*                   AsGeometry() override;                        // 7
+		virtual NiTriStrips*                  AsNetImmerseTriangleStrips() override;        // 8
+		virtual BSTriShape*                   AsTriangleShape() override;                   // 9
+		virtual BSSegmentedTriShape*          AsSegmentedTriangleShape() override;          // A
+		virtual BSSubIndexTriShape*           AsSubIndexTriangleShape() override;           // B
+		virtual BSDynamicTriShape*            AsDynamicTriangleShape() override;            // C
+		virtual NiGeometry*                   AsNetImmerseGeometry() override;              // D
+		virtual NiTriBasedGeom*               AsNetImmerseTriangleBasedGeometry() override; // E
+		virtual NiTriShape*                   AsNetImmerseTriangleShape() override;         // F
+		virtual NiParticles*                  AsNetImmerseParticles() override;             // 10
+		virtual BSLines*                      AsLines() override;                           // 11
+		virtual bhkNiCollisionObject*         AsNetImmerseCollisionObject() override;       // 12
+		virtual bhkBlendCollisionObject*      AsBlendCollisionObject() override;            // 13
+		virtual bhkAttachmentCollisionObject* AsAttachmentCollisionObject() override;       // 14
+		virtual bhkRigidBody*                 AsRigidBody() override;                       // 15
+		virtual bhkLimitedHingeConstraint*    AsLimitedHingeConstraint() override;          // 16
 
 		// Add
 		virtual void                Unknown25(BSTempEffect*);                     // 25

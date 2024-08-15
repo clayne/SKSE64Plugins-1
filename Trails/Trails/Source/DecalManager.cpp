@@ -16,7 +16,7 @@ namespace Trails
 		{
 			if (creationData.target3D)
 			{
-				auto* target3DNode = creationData.target3D->AsNiNode();
+				auto* target3DNode = creationData.target3D->AsNetImmerseNode();
 
 				if (target3DNode)
 				{

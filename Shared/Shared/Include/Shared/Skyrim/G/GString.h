@@ -98,19 +98,21 @@ namespace Skyrim
 		size_type size() const;
 
 		// Non-member functions
-		static UPInt BernsteinHashFunction(const void* dataInput, UPInt size, UPInt seed = 5381);
+		friend bool operator==(const GString& left, const GString& right) { return std::strcmp(left.data(), right.data()) == 0; }
+		friend bool operator!=(const GString& left, const GString& right) { return !(left == right); }
 
-		// Member functions
-		friend bool operator==(const GString& left, const_pointer right) { return (left.data() == right) || (std::strcmp(left.data(), right) == 0); }
+		friend bool operator==(const GString& left, const_pointer right) { return std::strcmp(left.data(), right ? right : GString::EMPTY) == 0; }
 		friend bool operator!=(const GString& left, const_pointer right) { return !(left == right); }
 		friend bool operator==(const_pointer left, const GString& right) { return right == left; }
 		friend bool operator!=(const_pointer left, const GString& right) { return !(left == right); }
-		friend bool operator==(const GString& left, const GString& right) { return left == right.data(); }
-		friend bool operator!=(const GString& left, const GString& right) { return !(left == right); }
-		friend bool operator==(const GString& left, const std::basic_string_view<value_type>& right) { return left == right.data(); }
-		friend bool operator!=(const GString& left, const std::basic_string_view<value_type>& right) { return !(left == right); }
-		friend bool operator==(const std::basic_string_view<value_type>& left, const GString& right) { return right == left; }
-		friend bool operator!=(const std::basic_string_view<value_type>& left, const GString& right) { return !(left == right); }
+
+		friend bool operator==(const GString& left, std::basic_string_view<value_type> right) { return left == right.data(); }
+		friend bool operator!=(const GString& left, std::basic_string_view<value_type> right) { return !(left == right); }
+		friend bool operator==(std::basic_string_view<value_type> left, const GString& right) { return right == left; }
+		friend bool operator!=(std::basic_string_view<value_type> left, const GString& right) { return !(left == right); }
+
+		static UPInt BernsteinHashFunction(const void* dataInput, UPInt size, UPInt seed = 5381);
+		static UPInt BernsteinHashFunctionCaseInsensitive(const void* dataInput, UPInt size, UPInt seed = 5381);
 
 	protected:
 		static constexpr value_type EMPTY[]{ 0 };

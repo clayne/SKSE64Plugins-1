@@ -165,11 +165,12 @@ namespace Relocation
 		std::uint64_t previousIdentifier{ 0 };
 		std::uint64_t previousOffset{ 0 };
 
-		Utility::Enumeration<Packing, std::uint8_t> packing;
-
 		for (auto& element : this->span_)
 		{
-			inputFileStream.read(reinterpret_cast<char*>(packing.data()), sizeof(std::uint8_t));
+			std::uint8_t packing8;
+			inputFileStream.read(reinterpret_cast<char*>(std::addressof(packing8)), sizeof(std::uint8_t));
+
+			Utility::Enumeration<Packing, std::uint8_t> packing = static_cast<Packing>(packing8);
 
 			auto identifierPacking = packing & Packing::kMask;
 			auto offsetPacking     = packing >> 4;

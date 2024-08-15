@@ -6,16 +6,12 @@
 
 namespace Utility
 {
-	class TypeTraits
+	namespace TypeTraits
 	{
-	private:
-		class Helpers
+		namespace Implementation
 		{
-		public:
 			template <class T>
-			struct AddVariadicArguments
-			{
-			};
+			struct AddVariadicArguments;
 
 			template <class Result, class Class, class... Arguments>
 			struct AddVariadicArguments<Result (Class::*)(Arguments...)>
@@ -39,9 +35,7 @@ namespace Utility
 			};
 
 			template <class T>
-			struct MakeFunctionPointer
-			{
-			};
+			struct MakeFunctionPointer;
 
 			template <class Result, class Class, class... Arguments>
 			struct MakeFunctionPointer<Result (Class::*)(Arguments...)>
@@ -70,35 +64,32 @@ namespace Utility
 			public:
 				using type = Result (*)(const Class*, Arguments..., ...);
 			};
-		};
+		}
 
-	public:
-		template <class T, class Enable = void>
-		struct AddVariadicArguments
+		template <class T>
+		struct AddVariadicArguments;
+
+		template <class T>
+			requires(std::disjunction_v<
+				std::is_member_function_pointer<T>,
+				std::conjunction<
+					std::is_pointer<T>,
+					std::is_function<std::remove_pointer_t<T>>>>)
+		struct AddVariadicArguments<T> :
+			Implementation::AddVariadicArguments<T>
 		{
+		public:
 		};
 
 		template <class T>
-		struct AddVariadicArguments<
-			T,
-			typename std::enable_if_t<
-				std::is_member_function_pointer_v<T> || (std::is_pointer_v<T> && std::is_function_v<std::remove_pointer_t<T>>)>> :
-			Helpers::AddVariadicArguments<T>
-		{
-		};
-
-		template <class T, class Enable = void>
-		struct MakeFunctionPointer
-		{
-		};
+		struct MakeFunctionPointer;
 
 		template <class T>
-		struct MakeFunctionPointer<
-			T,
-			typename std::enable_if_t<
-				std::is_member_function_pointer_v<T>>> :
-			Helpers::MakeFunctionPointer<T>
+			requires(std::is_member_function_pointer_v<T>)
+		struct MakeFunctionPointer<T> :
+			Implementation::MakeFunctionPointer<T>
 		{
+		public:
 		};
-	};
+	}
 }

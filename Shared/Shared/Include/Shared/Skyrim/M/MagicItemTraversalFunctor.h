@@ -24,7 +24,7 @@ namespace Skyrim
 			// Member variables
 			float        floatingPoint;
 			std::int32_t integer{ 0 };
-		} result{};
+		} result{}; // 8
 	};
 	static_assert(offsetof(MagicItemTraversalFunctor, result) == 0x8);
 	static_assert(sizeof(MagicItemTraversalFunctor) == 0x10);

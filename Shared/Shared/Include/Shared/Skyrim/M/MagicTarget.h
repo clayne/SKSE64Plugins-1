@@ -35,6 +35,7 @@ namespace Skyrim
 		struct ResultsCollector
 		{
 		public:
+			// Member variables
 			MagicTarget*  magicTarget;             // 0
 			Actor*        caster;                  // 8
 			MagicItem*    magicItem;               // 10

@@ -51,6 +51,7 @@ namespace Skyrim
 		struct Skills
 		{
 		public:
+			// Member variables
 			std::uint8_t values[Utility::Conversion::ToUnderlying(Skill::kTotal)];  // 0
 			std::uint8_t offsets[Utility::Conversion::ToUnderlying(Skill::kTotal)]; // 12
 		};

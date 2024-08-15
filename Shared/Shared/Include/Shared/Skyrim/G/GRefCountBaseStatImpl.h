@@ -14,6 +14,7 @@ namespace Skyrim
 	class GRefCountBaseStatImpl :
 		public Base // 0
 	{
+	public:
 		GFC_MEMORY_REDEFINE_NEW_IMPLEMENTATION(Base, GFC_REFERENCECOUNTALLOCATION_CHECK_DELETE, STATISTIC_TYPE)
 	};
 }

@@ -75,7 +75,7 @@ namespace ScrambledBugs
 	{
 		SPDLOG_INFO("Loading Game...");
 
-		const auto& settings = ScrambledBugs::Settings::GetSingleton();
+		const auto& settings = Settings::GetSingleton();
 
 		auto*                   createdObjectManager = Skyrim::BGSCreatedObjectManager::GetSingleton();
 		Skyrim::BSSpinLockGuard lockGuard(createdObjectManager->lock);
@@ -127,7 +127,7 @@ namespace ScrambledBugs
 	{
 		SPDLOG_INFO("Saving Game...");
 
-		const auto& settings = ScrambledBugs::Settings::GetSingleton();
+		const auto& settings = Settings::GetSingleton();
 
 		if (settings.fixes.enchantmentCost)
 		{

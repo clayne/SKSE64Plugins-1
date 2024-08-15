@@ -17,7 +17,7 @@ namespace Skyrim
 
 		// Override (NiNode)
 		virtual const NiRTTI* GetRTTI() const override;                               // 2
-		virtual BSFadeNode*   AsBSFadeNode() override;                                // 5
+		virtual BSFadeNode*   AsFadeNode() override;                                  // 5
 		virtual NiObject*     CreateClone(NiCloningProcess& cloningProcess) override; // 17
 		virtual void          LoadBinary(NiStream& stream) override;                  // 18
 		virtual void          LinkObject(NiStream& stream) override;                  // 19

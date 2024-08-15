@@ -429,7 +429,7 @@ namespace Skyrim
 		std::uint64_t                                     unknown170;                                                              // 168, 170
 		std::uint64_t                                     unknown178;                                                              // 170, 178
 		std::uint64_t                                     unknown180;                                                              // 178, 180
-		CastPowerItem*                                    castPowers;                                                              // 180, 188
+		CastPowerItem*                                    castPowerItems;                                                          // 180, 188
 		std::uint64_t                                     unknown190;                                                              // 188, 190
 		std::uint64_t                                     unknown198;                                                              // 190, 198
 		std::uint64_t                                     unknown1A0;                                                              // 198, 1A0
@@ -468,7 +468,7 @@ namespace Skyrim
 	static_assert(offsetof(Actor, booleanBits) == SKYRIM_RELOCATE(0xE0, 0xE8));
 	static_assert(offsetof(Actor, currentProcess) == SKYRIM_RELOCATE(0xF0, 0xF8));
 	static_assert(offsetof(Actor, combatController) == SKYRIM_RELOCATE(0x158, 0x160));
-	static_assert(offsetof(Actor, castPowers) == SKYRIM_RELOCATE(0x180, 0x188));
+	static_assert(offsetof(Actor, castPowerItems) == SKYRIM_RELOCATE(0x180, 0x188));
 	static_assert(offsetof(Actor, magicCasters) == SKYRIM_RELOCATE(0x1A0, 0x1A8));
 	static_assert(offsetof(Actor, selectedMagicItems) == SKYRIM_RELOCATE(0x1C0, 0x1C8));
 	static_assert(offsetof(Actor, selectedPower) == SKYRIM_RELOCATE(0x1E0, 0x1E8));

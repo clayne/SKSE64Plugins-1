@@ -43,26 +43,26 @@ namespace Skyrim
 
 		// Add
 		virtual const NiRTTI*                 GetRTTI() const;                                // 2
-		virtual NiNode*                       AsNiNode();                                     // 3
-		virtual NiSwitchNode*                 AsNiSwitchNode();                               // 4
-		virtual BSFadeNode*                   AsBSFadeNode();                                 // 5
-		virtual BSMultiBoundNode*             AsBSMultipleBoundNode();                        // 6
-		virtual BSGeometry*                   AsBSGeometry();                                 // 7
-		virtual NiTriStrips*                  AsNiTriangleStrips();                           // 8
-		virtual BSTriShape*                   AsBSTriangleShape();                            // 9
-		virtual BSSegmentedTriShape*          AsBSSegmentedTriangleShape();                   // A
-		virtual BSSubIndexTriShape*           AsBSSubIndexTriangleShape();                    // B
-		virtual BSDynamicTriShape*            AsBSDynamicTriangleShape();                     // C
-		virtual NiGeometry*                   AsNiGeometry();                                 // D
-		virtual NiTriBasedGeom*               AsNiTriangleBasedGeometry();                    // E
-		virtual NiTriShape*                   AsNiTriangleShape();                            // F
-		virtual NiParticles*                  AsNiParticles();                                // 10
-		virtual BSLines*                      AsBSLines();                                    // 11
-		virtual bhkNiCollisionObject*         AsBhkNiCollisionObject();                       // 12
-		virtual bhkBlendCollisionObject*      AsBhkBlendCollisionObject();                    // 13
-		virtual bhkAttachmentCollisionObject* AsBhkAttachmentCollisionObject();               // 14
-		virtual bhkRigidBody*                 AsBhkRigidBody();                               // 15
-		virtual bhkLimitedHingeConstraint*    AsBhkLimitedHingeConstraint();                  // 16
+		virtual NiNode*                       AsNetImmerseNode();                             // 3
+		virtual NiSwitchNode*                 AsNetImmerseSwitchNode();                       // 4
+		virtual BSFadeNode*                   AsFadeNode();                                   // 5
+		virtual BSMultiBoundNode*             AsMultipleBoundNode();                          // 6
+		virtual BSGeometry*                   AsGeometry();                                   // 7
+		virtual NiTriStrips*                  AsNetImmerseTriangleStrips();                   // 8
+		virtual BSTriShape*                   AsTriangleShape();                              // 9
+		virtual BSSegmentedTriShape*          AsSegmentedTriangleShape();                     // A
+		virtual BSSubIndexTriShape*           AsSubIndexTriangleShape();                      // B
+		virtual BSDynamicTriShape*            AsDynamicTriangleShape();                       // C
+		virtual NiGeometry*                   AsNetImmerseGeometry();                         // D
+		virtual NiTriBasedGeom*               AsNetImmerseTriangleBasedGeometry();            // E
+		virtual NiTriShape*                   AsNetImmerseTriangleShape();                    // F
+		virtual NiParticles*                  AsNetImmerseParticles();                        // 10
+		virtual BSLines*                      AsLines();                                      // 11
+		virtual bhkNiCollisionObject*         AsNetImmerseCollisionObject();                  // 12
+		virtual bhkBlendCollisionObject*      AsBlendCollisionObject();                       // 13
+		virtual bhkAttachmentCollisionObject* AsAttachmentCollisionObject();                  // 14
+		virtual bhkRigidBody*                 AsRigidBody();                                  // 15
+		virtual bhkLimitedHingeConstraint*    AsLimitedHingeConstraint();                     // 16
 		virtual NiObject*                     CreateClone(NiCloningProcess& cloningProcess);  // 17
 		virtual void                          LoadBinary(NiStream& stream);                   // 18
 		virtual void                          LinkObject(NiStream& stream);                   // 19
@@ -76,7 +76,7 @@ namespace Skyrim
 		virtual std::uint32_t                 GetBlockAllocationSize() const;                 // 21
 		virtual NiObjectGroup*                GetGroup() const;                               // 22
 		virtual void                          SetGroup(NiObjectGroup* group);                 // 23
-		virtual NiControllerManager*          AsNiControllerManager();                        // 24
+		virtual NiControllerManager*          AsNetImmerseControllerManager();                // 24
 	};
 	static_assert(sizeof(NiObject) == 0x10);
 }

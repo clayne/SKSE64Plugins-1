@@ -66,7 +66,7 @@ namespace ConditionsTargetMagicEffects::Events
 			{
 				auto* effectSetting = static_cast<Skyrim::EffectSetting*>(lockList);
 
-				Utility::Enumeration<Skyrim::ActorValue, std::uint32_t> magicSkill = static_cast<std::uint32_t>(reinterpret_cast<std::uintptr_t>(parameter1));
+				Utility::Enumeration<Skyrim::ActorValue, std::uint32_t> magicSkill = static_cast<Skyrim::ActorValue>(reinterpret_cast<std::uintptr_t>(parameter1));
 
 				if (effectSetting->magicSkill == magicSkill)
 				{
@@ -78,7 +78,7 @@ namespace ConditionsTargetMagicEffects::Events
 				auto* magicItem           = static_cast<Skyrim::MagicItem*>(object->baseObject);
 				auto* costliestEffectItem = magicItem->GetCostliestEffectItem(Skyrim::MagicSystem::Delivery::kAny, false);
 
-				Utility::Enumeration<Skyrim::ActorValue, std::uint32_t> magicSkill = static_cast<std::uint32_t>(reinterpret_cast<std::uintptr_t>(parameter1));
+				Utility::Enumeration<Skyrim::ActorValue, std::uint32_t> magicSkill = static_cast<Skyrim::ActorValue>(reinterpret_cast<std::uintptr_t>(parameter1));
 
 				if (costliestEffectItem->effectSetting->magicSkill == magicSkill)
 				{

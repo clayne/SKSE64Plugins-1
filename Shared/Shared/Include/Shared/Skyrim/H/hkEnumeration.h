@@ -44,6 +44,6 @@ namespace Skyrim
 
 	private:
 		// Member variables
-		underlying_type storage_;
+		underlying_type storage_; // 0
 	};
 }

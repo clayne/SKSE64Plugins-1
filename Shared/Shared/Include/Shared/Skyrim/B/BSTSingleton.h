@@ -10,6 +10,7 @@ namespace Skyrim
 	template <class T>
 	struct BSTSingletonExplicit
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<BSTSingletonExplicit<void>>);
 
@@ -17,6 +18,7 @@ namespace Skyrim
 	template <class T>
 	struct BSTSingletonImplicit
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<BSTSingletonImplicit<void>>);
 
@@ -24,6 +26,7 @@ namespace Skyrim
 	template <class T>
 	struct BSTSingletonSDMOpStaticBuffer
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<BSTSingletonSDMOpStaticBuffer<void>>);
 
@@ -51,6 +54,7 @@ namespace Skyrim
 	struct BSTSingletonSDM :
 		public BSTSingletonSDMBase<BSTSDMTraits<T, Singleton<T>>> // 0
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<BSTSingletonSDM<void>>);
 }

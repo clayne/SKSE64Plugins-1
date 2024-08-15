@@ -17,7 +17,7 @@ namespace Skyrim
 		// Member functions
 		constexpr bool HasHit() const noexcept
 		{
-			return this->rootCollidable != nullptr;
+			return this->rootCollidable;
 		}
 
 		constexpr void Reset() noexcept

@@ -232,7 +232,7 @@ namespace Skyrim
 		struct BSCRC32<NiPointer<T>>
 		{
 		public:
-			inline std::uint32_t operator()(const NiPointer<T>& key) const noexcept
+			inline constexpr std::uint32_t operator()(const NiPointer<T>& key) const noexcept
 			{
 				return BSCRC32<T*>()(key.get());
 			}

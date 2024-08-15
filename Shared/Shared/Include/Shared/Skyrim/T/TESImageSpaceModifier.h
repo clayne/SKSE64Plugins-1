@@ -25,8 +25,8 @@ namespace Skyrim
 		{
 		public:
 			// Member variables
-			T multiply;
-			T add;
+			T multiply; // 0
+			T add;      // ?
 		};
 
 		struct HDR

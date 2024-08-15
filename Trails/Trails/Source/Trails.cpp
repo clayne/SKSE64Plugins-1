@@ -36,7 +36,7 @@ namespace Trails
 	{
 		Skyrim::Events::InitializeThread::GetSingleton().after.Subscribe(
 			std::make_shared<decltype(Skyrim::Events::InitializeThread::after)::handler_type::element_type>(
-				Trails::InitializeThread));
+				InitializeThread));
 	}
 }
 

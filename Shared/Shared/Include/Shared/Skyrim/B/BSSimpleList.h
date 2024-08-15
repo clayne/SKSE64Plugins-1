@@ -72,14 +72,15 @@ namespace Skyrim
 			Node*      next{ nullptr }; // ?
 		};
 
-		template <class U>
+		template <class Value, class Node>
 		class iterator
 		{
 		public:
-			using value_type        = std::conditional_t<std::is_const_v<U>, const value_type, value_type>;
+			using value_type        = Value;
 			using pointer           = value_type*;
 			using reference         = value_type&;
 			using iterator_category = std::forward_iterator_tag;
+			using node_type         = Node;
 
 			constexpr iterator() noexcept                = default;
 			constexpr iterator(const iterator&) noexcept = default;
@@ -90,13 +91,13 @@ namespace Skyrim
 			constexpr iterator& operator=(const iterator&) noexcept = default;
 			constexpr iterator& operator=(iterator&&) noexcept      = default;
 
-			constexpr iterator(U* current) noexcept :
+			constexpr iterator(node_type* current) noexcept :
 				current_(current)
 			{
 			}
 
 			constexpr reference operator*() const noexcept { return this->current_->value; }
-			constexpr pointer   operator->() const noexcept { return std::addressof(this->current_->value); }
+			constexpr pointer   operator->() const noexcept { return std::addressof(this->operator*()); }
 
 			friend constexpr bool operator==(const iterator& left, const iterator& right) noexcept { return left.current_ == right.current_; }
 			friend constexpr bool operator!=(const iterator& left, const iterator& right) noexcept { return !(left == right); }
@@ -112,14 +113,16 @@ namespace Skyrim
 			{
 				iterator iterator(*this);
 
-				++(*this);
+				this->operator++();
 
 				return iterator;
 			}
 
 		private:
-			U* current_{ nullptr };
+			node_type* current_{ nullptr };
 		};
+
+		using node_type = Node;
 
 		BSSimpleList() = default;
 
@@ -162,13 +165,13 @@ namespace Skyrim
 		constexpr const_reference front() const noexcept { return *this->begin(); }
 
 		// Iterators
-		constexpr iterator<Node>       begin() noexcept { return iterator<Node>(this->get_head()); }
-		constexpr iterator<const Node> begin() const noexcept { return iterator<const Node>(this->get_head()); }
-		constexpr iterator<const Node> cbegin() const noexcept { return this->begin(); }
+		constexpr iterator<value_type, node_type>             begin() noexcept { return iterator<value_type, node_type>(this->get_head()); }
+		constexpr iterator<const value_type, const node_type> begin() const noexcept { return iterator<const value_type, const node_type>(this->get_head()); }
+		constexpr iterator<const value_type, const node_type> cbegin() const noexcept { return this->begin(); }
 
-		constexpr iterator<Node>       end() noexcept { return iterator<Node>(nullptr); }
-		constexpr iterator<const Node> end() const noexcept { return iterator<const Node>(nullptr); }
-		constexpr iterator<const Node> cend() const noexcept { return this->end(); }
+		constexpr iterator<value_type, node_type>             end() noexcept { return iterator<value_type, node_type>(nullptr); }
+		constexpr iterator<const value_type, const node_type> end() const noexcept { return iterator<const value_type, const node_type>(nullptr); }
+		constexpr iterator<const value_type, const node_type> cend() const noexcept { return this->end(); }
 
 		// Modifiers
 		void clear()

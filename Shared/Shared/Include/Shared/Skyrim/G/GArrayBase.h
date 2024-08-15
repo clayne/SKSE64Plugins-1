@@ -293,7 +293,7 @@ namespace Skyrim
 
 			bool operator!=(const Iterator& iterator) const
 			{
-				return this->array_ != iterator.array_ || this->currentIndex_ != iterator.currentIndex_;
+				return !this->operator==(iterator);
 			}
 
 			Iterator& operator++()
@@ -362,12 +362,12 @@ namespace Skyrim
 
 			value_type* operator->() const
 			{
-				return std::addressof((*this->array_)[this->currentIndex_]);
+				return std::addressof(this->operator*());
 			}
 
 			value_type* GetPointer() const
 			{
-				return std::addressof((*this->array_)[this->currentIndex_]);
+				return this->operator->();
 			}
 
 			bool IsFinished() const
@@ -433,7 +433,7 @@ namespace Skyrim
 
 			bool operator!=(const ConstantIterator& iterator) const
 			{
-				return this->array_ != iterator.array_ || this->currentIndex_ != iterator.currentIndex_;
+				return !this->operator==(iterator);
 			}
 
 			ConstantIterator& operator++()
@@ -502,12 +502,12 @@ namespace Skyrim
 
 			const value_type* operator->() const
 			{
-				return std::addressof((*this->array_)[this->currentIndex_]);
+				return std::addressof(this->operator*());
 			}
 
 			const value_type* GetPointer() const
 			{
-				return std::addressof((*this->array_)[this->currentIndex_]);
+				return this->operator->();
 			}
 
 			bool IsFinished() const

@@ -34,7 +34,7 @@ namespace ScrambledBugs
 		{
 			case SKSE::MessagingInterface::kPostLoad:
 			{
-				ScrambledBugs::PostLoad();
+				PostLoad();
 
 				break;
 			}
@@ -43,16 +43,16 @@ namespace ScrambledBugs
 
 	void Load()
 	{
-		if (!SKSE::Storage::GetSingleton().GetMessagingInterface()->RegisterListener(ScrambledBugs::MessageHandler))
+		if (!SKSE::Storage::GetSingleton().GetMessagingInterface()->RegisterListener(MessageHandler))
 		{
 			return;
 		}
 
 		const auto* serializationInterface = SKSE::Storage::GetSingleton().GetSerializationInterface();
 
-		serializationInterface->SetUniqueID(ScrambledBugs::Serialization::kUniqueID);
-		serializationInterface->SetLoadCallback(std::addressof(ScrambledBugs::Serialization::LoadGame));
-		serializationInterface->SetSaveCallback(std::addressof(ScrambledBugs::Serialization::SaveGame));
+		serializationInterface->SetUniqueID(Serialization::kUniqueID);
+		serializationInterface->SetLoadCallback(std::addressof(Serialization::LoadGame));
+		serializationInterface->SetSaveCallback(std::addressof(Serialization::SaveGame));
 
 		Settings::GetSingleton().Load();
 	}

@@ -54,6 +54,7 @@ namespace Skyrim
 		struct MapRectangle
 		{
 		public:
+			// Member variables
 			std::uint32_t width;     // 0
 			std::uint32_t height;    // 4
 			std::uint8_t* data;      // 8

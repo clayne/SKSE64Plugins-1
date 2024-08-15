@@ -33,7 +33,7 @@ namespace Skyrim
 		BGSImpactData* GetImpactData(BGSMaterialType* materialType) const;
 
 		// Member variables
-		BSTHashMap<const BGSMaterialType*, BGSImpactData*> impacts; // 28
+		BSTHashMap<BGSMaterialType*, BGSImpactData*> impacts; // 28
 	};
 	static_assert(offsetof(BGSImpactDataSet, impacts) == 0x28);
 	static_assert(sizeof(BGSImpactDataSet) == 0x58);

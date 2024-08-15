@@ -33,6 +33,7 @@ namespace Skyrim
 			};
 			static_assert(sizeof(Flags) == 0x4);
 
+			// Member variables
 			const char*                                     name;               // 0
 			Utility::Enumeration<Flags, std::uint32_t>      flags;              // 8
 			Utility::Enumeration<ActorValue, std::uint32_t> fixedActorValue;    // C

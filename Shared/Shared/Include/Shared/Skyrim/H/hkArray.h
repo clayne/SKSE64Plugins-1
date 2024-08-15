@@ -66,6 +66,7 @@ namespace Skyrim
 	class hkArray :
 		public hkArrayBase<T> // 0
 	{
+	public:
 	};
 	static_assert(sizeof(hkArray<void*>) == 0x10);
 

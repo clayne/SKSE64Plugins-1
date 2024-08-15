@@ -19,12 +19,12 @@ namespace Skyrim
 
 	protected:
 		// Override (IFormFactory)
-		TESForm* CreateImplementation() override; // 1
+		virtual TESForm* CreateImplementation() override; // 1
 
 	public:
 		// Override (IFormFactory)
-		const char* GetFormName() const override; // 2
-		FormType    GetFormType() const override; // 3
+		virtual const char* GetFormName() const override; // 2
+		virtual FormType    GetFormType() const override; // 3
 
 		// Non-member functions
 		static TESObjectREFRFactory* GetFormFactory();

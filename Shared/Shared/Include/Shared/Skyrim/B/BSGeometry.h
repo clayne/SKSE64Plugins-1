@@ -37,7 +37,7 @@ namespace Skyrim
 
 		// Override (NiAVObject)
 		virtual const NiRTTI* GetRTTI() const override;                                // 2
-		virtual BSGeometry*   AsBSGeometry() override;                                 // 7
+		virtual BSGeometry*   AsGeometry() override;                                   // 7
 		virtual void          LoadBinary(NiStream& stream) override;                   // 18
 		virtual void          LinkObject(NiStream& stream) override;                   // 19
 		virtual bool          RegisterStreamables(NiStream& stream) override;          // 1A

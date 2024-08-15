@@ -27,7 +27,7 @@ namespace Skyrim
 		class iterator
 		{
 		public:
-			using value_type        = U;
+			using value_type        = std::remove_const_t<U>;
 			using pointer           = value_type*;
 			using reference         = value_type&;
 			using iterator_category = std::forward_iterator_tag;
@@ -42,45 +42,66 @@ namespace Skyrim
 			constexpr iterator& operator=(iterator&&) noexcept      = default;
 
 			constexpr iterator(pointer head, pointer tail) noexcept :
-				head_(head), tail_(tail)
+				begin_(head), end_(tail)
 			{
-				if (this->head_ && this->tail_)
+				if (this->iterable() && !*this->begin_)
 				{
-					while (this->head_ != this->tail_ && !*this->head_)
-					{
-						++this->head_;
-					}
+					this->seek();
 				}
 			}
 
-			constexpr reference operator*() const noexcept { return *this->head_; }
-			constexpr pointer   operator->() const noexcept { return this->head_; }
+			constexpr reference operator*() const noexcept
+			{
+				return *this->begin_;
+			}
 
-			friend constexpr bool operator==(const iterator& left, const iterator& right) noexcept { return left.head_ == right.head_; }
-			friend constexpr bool operator!=(const iterator& left, const iterator& right) noexcept { return !(left == right); }
+			constexpr pointer operator->() const noexcept
+			{
+				return std::addressof(this->operator*());
+			}
+
+			friend constexpr bool operator==(const iterator& left, const iterator& right) noexcept
+			{
+				return left.begin_ == right.begin_;
+			}
+
+			friend constexpr bool operator!=(const iterator& left, const iterator& right) noexcept
+			{
+				return !(left == right);
+			}
 
 			constexpr iterator& operator++() noexcept
 			{
-				do
-				{
-					++this->head_;
-				} while (this->head_ != this->tail_ && !*this->head_);
+				this->seek();
 
 				return *this;
 			}
 
 			constexpr iterator operator++(int) noexcept
 			{
-				iterator iterator{ *this };
+				iterator iterator(*this);
 
-				++(*this);
+				this->operator++();
 
 				return iterator;
 			}
 
 		private:
-			pointer head_{ nullptr };
-			pointer tail_{ nullptr };
+			constexpr bool iterable() const noexcept
+			{
+				return this->begin_ && this->end_ && this->begin_ != this->end_;
+			}
+
+			constexpr void seek() noexcept
+			{
+				do
+				{
+					++this->begin_;
+				} while (this->begin_ != this->end_ && !*this->begin_);
+			}
+
+			pointer begin_{ nullptr };
+			pointer end_{ nullptr };
 		};
 
 		// Add
@@ -89,32 +110,24 @@ namespace Skyrim
 		// Iterators
 		constexpr iterator<value_type> begin() noexcept
 		{
-			auto* head = this->data();
-
-			return iterator<value_type>(head, head + this->freeIndex_);
+			return iterator<value_type>(this->data(), this->data() + this->capacity());
 		}
 
 		constexpr iterator<const value_type> begin() const noexcept
 		{
-			const auto* head = this->data();
-
-			return iterator<const value_type>(head, head + this->freeIndex_);
+			return iterator<const value_type>(this->data(), this->data() + this->capacity());
 		}
 
 		constexpr iterator<const value_type> cbegin() const noexcept { return this->begin(); }
 
 		constexpr iterator<value_type> end() noexcept
 		{
-			auto* tail = this->data() + this->freeIndex_;
-
-			return iterator<value_type>(tail, tail);
+			return iterator<value_type>(this->data() + this->capacity(), this->data() + this->capacity());
 		}
 
 		constexpr iterator<const value_type> end() const noexcept
 		{
-			const auto* tail = this->data() + this->freeIndex_;
-
-			return iterator<const value_type>(tail, tail);
+			return iterator<const value_type>(this->data() + this->capacity(), this->data() + this->capacity());
 		}
 
 		constexpr iterator<const value_type> cend() const noexcept { return this->end(); }
@@ -134,7 +147,7 @@ namespace Skyrim
 		// Member variables
 		pointer   data_;       // 8
 		size_type capacity_;   // 10
-		size_type freeIndex_;  // 12
+		size_type free_;       // 12
 		size_type size_;       // 14
 		size_type growthSize_; // 16
 	};
@@ -144,6 +157,7 @@ namespace Skyrim
 	class NiTObjectArray :
 		public NiTArray<T, NiTNewInterface<T>> // 0
 	{
+	public:
 	};
 	static_assert(sizeof(NiTObjectArray<void*>) == 0x18);
 
@@ -151,6 +165,7 @@ namespace Skyrim
 	class NiTPrimitiveArray :
 		public NiTArray<T, NiTMallocInterface<T>> // 0
 	{
+	public:
 	};
 	static_assert(sizeof(NiTPrimitiveArray<void*>) == 0x18);
 }

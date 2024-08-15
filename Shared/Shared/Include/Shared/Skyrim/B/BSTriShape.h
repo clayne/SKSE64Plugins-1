@@ -17,7 +17,7 @@ namespace Skyrim
 
 		// Override (BSGeometry)
 		virtual const NiRTTI* GetRTTI() const override;                               // 2
-		virtual BSTriShape*   AsBSTriangleShape() override;                           // 9
+		virtual BSTriShape*   AsTriangleShape() override;                             // 9
 		virtual NiObject*     CreateClone(NiCloningProcess& cloningProcess) override; // 17
 		virtual void          LoadBinary(NiStream& stream) override;                  // 18
 		virtual void          LinkObject(NiStream& stream) override;                  // 19

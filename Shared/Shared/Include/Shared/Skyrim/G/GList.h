@@ -70,7 +70,7 @@ namespace Skyrim
 
 			constexpr pointer operator->() const noexcept
 			{
-				return this->current_;
+				return std::addressof(this->operator*());
 			}
 
 			friend constexpr bool operator==(const iterator& left, const iterator& right) noexcept
@@ -92,9 +92,9 @@ namespace Skyrim
 
 			constexpr iterator operator++(int) noexcept
 			{
-				iterator iterator{ *this };
+				iterator iterator(*this);
 
-				++(*this);
+				this->operator++();
 
 				return iterator;
 			}
@@ -108,9 +108,9 @@ namespace Skyrim
 
 			constexpr iterator operator--(int) noexcept
 			{
-				iterator iterator{ *this };
+				iterator iterator(*this);
 
-				--(*this);
+				this->operator--();
 
 				return iterator;
 			}

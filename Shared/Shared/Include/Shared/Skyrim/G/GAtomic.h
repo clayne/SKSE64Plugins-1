@@ -8,6 +8,7 @@ namespace Skyrim
 {
 	struct GAtomicOperationsRawBase
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<GAtomicOperationsRawBase>);
 
@@ -124,6 +125,7 @@ namespace Skyrim
 	struct GAtomicOperationsRaw :
 		public GAtomicOperationsRawBase // 0
 	{
+	public:
 	};
 
 	template <>
@@ -715,7 +717,7 @@ namespace Skyrim
 			}
 
 			// Member variables
-			GLockSafe* lock;
+			GLockSafe* lock; // 0
 		};
 		static_assert(offsetof(Locker, lock) == 0x0);
 		static_assert(sizeof(Locker) == 0x8);
@@ -735,7 +737,7 @@ namespace Skyrim
 			}
 
 			// Member variables
-			GLockSafe* lock;
+			GLockSafe* lock; // 0
 		};
 		static_assert(offsetof(TemporaryUnlocker, lock) == 0x0);
 		static_assert(sizeof(TemporaryUnlocker) == 0x8);

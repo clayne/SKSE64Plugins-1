@@ -28,7 +28,7 @@ namespace Skyrim
 
 		private:
 			// Member variables
-			std::uint8_t bitField_[0x17];
+			std::uint8_t bitField_[0x17]; // 0
 		};
 		static_assert(sizeof(PresenceBitField) == 0x17);
 

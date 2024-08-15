@@ -182,7 +182,7 @@ namespace Skyrim
 
 	bool Actor::GetMount(NiPointer<Actor>& mount) const
 	{
-		if (this->booleanFlags.none(Actor::BooleanFlags::kMount))
+		if (this->booleanFlags.none(BooleanFlags::kMount))
 		{
 			BSTSmartPointer<RefrInteraction> referenceInteraction;
 
@@ -190,7 +190,7 @@ namespace Skyrim
 			{
 				NiPointer<Actor> targetActor;
 
-				if (referenceInteraction->GetTargetActor(targetActor) && targetActor->booleanFlags.all(Actor::BooleanFlags::kMount))
+				if (referenceInteraction->GetTargetActor(targetActor) && targetActor->booleanFlags.all(BooleanFlags::kMount))
 				{
 					mount = targetActor;
 
@@ -206,7 +206,7 @@ namespace Skyrim
 
 	bool Actor::GetRider(NiPointer<Actor>& rider) const
 	{
-		if (this->booleanFlags.all(Actor::BooleanFlags::kMount))
+		if (this->booleanFlags.all(BooleanFlags::kMount))
 		{
 			BSTSmartPointer<RefrInteraction> referenceInteraction;
 
@@ -214,7 +214,7 @@ namespace Skyrim
 			{
 				NiPointer<Actor> actor;
 
-				if (referenceInteraction->GetActor(actor) && actor->booleanFlags.none(Actor::BooleanFlags::kMount))
+				if (referenceInteraction->GetActor(actor) && actor->booleanFlags.none(BooleanFlags::kMount))
 				{
 					rider = actor;
 

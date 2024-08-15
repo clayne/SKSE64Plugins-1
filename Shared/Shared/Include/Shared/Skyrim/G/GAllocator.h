@@ -20,6 +20,7 @@ namespace Skyrim
 		public GAllocatorBaseDH<STATISTIC_ID>, // 0
 		public GConstructorMovable<T>          // 0
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<GAllocatorDH<void*>>);
 
@@ -28,6 +29,7 @@ namespace Skyrim
 		public GAllocatorBaseDH<STATISTIC_ID>, // 0
 		public GConstructorCPP<T>              // 0
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<GAllocatorDHCPP<void*>>);
 
@@ -36,6 +38,7 @@ namespace Skyrim
 		public GAllocatorBaseDH<STATISTIC_ID>, // 0
 		public GConstructorPOD<T>              // 0
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<GAllocatorDHPOD<void*>>);
 
@@ -44,6 +47,7 @@ namespace Skyrim
 		public GAllocatorBaseGH<STATISTIC_ID>, // 0
 		public GConstructorMovable<T>          // 0
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<GAllocatorGH<void*>>);
 
@@ -52,6 +56,7 @@ namespace Skyrim
 		public GAllocatorBaseGH<STATISTIC_ID>, // 0
 		public GConstructorCPP<T>              // 0
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<GAllocatorGHCPP<void*>>);
 
@@ -60,6 +65,7 @@ namespace Skyrim
 		public GAllocatorBaseGH<STATISTIC_ID>, // 0
 		public GConstructorPOD<T>              // 0
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<GAllocatorGHPOD<void*>>);
 
@@ -68,6 +74,7 @@ namespace Skyrim
 		public GAllocatorBaseLH<STATISTIC_ID>, // 0
 		public GConstructorMovable<T>          // 0
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<GAllocatorLH<void*>>);
 
@@ -76,6 +83,7 @@ namespace Skyrim
 		public GAllocatorBaseLH<STATISTIC_ID>, // 0
 		public GConstructorCPP<T>              // 0
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<GAllocatorLHCPP<void*>>);
 
@@ -84,6 +92,7 @@ namespace Skyrim
 		public GAllocatorBaseLH<STATISTIC_ID>, // 0
 		public GConstructorPOD<T>              // 0
 	{
+	public:
 	};
 	static_assert(std::is_empty_v<GAllocatorLHPOD<void*>>);
 }

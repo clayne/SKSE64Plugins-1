@@ -30,6 +30,7 @@ namespace Skyrim
 		struct CalculateSizeForSPUInput
 		{
 		public:
+			// Member variables
 			bool midPhaseAgent3Registered; // 0
 			bool isFixedOrKeyframed;       // 1
 			bool hasDynamicMotionSaved;    // 2

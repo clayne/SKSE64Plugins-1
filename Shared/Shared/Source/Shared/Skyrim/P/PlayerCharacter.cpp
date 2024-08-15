@@ -48,11 +48,11 @@ namespace Skyrim
 	{
 		if (leftHand)
 		{
-			this->flagsBE3.reset(PlayerCharacter::FlagsBE3::kShownInsufficientChargeMessageLeftHand);
+			this->flagsBE3.reset(FlagsBE3::kShownInsufficientChargeMessageLeftHand);
 		}
 		else
 		{
-			this->flagsBE3.reset(PlayerCharacter::FlagsBE3::kShownInsufficientChargeMessageRightHand);
+			this->flagsBE3.reset(FlagsBE3::kShownInsufficientChargeMessageRightHand);
 		}
 	}
 }

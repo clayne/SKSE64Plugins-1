@@ -11,35 +11,35 @@ namespace ScrambledBugs::Fixes
 {
 	void PowerCooldowns::Fix(bool& powerCooldowns)
 	{
-		Utility::Memory::SafeWriteAbsoluteJump(Addresses::Fixes::PowerCooldowns::SaveCastPowers, reinterpret_cast<std::uintptr_t>(std::addressof(PowerCooldowns::SaveCastPowers)));
+		Utility::Memory::SafeWriteAbsoluteJump(Addresses::Fixes::PowerCooldowns::SaveCastPowerItems, reinterpret_cast<std::uintptr_t>(std::addressof(PowerCooldowns::SaveCastPowerItems)));
 	}
 
-	void PowerCooldowns::SaveCastPowers(Skyrim::Actor* actor, Skyrim::BGSSaveFormBuffer* saveFormBuffer)
+	void PowerCooldowns::SaveCastPowerItems(Skyrim::Actor* actor, Skyrim::BGSSaveFormBuffer* saveFormBuffer)
 	{
 		// actor != nullptr
 		// saveFormBuffer != nullptr
 
-		std::uint32_t castPowerCount{ 0 };
-		auto*         castPowers = actor->castPowers;
+		std::uint32_t castPowerItemCount{ 0 };
+		auto*         castPowerItems = actor->castPowerItems;
 
-		if (castPowers)
+		if (castPowerItems)
 		{
-			for (const auto& castPower : *castPowers)
+			for (const auto& castPowerItem : *castPowerItems)
 			{
-				++castPowerCount;
+				++castPowerItemCount;
 			}
 
-			saveFormBuffer->SaveData(std::addressof(castPowerCount), sizeof(std::uint32_t), sizeof(std::uint32_t));
+			saveFormBuffer->SaveData(std::addressof(castPowerItemCount), sizeof(std::uint32_t), sizeof(std::uint32_t));
 
-			for (const auto& castPower : *castPowers)
+			for (const auto& castPowerItem : *castPowerItems)
 			{
-				saveFormBuffer->SaveFormID(castPower.power, 0);
-				saveFormBuffer->SaveData(std::addressof(castPower.cooldown), sizeof(float), sizeof(float));
+				saveFormBuffer->SaveFormID(castPowerItem.power, 0);
+				saveFormBuffer->SaveData(std::addressof(castPowerItem.cooldown), sizeof(float), sizeof(float));
 			}
 		}
 		else
 		{
-			saveFormBuffer->SaveData(std::addressof(castPowerCount), sizeof(std::uint32_t), sizeof(std::uint32_t));
+			saveFormBuffer->SaveData(std::addressof(castPowerItemCount), sizeof(std::uint32_t), sizeof(std::uint32_t));
 		}
 	}
 }

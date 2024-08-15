@@ -17,7 +17,7 @@ namespace Skyrim
 
 		if (magnitude)
 		{
-			this->operator/=(magnitude);
+			*this /= magnitude;
 		}
 	}
 }

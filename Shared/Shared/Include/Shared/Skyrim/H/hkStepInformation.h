@@ -11,6 +11,7 @@ namespace Skyrim
 	class hkStepInformation
 	{
 	public:
+		// Member variables
 		alignas(0x10) hkTime startTime; // 0
 		hkTime endTime;                 // 4
 		float  deltaTime;               // 8

@@ -114,23 +114,21 @@ namespace Skyrim
 
 		explicit constexpr operator bool() const noexcept { return this->handle_ != 0; }
 
+		friend constexpr bool operator==(const BSPointerHandle& left, const BSPointerHandle& right) noexcept
+		{
+			return left.native_handle() == right.native_handle();
+		}
+
+		friend constexpr bool operator!=(const BSPointerHandle& left, const BSPointerHandle& right) noexcept
+		{
+			return !(left == right);
+		}
+
 	private:
 		// Member variables
 		native_handle_type handle_{ 0 }; // 0
 	};
 	static_assert(sizeof(BSPointerHandle<void>) == 0x4);
-
-	template <class T>
-	constexpr bool operator==(const BSPointerHandle<T>& left, const BSPointerHandle<T>& right) noexcept
-	{
-		return left.native_handle() == right.native_handle();
-	}
-
-	template <class T>
-	constexpr bool operator!=(const BSPointerHandle<T>& left, const BSPointerHandle<T>& right) noexcept
-	{
-		return !(left == right);
-	}
 
 	using ActorHandle           = BSPointerHandle<Actor>;
 	using ObjectReferenceHandle = BSPointerHandle<TESObjectREFR>;

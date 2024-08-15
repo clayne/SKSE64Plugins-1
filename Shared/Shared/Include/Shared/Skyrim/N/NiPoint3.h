@@ -23,59 +23,82 @@ namespace Skyrim
 		{
 		}
 
-		constexpr NiPoint3& operator+=(const NiPoint3& right) noexcept
-		{
-			this->x += right.x;
-			this->y += right.y;
-			this->z += right.z;
+		// Arithmetic operators
+		friend constexpr NiPoint3 operator-(const NiPoint3& left) noexcept { return NiPoint3(-left.x, -left.y, -left.z); }
 
-			return *this;
+		friend constexpr NiPoint3 operator+(const NiPoint3& left, const NiPoint3& right) noexcept { return NiPoint3(left.x + right.x, left.y + right.y, left.z + right.z); }
+		friend constexpr NiPoint3 operator+(const NiPoint3& left, float right) noexcept { return NiPoint3(left.x + right, left.y + right, left.z + right); }
+		friend constexpr NiPoint3 operator+(float left, const NiPoint3& right) noexcept { return NiPoint3(left + right.x, left + right.y, left + right.z); }
+
+		friend constexpr NiPoint3 operator-(const NiPoint3& left, const NiPoint3& right) noexcept { return NiPoint3(left.x - right.x, left.y - right.y, left.z - right.z); }
+		friend constexpr NiPoint3 operator-(const NiPoint3& left, float right) noexcept { return NiPoint3(left.x - right, left.y - right, left.z - right); }
+		friend constexpr NiPoint3 operator-(float left, const NiPoint3& right) noexcept { return NiPoint3(left - right.x, left - right.y, left - right.z); }
+
+		friend constexpr float    operator*(const NiPoint3& left, const NiPoint3& right) noexcept { return left.x * right.x + left.y * right.y + left.z * right.z; }
+		friend constexpr NiPoint3 operator*(const NiPoint3& left, float right) noexcept { return NiPoint3(left.x * right, left.y * right, left.z * right); }
+		friend constexpr NiPoint3 operator*(float left, const NiPoint3& right) noexcept { return NiPoint3(left * right.x, left * right.y, left * right.z); }
+
+		friend constexpr NiPoint3 operator/(const NiPoint3& left, float right) noexcept { return NiPoint3(left.x / right, left.y / right, left.z / right); }
+		friend constexpr NiPoint3 operator/(float left, const NiPoint3& right) noexcept { return NiPoint3(left / right.x, left / right.y, left / right.z); }
+
+		// Assignment operators
+		friend constexpr NiPoint3& operator+=(NiPoint3& left, const NiPoint3& right) noexcept
+		{
+			left.x += right.x;
+			left.y += right.y;
+			left.z += right.z;
+
+			return left;
 		}
 
-		constexpr NiPoint3& operator+=(float right) noexcept
+		friend constexpr NiPoint3& operator+=(NiPoint3& left, float right) noexcept
 		{
-			this->x += right;
-			this->y += right;
-			this->z += right;
+			left.x += right;
+			left.y += right;
+			left.z += right;
 
-			return *this;
+			return left;
 		}
 
-		constexpr NiPoint3& operator-=(const NiPoint3& right) noexcept
+		friend constexpr NiPoint3& operator-=(NiPoint3& left, const NiPoint3& right) noexcept
 		{
-			this->x -= right.x;
-			this->y -= right.y;
-			this->z -= right.z;
+			left.x -= right.x;
+			left.y -= right.y;
+			left.z -= right.z;
 
-			return *this;
+			return left;
 		}
 
-		constexpr NiPoint3& operator-=(float right) noexcept
+		friend constexpr NiPoint3& operator-=(NiPoint3& left, float right) noexcept
 		{
-			this->x -= right;
-			this->y -= right;
-			this->z -= right;
+			left.x -= right;
+			left.y -= right;
+			left.z -= right;
 
-			return *this;
+			return left;
 		}
 
-		constexpr NiPoint3& operator*=(float right) noexcept
+		friend constexpr NiPoint3& operator*=(NiPoint3& left, float right) noexcept
 		{
-			this->x *= right;
-			this->y *= right;
-			this->z *= right;
+			left.x *= right;
+			left.y *= right;
+			left.z *= right;
 
-			return *this;
+			return left;
 		}
 
-		constexpr NiPoint3& operator/=(float right) noexcept
+		friend constexpr NiPoint3& operator/=(NiPoint3& left, float right) noexcept
 		{
-			this->x /= right;
-			this->y /= right;
-			this->z /= right;
+			left.x /= right;
+			left.y /= right;
+			left.z /= right;
 
-			return *this;
+			return left;
 		}
+
+		// Comparison operators
+		friend constexpr bool operator==(const NiPoint3& left, const NiPoint3& right) noexcept { return (left.x == right.x) && (left.y == right.y) && (left.z == right.z); }
+		friend constexpr bool operator!=(const NiPoint3& left, const NiPoint3& right) noexcept { return !(left == right); }
 
 		// Member functions
 		float Magnitude() const;
@@ -90,24 +113,4 @@ namespace Skyrim
 	static_assert(offsetof(NiPoint3, y) == 0x4);
 	static_assert(offsetof(NiPoint3, z) == 0x8);
 	static_assert(sizeof(NiPoint3) == 0xC);
-
-	constexpr bool operator==(const NiPoint3& left, const NiPoint3& right) noexcept { return (left.x == right.x) && (left.y == right.y) && (left.z == right.z); }
-	constexpr bool operator!=(const NiPoint3& left, const NiPoint3& right) noexcept { return !(left == right); }
-
-	constexpr NiPoint3 operator-(const NiPoint3& left) noexcept { return NiPoint3(-left.x, -left.y, -left.z); }
-
-	constexpr NiPoint3 operator+(const NiPoint3& left, const NiPoint3& right) noexcept { return NiPoint3(left.x + right.x, left.y + right.y, left.z + right.z); }
-	constexpr NiPoint3 operator+(const NiPoint3& left, float right) noexcept { return NiPoint3(left.x + right, left.y + right, left.z + right); }
-	constexpr NiPoint3 operator+(float left, const NiPoint3& right) noexcept { return NiPoint3(left + right.x, left + right.y, left + right.z); }
-
-	constexpr NiPoint3 operator-(const NiPoint3& left, const NiPoint3& right) noexcept { return NiPoint3(left.x - right.x, left.y - right.y, left.z - right.z); }
-	constexpr NiPoint3 operator-(const NiPoint3& left, float right) noexcept { return NiPoint3(left.x - right, left.y - right, left.z - right); }
-	constexpr NiPoint3 operator-(float left, const NiPoint3& right) noexcept { return NiPoint3(left - right.x, left - right.y, left - right.z); }
-
-	constexpr float    operator*(const NiPoint3& left, const NiPoint3& right) noexcept { return left.x * right.x + left.y * right.y + left.z * right.z; }
-	constexpr NiPoint3 operator*(const NiPoint3& left, float right) noexcept { return NiPoint3(left.x * right, left.y * right, left.z * right); }
-	constexpr NiPoint3 operator*(float left, const NiPoint3& right) noexcept { return NiPoint3(left * right.x, left * right.y, left * right.z); }
-
-	constexpr NiPoint3 operator/(const NiPoint3& left, float right) noexcept { return NiPoint3(left.x / right, left.y / right, left.z / right); }
-	constexpr NiPoint3 operator/(float left, const NiPoint3& right) noexcept { return NiPoint3(left / right.x, left / right.y, left / right.z); }
 }

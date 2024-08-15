@@ -38,6 +38,7 @@ namespace Skyrim
 	class NiTPointerListBase :
 		public NiTListBase<Allocator, T> // 0
 	{
+	public:
 	};
 	static_assert(sizeof(NiTPointerListBase<void, void*>) == 0x18);
 
@@ -45,6 +46,7 @@ namespace Skyrim
 	class NiTList :
 		public NiTPointerListBase<NiTDefaultAllocator<T>, T> // 0
 	{
+	public:
 	};
 	static_assert(sizeof(NiTList<void*>) == 0x18);
 }

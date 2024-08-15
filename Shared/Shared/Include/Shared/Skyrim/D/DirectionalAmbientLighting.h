@@ -14,6 +14,7 @@ namespace Skyrim
 		struct Axis
 		{
 		public:
+			// Member variables
 			Color positive; // 0
 			Color negative; // 4
 		};
@@ -21,6 +22,7 @@ namespace Skyrim
 		static_assert(offsetof(Axis, negative) == 0x4);
 		static_assert(sizeof(Axis) == 0x8);
 
+		// Member variables
 		Axis  x;                    // 0
 		Axis  y;                    // 8
 		Axis  z;                    // 10
