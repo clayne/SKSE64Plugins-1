@@ -228,9 +228,6 @@ namespace PickpocketChanceFix
 		// ContainerMenu::RequestItemCardInfo does not check isInContainer
 		auto stealValue = targetActor->GetStealValue(inventoryEntryData, count, isInContainer);
 
-		SPDLOG_INFO("ContainerMenu::AdvanceMovie:        {} TESObjectREFR::GetStealValue(reference: {}, inventoryEntryData: {:08X}, count: {}, assumeOwnership: {})",
-			stealValue, targetActor->GetReferenceName(), reinterpret_cast<std::uintptr_t>(inventoryEntryData), count, isInContainer);
-
 		// ContainerMenu::RequestItemCardInfo does not set a minimum value
 		if (stealValue < 1)
 		{
@@ -255,17 +252,6 @@ namespace PickpocketChanceFix
 			targetActor,
 			detected,
 			boundObject);
-
-		SPDLOG_INFO("ContainerMenu::AdvanceMovie:        {} AIFormulas::ComputePickpocketSuccess(thiefSkill: {}, targetSkill: {}, value: {}, weight: {}, thief: {}, target: {}, detected: {}, boundObject: {})",
-			pickpocketChance,
-			playerCharacter->GetClampedActorValue(Skyrim::ActorValue::kPickpocket),
-			targetActor->GetActorValue(Skyrim::ActorValue::kPickpocket),
-			stealValue,
-			formWeight * static_cast<float>(count),
-			playerCharacter->GetReferenceName(),
-			targetActor->GetReferenceName(),
-			detected,
-			boundObject->GetFormName());
 
 		if (pickpocketChance > 100)
 		{

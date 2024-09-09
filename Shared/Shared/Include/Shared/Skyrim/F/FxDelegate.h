@@ -14,7 +14,6 @@
 namespace Skyrim
 {
 	class FxResponseArgumentsBase;
-	class GFxMovieView;
 
 	class FxDelegate :
 		GFxExternalInterface // 0
