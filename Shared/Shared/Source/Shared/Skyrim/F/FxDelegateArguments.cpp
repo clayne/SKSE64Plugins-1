@@ -2,36 +2,19 @@
 
 #include "Shared/Skyrim/F/FxDelegateArguments.h"
 
+#include "Shared/Skyrim/Addresses.h"
+#include "Shared/Utility/TypeTraits.h"
+
 
 
 namespace Skyrim
 {
-	FxDelegateArguments::FxDelegateArguments(GFxValue responseID, FxDelegateHandler* delegateHandler, GFxMovieView* movieView, const GFxValue* values, std::uint32_t argumentCount) :
-		responseID_(responseID),
-		delegateHandler_(delegateHandler),
-		movieView_(movieView),
-		arguments_(values),
-		argumentCount_(argumentCount)
+	void FxDelegateArguments::Respond(FxResponseArgumentsBase& parameters) const
 	{
-	}
+		auto* function{ reinterpret_cast<
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&FxDelegateArguments::Respond)>::type>(
+			Addresses::FxDelegateArguments::Respond()) };
 
-	const GFxValue& FxDelegateArguments::operator[](UPInt index) const
-	{
-		return this->arguments_[index];
-	}
-
-	std::uint32_t FxDelegateArguments::GetArgumentCount() const
-	{
-		return this->argumentCount_;
-	}
-
-	FxDelegateHandler* FxDelegateArguments::GetHandler() const
-	{
-		return this->delegateHandler_;
-	}
-
-	GFxMovieView* FxDelegateArguments::GetMovie() const
-	{
-		return this->movieView_;
+		function(this, parameters);
 	}
 }

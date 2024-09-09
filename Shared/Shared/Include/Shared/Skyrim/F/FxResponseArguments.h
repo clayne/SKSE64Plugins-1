@@ -19,22 +19,24 @@ namespace Skyrim
 		{
 		}
 
-		// Member functions
-		void Add(const GFxValue& value)
-		{
-			if (this->index_ > COUNT)
-			{
-				return;
-			}
+		// Override
+		virtual ~FxResponseArguments() override = default; // 0
 
-			this->values_[this->index_++] = value;
-		}
-
-		std::uint32_t GetValues(GFxValue** parameters)
+		// Override (FxResponseArgumentsBase)
+		virtual std::uint32_t GetValues(GFxValue** parameters) override // 1
 		{
 			*parameters = this->values_;
 
 			return this->index_;
+		}
+
+		// Member functions
+		void Add(const GFxValue& value)
+		{
+			if (this->index_ <= COUNT)
+			{
+				this->values_[this->index_++] = value;
+			}
 		}
 
 	private:

@@ -131,7 +131,7 @@ namespace Skyrim
 		virtual void                    UnknownC1(Projectile*);                                                                                                                                                  // C1
 
 		// Member variables
-		BSSimpleList<ImpactData*>                  impacts;                // 98, A0
+		BSSimpleList<ImpactData*>                  impactData;             // 98, A0
 		std::uint64_t                              unknownB0;              // A8, B0
 		std::uint64_t                              unknownB8;              // B0, B8
 		std::uint64_t                              unknownC0;              // B8, C0
@@ -176,7 +176,7 @@ namespace Skyrim
 		std::uint16_t                              unknown1DA;             // 1D2, 1DA
 		std::uint32_t                              unknown1DC;             // 1D4, 1DC
 	};
-	static_assert(offsetof(Projectile, impacts) == SKYRIM_RELOCATE(0x98, 0xA0));
+	static_assert(offsetof(Projectile, impactData) == SKYRIM_RELOCATE(0x98, 0xA0));
 	static_assert(offsetof(Projectile, velocity) == SKYRIM_RELOCATE(0xF0, 0xF8));
 	static_assert(offsetof(Projectile, linearVelocity) == SKYRIM_RELOCATE(0xFC, 0x104));
 	static_assert(offsetof(Projectile, desiredTargetHandle) == SKYRIM_RELOCATE(0x124, 0x12C));

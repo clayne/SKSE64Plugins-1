@@ -134,14 +134,14 @@ namespace ScrambledBugs
 			auto*                   createdObjectManager = Skyrim::BGSCreatedObjectManager::GetSingleton();
 			Skyrim::BSSpinLockGuard lockGuard(createdObjectManager->lock);
 
-			for (const auto& createdArmorEnchantmentItem : createdObjectManager->createdArmorEnchantmentItems)
+			for (const auto& armorEnchantmentItem : createdObjectManager->armorEnchantmentItems)
 			{
-				EnchantmentCost().SaveGame(serializationInterface, createdArmorEnchantmentItem.magicItem);
+				EnchantmentCost().SaveGame(serializationInterface, armorEnchantmentItem.magicItem);
 			}
 
-			for (const auto& createdWeaponEnchantmentItem : createdObjectManager->createdWeaponEnchantmentItems)
+			for (const auto& weaponEnchantmentItem : createdObjectManager->weaponEnchantmentItems)
 			{
-				EnchantmentCost().SaveGame(serializationInterface, createdWeaponEnchantmentItem.magicItem);
+				EnchantmentCost().SaveGame(serializationInterface, weaponEnchantmentItem.magicItem);
 			}
 		}
 

@@ -27,8 +27,8 @@ namespace Skyrim
 			kImageLoader,
 			kActionControl,
 			kUserEventHandler,
-			FSCommandHandler,
-			ExternalInterface,
+			kFSCommandHandler,
+			kExternalInterface,
 
 			// Loading
 			kFileOpener,
@@ -63,18 +63,23 @@ namespace Skyrim
 		};
 		static_assert(sizeof(StateType) == 0x4);
 
-		GFxState(Utility::Enumeration<StateType, std::uint32_t> stateType = StateType::kNone);
+		GFxState(Utility::Enumeration<StateType, std::uint32_t> stateType = StateType::kNone) :
+			stateType_(stateType)
+		{
+		}
 
 		// Override
 		virtual ~GFxState() override {} // 0
 
 		// Member functions
-		StateType GetStateType() const;
+		inline StateType GetStateType() const
+		{
+			return this->stateType_.get();
+		}
 
 	protected:
 		// Member variables
 		Utility::Enumeration<StateType, std::uint32_t> stateType_; // 10
-		std::uint32_t                                  padding14_; // 14
 	};
 	static_assert(sizeof(GFxState) == 0x18);
 }

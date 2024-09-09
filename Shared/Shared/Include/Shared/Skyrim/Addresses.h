@@ -39,6 +39,7 @@ namespace Skyrim
 			std::uintptr_t AddSpellItem();
 			std::uintptr_t AdjustHealthDamageToDifficulty();
 			std::uintptr_t CanBeKilledBy();
+			std::uintptr_t ForceDetect();
 			std::uintptr_t GetActorValueModifier();
 			std::uintptr_t GetArmorRating();
 			std::uintptr_t GetControllingActor();
@@ -50,8 +51,10 @@ namespace Skyrim
 			std::uintptr_t IsPositionInLineOfSight();
 			std::uintptr_t IsReferenceInLineOfSight();
 			std::uintptr_t ModifyActorValue();
+			std::uintptr_t PickpocketAlarm();
 			std::uintptr_t RemoveActorValueModifiers();
 			std::uintptr_t RemoveBasePerks();
+			std::uintptr_t RequestDetectionLevel();
 			std::uintptr_t SetSelectedMagicItem();
 			std::uintptr_t VirtualFunctionTable();
 		}
@@ -70,7 +73,13 @@ namespace Skyrim
 
 		namespace ActorValueOwner
 		{
+			std::uintptr_t GetClampedActorValue();
 			std::uintptr_t GetDualCastingEffectiveness();
+		}
+
+		namespace AIFormulas
+		{
+			std::uintptr_t ComputePickpocketSuccess();
 		}
 
 		namespace AITimer
@@ -255,7 +264,10 @@ namespace Skyrim
 
 		namespace ContainerMenu
 		{
+			std::uintptr_t ContainerMode();
+			std::uintptr_t MenuName();
 			std::uintptr_t TargetReferenceHandle();
+			std::uintptr_t VirtualFunctionTable();
 		}
 
 		namespace CraftingSubMenus
@@ -368,6 +380,23 @@ namespace Skyrim
 			std::uintptr_t VirtualFunctionTable();
 		}
 
+		namespace FxDelegate
+		{
+			std::uintptr_t Invoke();
+			std::uintptr_t RegisterDelegateHandler();
+			std::uintptr_t UnregisterDelegateHandler();
+		}
+
+		namespace FxDelegateArguments
+		{
+			std::uintptr_t Respond();
+		}
+
+		namespace GameplayFormulas
+		{
+			std::uintptr_t CalculatePickpocketSkillUse();
+		}
+
 		namespace GameSettingCollection
 		{
 			std::uintptr_t GetSetting();
@@ -390,6 +419,7 @@ namespace Skyrim
 				std::uintptr_t GetDisplayInformation();
 				std::uintptr_t GetElement();
 				std::uintptr_t GetMember();
+				std::uintptr_t GetText();
 				std::uintptr_t GotoAndPlay();
 				std::uintptr_t HasMember();
 				std::uintptr_t Invoke();
@@ -402,6 +432,8 @@ namespace Skyrim
 				std::uintptr_t SetElement();
 				std::uintptr_t SetMember();
 				std::uintptr_t SetText();
+				std::uintptr_t SetTextW();
+				std::uintptr_t VisitMembers();
 			}
 		}
 
@@ -489,9 +521,21 @@ namespace Skyrim
 			std::uintptr_t VirtualFunctionTable();
 		}
 
+		namespace ItemCard
+		{
+			std::uintptr_t PopulateInformation();
+		}
+
 		namespace ItemList
 		{
+			namespace Item
+			{
+				std::uintptr_t GetFilterFlag();
+				std::uintptr_t IsInContainer();
+			}
+
 			std::uintptr_t GetSelectedItem();
+			std::uintptr_t InvalidateListData();
 			std::uintptr_t Update();
 		}
 
@@ -599,6 +643,11 @@ namespace Skyrim
 			std::uintptr_t RemoveExtraDataAt();
 		}
 
+		namespace NiRefObject
+		{
+			std::uintptr_t ReferenceObjectCount();
+		}
+
 		namespace NiStringExtraData
 		{
 			std::uintptr_t CreateObject();
@@ -622,6 +671,11 @@ namespace Skyrim
 		namespace PeakValueModifierEffect
 		{
 			std::uintptr_t VirtualFunctionTable();
+		}
+
+		namespace Pickpocket
+		{
+			std::uintptr_t GetEventSource();
 		}
 
 		namespace PlayerCharacter
@@ -755,11 +809,6 @@ namespace Skyrim
 			std::uintptr_t Singleton();
 		}
 
-		namespace TESBoundObject
-		{
-			std::uintptr_t GetWeight();
-		}
-
 		namespace TESCondition
 		{
 			std::uintptr_t Clear();
@@ -779,6 +828,7 @@ namespace Skyrim
 			std::uintptr_t GetEnchantmentItem();
 			std::uintptr_t GetFormFromEditorID();
 			std::uintptr_t GetFormName();
+			std::uintptr_t GetFormWeight();
 			std::uintptr_t GetMaximumCharge();
 			std::uintptr_t SetTemporary();
 		}
@@ -801,6 +851,7 @@ namespace Skyrim
 			std::uintptr_t GetReferenceFrom3D();
 			std::uintptr_t GetReferenceLock();
 			std::uintptr_t GetReferenceName();
+			std::uintptr_t GetStealValue();
 			std::uintptr_t IsCrimeToActivate();
 		}
 

@@ -122,6 +122,7 @@ namespace Skyrim
 		EnchantmentItem* GetEnchantmentItem(ExtraDataList* extraDataList);
 		TESFile*         GetFile(std::int32_t index = -1) const;
 		const char*      GetFormName() const;
+		float            GetFormWeight() const;
 		std::uint16_t    GetMaximumCharge(ExtraDataList* extraDataList) const;
 		bool             IsCreated() const;
 		void             SetTemporary();

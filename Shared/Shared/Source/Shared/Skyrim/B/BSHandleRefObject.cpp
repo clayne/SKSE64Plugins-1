@@ -6,6 +6,12 @@
 
 namespace Skyrim
 {
+	// CommonLibSSE explicitly reimplements the NiRefObject virtual destructor
+	BSHandleRefObject::~BSHandleRefObject()
+	{
+		this->referenceCount_ &= BSHandleRefObject::kReferenceCountMask;
+	}
+
 	void BSHandleRefObject::DecrementReferenceCount()
 	{
 		std::atomic_ref referenceCount(const_cast<std::uint32_t&>(this->referenceCount_));

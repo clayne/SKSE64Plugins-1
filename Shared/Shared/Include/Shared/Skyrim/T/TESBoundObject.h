@@ -35,9 +35,6 @@ namespace Skyrim
 		virtual void Unknown51(TESBoundObject*); // 51
 		virtual void Unknown52(TESBoundObject*); // 52
 
-		// Member functions
-		float GetWeight() const;
-
 		// Member variables
 		std::uint64_t unknown20; // 20
 		std::uint64_t unknown28; // 28

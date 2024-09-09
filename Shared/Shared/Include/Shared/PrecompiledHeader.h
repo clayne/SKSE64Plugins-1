@@ -5,7 +5,7 @@
 #include <atomic>          // std::atomic_ref, std::atomic_size_t
 #include <bit>             // std::bit_ceil, std::has_single_bit
 #include <chrono>          // std::chrono::system_clock
-#include <cmath>           // std::abs, std::pow, std::sqrt
+#include <cmath>           // std::abs, std::atanf, std::logf, std::pow, std::sqrt, std::tanf
 #include <compare>         // std::strong_ordering
 #include <concepts>        // Concepts library
 #include <cstdarg>         // Variadic functions

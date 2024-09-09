@@ -22,15 +22,24 @@ namespace Skyrim
 		public IMenu // 0
 	{
 	public:
+		enum class ContainerMode : std::uint32_t
+		{
+			kPickpocket = 2,
+			kNPCMode    = 3
+		};
+		static_assert(sizeof(ContainerMode) == 0x4);
+
 		// Override
 		virtual ~ContainerMenu() override; // 0
 
 		// Override (IMenu)
-		virtual void            Accept(CallbackProcessor* processor) override; // 1
-		virtual UIMessageResult ProcessMessage(UIMessage& message) override;   // 4
-		virtual void            Unknown6(IMenu*) override;                     // 6
+		virtual void            Accept(CallbackProcessor* callbackProcessor) override; // 1
+		virtual UIMessageResult ProcessMessage(UIMessage& message) override;           // 4
+		virtual void            PostDisplay() override;                                // 6
 
 		// Non-member functions
+		static ContainerMode            GetContainerMode();
+		static const char*              GetMenuName();
 		static NiPointer<TESObjectREFR> GetTargetReference();
 		static ObjectReferenceHandle    GetTargetReferenceHandle();
 

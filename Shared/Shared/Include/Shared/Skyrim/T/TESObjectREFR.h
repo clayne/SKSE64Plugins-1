@@ -25,6 +25,7 @@ namespace Skyrim
 
 	class BipedAnim;
 	class InventoryChanges;
+	class InventoryEntryData;
 	class MagicCaster;
 	class MagicTarget;
 	class NiAVObject;
@@ -253,6 +254,7 @@ namespace Skyrim
 		ReferenceLock*    GetReferenceLock() const;
 		const char*       GetReferenceName() const;
 		BipedObjectSlot   GetShieldBipedObjectSlot() const;
+		std::int32_t      GetStealValue(InventoryEntryData* inventoryEntryData, std::int32_t count, bool assumeOwnership) const;
 		bool              Is3DLoaded() const;
 		bool              IsCrimeToActivate() const;
 		bool              SameWorldSpace(TESObjectREFR* target, bool compareParentWorldSpace) const;

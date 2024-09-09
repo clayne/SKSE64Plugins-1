@@ -7,6 +7,7 @@
 #include "Shared/Skyrim/A/ActorValueOwner.h"
 #include "Shared/Skyrim/B/BGSEntryPoint.h"
 #include "Shared/Skyrim/B/BSTEventSink.h"
+#include "Shared/Skyrim/D/DetectionPriority.h"
 #include "Shared/Skyrim/I/IPostAnimationChannelUpdateFunctor.h"
 #include "Shared/Skyrim/M/MagicTarget.h"
 #include "Shared/Skyrim/N/NiPointer.h"
@@ -319,7 +320,7 @@ namespace Skyrim
 		virtual bool                  MoveToMiddleHigh();                                                                                                                                             // F4
 		virtual void                  UnknownF5(Actor*);                                                                                                                                              // F5
 		virtual void                  UnknownF6(Actor*);                                                                                                                                              // F6
-		virtual void                  UnknownF7(Actor*);                                                                                                                                              // F7
+		virtual void                  UseSkill(Utility::Enumeration<ActorValue, std::uint32_t> actorValue, float skillUse, TESForm* advanceForm, std::uint32_t advanceAction);                        // F7
 		virtual void                  UnknownF8(Actor*);                                                                                                                                              // F8
 		virtual void                  UnknownF9(Actor*);                                                                                                                                              // F9
 		virtual void                  ForEachPerk(PerkEntryVisitor& perkEntryVisitor) const;                                                                                                          // FA
@@ -373,6 +374,7 @@ namespace Skyrim
 		bool                    AddSpellItem(SpellItem* spellItem);
 		float                   AdjustHealthDamageToDifficulty(float damage, float onlyReduceDamage) const;
 		bool                    CanBeKilledBy(Actor* attacker) const;
+		void                    ForceDetect(Actor* target);
 		float                   GetActorValueModifier(Utility::Enumeration<ActorValueModifier, std::uint32_t> actorValueModifier, Utility::Enumeration<ActorValue, std::uint32_t> actorValue) const;
 		float                   GetArmorRating(InventoryEntryData* inventoryEntryData) const;
 		bhkCharacterController* GetCharacterController() const;
@@ -394,6 +396,7 @@ namespace Skyrim
 		void                    HandleActorValueModified(Utility::Enumeration<ActorValue, std::uint32_t> actorValue, float oldValue, float deltaValue, Actor* source);
 		LineOfSightLocation     IsActorInLineOfSight(Actor* target, float viewCone = 2 * std::numbers::pi_v<float>) const;
 		bool                    IsDualCasting() const;
+		bool                    IsKnockedOut() const;
 		bool                    IsNPC() const;
 		bool                    IsOnFlyingMount() const;
 		bool                    IsOnMount() const;
@@ -402,8 +405,10 @@ namespace Skyrim
 		bool                    IsReferenceInLineOfSight(TESObjectREFR* target, float viewCone = 2 * std::numbers::pi_v<float>) const;
 		bool                    IsSneaking() const;
 		void                    ModifyActorValue(Utility::Enumeration<ActorValueModifier, std::uint32_t> actorValueModifier, Utility::Enumeration<ActorValue, std::uint32_t> actorValue, float value, Actor* source);
+		void                    PickpocketAlarm(TESObjectREFR* target, TESBoundObject* boundObject, std::int32_t boundObjectCount);
 		void                    RemoveActorValueModifiers(Utility::Enumeration<ActorValue, std::uint32_t> actorValue);
 		void                    RemoveBasePerks();
+		std::int32_t            RequestDetectionLevel(Actor* target, Utility::Enumeration<DetectionPriority, std::uint32_t> detectionPriority) const;
 		void                    SetMaximumWardPower(float maximumWardPower);
 		void                    SetSelectedMagicItem(Utility::Enumeration<MagicSystem::CastingSource, std::uint32_t> castingSource, MagicItem* selectedMagicItem);
 

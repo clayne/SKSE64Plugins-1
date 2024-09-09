@@ -42,58 +42,58 @@ namespace Skyrim
 		friend constexpr NiPoint3 operator/(float left, const NiPoint3& right) noexcept { return NiPoint3(left / right.x, left / right.y, left / right.z); }
 
 		// Assignment operators
-		friend constexpr NiPoint3& operator+=(NiPoint3& left, const NiPoint3& right) noexcept
+		constexpr NiPoint3& operator+=(const NiPoint3& right) noexcept
 		{
-			left.x += right.x;
-			left.y += right.y;
-			left.z += right.z;
+			this->x += right.x;
+			this->y += right.y;
+			this->z += right.z;
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr NiPoint3& operator+=(NiPoint3& left, float right) noexcept
+		constexpr NiPoint3& operator+=(float right) noexcept
 		{
-			left.x += right;
-			left.y += right;
-			left.z += right;
+			this->x += right;
+			this->y += right;
+			this->z += right;
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr NiPoint3& operator-=(NiPoint3& left, const NiPoint3& right) noexcept
+		constexpr NiPoint3& operator-=(const NiPoint3& right) noexcept
 		{
-			left.x -= right.x;
-			left.y -= right.y;
-			left.z -= right.z;
+			this->x -= right.x;
+			this->y -= right.y;
+			this->z -= right.z;
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr NiPoint3& operator-=(NiPoint3& left, float right) noexcept
+		constexpr NiPoint3& operator-=(float right) noexcept
 		{
-			left.x -= right;
-			left.y -= right;
-			left.z -= right;
+			this->x -= right;
+			this->y -= right;
+			this->z -= right;
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr NiPoint3& operator*=(NiPoint3& left, float right) noexcept
+		constexpr NiPoint3& operator*=(float right) noexcept
 		{
-			left.x *= right;
-			left.y *= right;
-			left.z *= right;
+			this->x *= right;
+			this->y *= right;
+			this->z *= right;
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr NiPoint3& operator/=(NiPoint3& left, float right) noexcept
+		constexpr NiPoint3& operator/=(float right) noexcept
 		{
-			left.x /= right;
-			left.y /= right;
-			left.z /= right;
+			this->x /= right;
+			this->y /= right;
+			this->z /= right;
 
-			return left;
+			return *this;
 		}
 
 		// Comparison operators

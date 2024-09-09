@@ -201,6 +201,12 @@ namespace Skyrim
 	};
 	static_assert(sizeof(BSTSmartPointer<void*>) == 0x8);
 
+	template <class T, class... Arguments>
+	inline BSTSmartPointer<T> make_smart_pointer(Arguments&&... arguments)
+	{
+		return BSTSmartPointer<T>{ new T(std::forward<Arguments>(arguments)...) };
+	}
+
 	// Non-member functions
 	// 1
 	template <class T1, class T2>

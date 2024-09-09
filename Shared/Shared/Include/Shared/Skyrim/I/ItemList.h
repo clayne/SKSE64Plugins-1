@@ -20,6 +20,12 @@ namespace Skyrim
 		struct Item
 		{
 		public:
+			// Non-member functions
+			static bool IsInContainer(std::uint32_t filterFlag);
+
+			// Member functions
+			std::uint32_t GetFilterFlag() const;
+
 			// Member variables
 			StandardItemData standardItemData; // 0
 			GFxValue         object;           // 18
@@ -30,7 +36,8 @@ namespace Skyrim
 		static_assert(sizeof(Item) == 0x40);
 
 		// Member functions
-		Item* GetSelectedItem();
+		Item* GetSelectedItem() const;
+		void  InvalidateListData();
 		void  Update(TESObjectREFR* owner);
 
 		// Member variables

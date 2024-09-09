@@ -41,6 +41,7 @@ namespace Skyrim
 
 			enum class KnockState : std::uint32_t
 			{
+				kNormal = 0
 			};
 			static_assert(sizeof(KnockState) == 0x4);
 

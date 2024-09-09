@@ -24,6 +24,7 @@ namespace Skyrim
 		virtual bool  IsPlayerOwner() const;                                                                                                                                                  // 8
 
 		// Member functions
+		float GetClampedActorValue(Utility::Enumeration<ActorValue, std::uint32_t> actorValue) const;
 		float GetDualCastingEffectiveness(float cost) const;
 	};
 	static_assert(sizeof(ActorValueOwner) == 0x8);

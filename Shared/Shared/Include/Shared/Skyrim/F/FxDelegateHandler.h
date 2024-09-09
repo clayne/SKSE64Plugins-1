@@ -23,7 +23,7 @@ namespace Skyrim
 		{
 		public:
 			// Add
-			virtual ~CallbackProcessor();                                                  // 0
+			virtual ~CallbackProcessor() {};                                               // 0
 			virtual void Process(const GString& methodName, CallbackFunction* method) = 0; // 1
 		};
 		static_assert(sizeof(CallbackProcessor) == 0x8);
@@ -32,7 +32,7 @@ namespace Skyrim
 		virtual ~FxDelegateHandler() override {} // 0
 
 		// Add
-		virtual void Accept(CallbackProcessor* callbackRegistrar) = 0; // 1
+		virtual void Accept(CallbackProcessor* callbackProcessor) = 0; // 1
 	};
 	static_assert(sizeof(FxDelegateHandler) == 0x10);
 }

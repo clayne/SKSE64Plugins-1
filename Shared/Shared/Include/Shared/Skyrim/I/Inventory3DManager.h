@@ -21,13 +21,13 @@ namespace Skyrim
 	{
 	public:
 		// Member variables
-		TESForm*              modelForm;   // 0
-		TESBoundObject*       modelObject; // 8
-		NiPointer<NiAVObject> model3D;     // 10
-		std::uint64_t         unknown18;   // 18
+		TESForm*              modelForm;        // 0
+		TESBoundObject*       modelBoundObject; // 8
+		NiPointer<NiAVObject> model3D;          // 10
+		std::uint64_t         unknown18;        // 18
 	};
 	static_assert(offsetof(LoadedInventoryModel, modelForm) == 0x0);
-	static_assert(offsetof(LoadedInventoryModel, modelObject) == 0x8);
+	static_assert(offsetof(LoadedInventoryModel, modelBoundObject) == 0x8);
 	static_assert(offsetof(LoadedInventoryModel, model3D) == 0x10);
 	static_assert(sizeof(LoadedInventoryModel) == 0x20);
 

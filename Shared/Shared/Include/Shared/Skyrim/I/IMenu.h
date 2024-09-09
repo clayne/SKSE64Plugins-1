@@ -44,16 +44,16 @@ namespace Skyrim
 		virtual ~IMenu() override; // 0
 
 		// Override (FxDelegateHandler)
-		virtual void Accept(CallbackProcessor* processor) override; // 1
+		virtual void Accept(CallbackProcessor* callbackProcessor) override; // 1
 
 		// Add
-		virtual void            Unknown2(IMenu*);                   // 2
-		virtual void            Unknown3(IMenu*);                   // 3
-		virtual UIMessageResult ProcessMessage(UIMessage& message); // 4
-		virtual void            Unknown5(IMenu*);                   // 5
-		virtual void            Unknown6(IMenu*);                   // 6
-		virtual void            Unknown7(IMenu*);                   // 7
-		virtual void            Unknown8(IMenu*);                   // 8
+		virtual void            Unknown2(IMenu*);                                        // 2
+		virtual void            Unknown3(IMenu*);                                        // 3
+		virtual UIMessageResult ProcessMessage(UIMessage& message);                      // 4
+		virtual void            AdvanceMovie(float interval, std::uint32_t currentTime); // 5
+		virtual void            PostDisplay();                                           // 6
+		virtual void            PreDisplay();                                            // 7
+		virtual void            Unknown8(IMenu*);                                        // 8
 
 		// Member variables
 		GPointer<GFxMovieView>                     movieView;     // 10

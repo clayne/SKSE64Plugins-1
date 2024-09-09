@@ -16,7 +16,7 @@ namespace Skyrim
 		// Add
 		virtual ~StandardItemData();           // 0
 		virtual const char*   GetName();       // 1
-		virtual std::uint32_t GetCount();      // 2
+		virtual std::int32_t  GetCount();      // 2
 		virtual std::uint32_t GetEquipState(); // 3
 		virtual std::uint32_t GetFilterFlag(); // 4
 		virtual std::uint32_t GetFavorited();  // 5

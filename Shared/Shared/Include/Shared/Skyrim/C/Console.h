@@ -21,8 +21,8 @@ namespace Skyrim
 		virtual ~Console() override; // 0
 
 		// Override (IMenu)
-		virtual void            Accept(CallbackProcessor* processor) override; // 1
-		virtual UIMessageResult ProcessMessage(UIMessage& message) override;   // 4
+		virtual void            Accept(CallbackProcessor* callbackProcessor) override; // 1
+		virtual UIMessageResult ProcessMessage(UIMessage& message) override;           // 4
 
 		// Non-member functions
 		static void                     ExecuteCommand(const char* command);

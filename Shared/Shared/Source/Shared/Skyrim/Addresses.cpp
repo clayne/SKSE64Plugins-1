@@ -100,6 +100,14 @@ namespace Skyrim
 				return address;
 			}
 
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x5FCA00, 1.6.318.0: SkyrimSE.exe + 0x623960</summary>
+			std::uintptr_t ForceDetect()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(36749, 37765)) };
+
+				return address;
+			}
+
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x621350, 1.6.318.0: SkyrimSE.exe + 0x6468C0</summary>
 			std::uintptr_t GetActorValueModifier()
 			{
@@ -188,6 +196,14 @@ namespace Skyrim
 				return address;
 			}
 
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x5DE160, 1.6.318.0: SkyrimSE.exe + 0x603C30</summary>
+			std::uintptr_t PickpocketAlarm()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(36428, 37423)) };
+
+				return address;
+			}
+
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x621590, 1.6.318.0: SkyrimSE.exe + 0x646B00</summary>
 			std::uintptr_t RemoveActorValueModifiers()
 			{
@@ -200,6 +216,14 @@ namespace Skyrim
 			std::uintptr_t RemoveBasePerks()
 			{
 				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(36695, 37704)) };
+
+				return address;
+			}
+
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x5FC9A0, 1.6.318.0: SkyrimSE.exe + 0x623900</summary>
+			std::uintptr_t RequestDetectionLevel()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(36748, 37764)) };
 
 				return address;
 			}
@@ -261,10 +285,29 @@ namespace Skyrim
 
 		namespace ActorValueOwner
 		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x3E5250, 1.6.318.0: SkyrimSE.exe + 0x3FDF00</summary>
+			std::uintptr_t GetClampedActorValue()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(26616, 27284)) };
+
+				return address;
+			}
+
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x3C1700, 1.6.318.0: SkyrimSE.exe + 0x3D9160</summary>
 			std::uintptr_t GetDualCastingEffectiveness()
 			{
 				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(25931, 26518)) };
+
+				return address;
+			}
+		}
+
+		namespace AIFormulas
+		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x3BCF40, 1.6.318.0: SkyrimSE.exe + 0x3D4820</summary>
+			std::uintptr_t ComputePickpocketSuccess()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(25822, 26379)) };
 
 				return address;
 			}
@@ -734,10 +777,34 @@ namespace Skyrim
 
 		namespace ContainerMenu
 		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x2F4C328, 1.6.318.0: SkyrimSE.exe + 0x2FE6FF0</summary>
+			std::uintptr_t ContainerMode()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(519396, 405937)) };
+
+				return address;
+			}
+
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x1DF3B98, 1.6.318.0: SkyrimSE.exe + 0x1E87F40</summary>
+			std::uintptr_t MenuName()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(509954, 382742)) };
+
+				return address;
+			}
+
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x2F4C3F0, 1.6.318.0: SkyrimSE.exe + 0x2FE70B8</summary>
 			std::uintptr_t TargetReferenceHandle()
 			{
 				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(519421, 405962)) };
+
+				return address;
+			}
+
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x16AD8F0, 1.6.318.0: SkyrimSE.exe + 0x17A0BC0</summary>
+			std::uintptr_t VirtualFunctionTable()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(268222, 215061)) };
 
 				return address;
 			}
@@ -1001,6 +1068,55 @@ namespace Skyrim
 			}
 		}
 
+		namespace FxDelegate
+		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0xED6AC0, 1.6.318.0: SkyrimSE.exe + 0xF1E470</summary>
+			std::uintptr_t Invoke()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(80520, 82640)) };
+
+				return address;
+			}
+
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0xED6A30, 1.6.318.0: SkyrimSE.exe + 0xF1E3E0</summary>
+			std::uintptr_t RegisterDelegateHandler()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(80518, 82638)) };
+
+				return address;
+			}
+
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0xED6A80, 1.6.318.0: SkyrimSE.exe + 0xF1E430</summary>
+			std::uintptr_t UnregisterDelegateHandler()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(80519, 82639)) };
+
+				return address;
+			}
+		}
+
+		namespace FxDelegateArguments
+		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0xED6990, 1.6.318.0: SkyrimSE.exe + 0xF1E340</summary>
+			std::uintptr_t Respond()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(80516, 82636)) };
+
+				return address;
+			}
+		}
+
+		namespace GameplayFormulas
+		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x3C11E0, 1.6.318.0: SkyrimSE.exe + 0x3D8C60</summary>
+			std::uintptr_t CalculatePickpocketSkillUse()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(25919, 26502)) };
+
+				return address;
+			}
+		}
+
 		namespace GameSettingCollection
 		{
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x1FCA30, 1.6.318.0: SkyrimSE.exe + 0x325330</summary>
@@ -1087,6 +1203,14 @@ namespace Skyrim
 				std::uintptr_t GetMember()
 				{
 					static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(80222, 82245)) };
+
+					return address;
+				}
+
+				/// <summary>1.5.97.0: SkyrimSE.exe + 0xECA320, 1.6.318.0: SkyrimSE.exe + 0xF0CA70</summary>
+				std::uintptr_t GetText()
+				{
+					static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(80225, 82248)) };
 
 					return address;
 				}
@@ -1183,6 +1307,22 @@ namespace Skyrim
 				std::uintptr_t SetText()
 				{
 					static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(80270, 82293)) };
+
+					return address;
+				}
+
+				/// <summary>1.5.97.0: SkyrimSE.exe + 0xECCDB0, 1.6.318.0: SkyrimSE.exe + 0xF0F380</summary>
+				std::uintptr_t SetTextW()
+				{
+					static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(80271, 82294)) };
+
+					return address;
+				}
+
+				/// <summary>1.5.97.0: SkyrimSE.exe + 0xECD630, 1.6.318.0: SkyrimSE.exe + 0xF0FAF0</summary>
+				std::uintptr_t VisitMembers()
+				{
+					static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(80279, 82302)) };
 
 					return address;
 				}
@@ -1405,12 +1545,50 @@ namespace Skyrim
 			}
 		}
 
+		namespace ItemCard
+		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x890E70, 1.6.318.0: SkyrimSE.exe + 0x8C0D10</summary>
+			std::uintptr_t PopulateInformation()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(51019, 51897)) };
+
+				return address;
+			}
+		}
+
 		namespace ItemList
 		{
+			namespace Item
+			{
+				/// <summary>1.5.97.0: SkyrimSE.exe + 0x861B10, 1.6.318.0: SkyrimSE.exe + 0x88F380</summary>
+				std::uintptr_t GetFilterFlag()
+				{
+					static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(50253, 51178)) };
+
+					return address;
+				}
+
+				/// <summary>1.5.97.0: SkyrimSE.exe + 0x88B630, 1.6.318.0: SkyrimSE.exe + 0x8BA990</summary>
+				std::uintptr_t IsInContainer()
+				{
+					static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(50943, 51820)) };
+
+					return address;
+				}
+			}
+
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x856400, 1.6.318.0: SkyrimSE.exe + 0x883290</summary>
 			std::uintptr_t GetSelectedItem()
 			{
 				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(50086, 51017)) };
+
+				return address;
+			}
+
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x8568D0, 1.6.318.0: SkyrimSE.exe + 0x883700</summary>
+			std::uintptr_t InvalidateListData()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(50097, 51028)) };
 
 				return address;
 			}
@@ -1763,6 +1941,17 @@ namespace Skyrim
 			}
 		}
 
+		namespace NiRefObject
+		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x3012520, 1.6.318.0: SkyrimSE.exe + 0x30AD0A0</summary>
+			std::uintptr_t ReferenceObjectCount()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(523912, 410493)) };
+
+				return address;
+			}
+		}
+
 		namespace NiStringExtraData
 		{
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0xC6C190, 1.6.318.0: SkyrimSE.exe + 0xC94780</summary>
@@ -1813,6 +2002,17 @@ namespace Skyrim
 			std::uintptr_t VirtualFunctionTable()
 			{
 				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(257874, 206014)) };
+
+				return address;
+			}
+		}
+
+		namespace Pickpocket
+		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x6C7E50, 1.6.318.0: SkyrimSE.exe + 0x6F00A0</summary>
+			std::uintptr_t GetEventSource()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(40057, 41068)) };
 
 				return address;
 			}
@@ -2170,17 +2370,6 @@ namespace Skyrim
 			}
 		}
 
-		namespace TESBoundObject
-		{
-			/// <summary>1.5.97.0: SkyrimSE.exe + 0x1A1730, 1.6.318.0: SkyrimSE.exe + 0x1ACFE0</summary>
-			std::uintptr_t GetWeight()
-			{
-				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(14809, 14988)) };
-
-				return address;
-			}
-		}
-
 		namespace TESCondition
 		{
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x444710, 1.6.318.0: SkyrimSE.exe + 0x45D8B0</summary>
@@ -2257,6 +2446,14 @@ namespace Skyrim
 			std::uintptr_t GetFormName()
 			{
 				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(14548, 14720)) };
+
+				return address;
+			}
+
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x1A1730, 1.6.318.0: SkyrimSE.exe + 0x1ACFE0</summary>
+			std::uintptr_t GetFormWeight()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(14809, 14988)) };
 
 				return address;
 			}
@@ -2346,6 +2543,14 @@ namespace Skyrim
 			std::uintptr_t GetReferenceName()
 			{
 				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(19354, 19781)) };
+
+				return address;
+			}
+
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x1D9080, 1.6.318.0: SkyrimSE.exe + 0x1E4B80</summary>
+			std::uintptr_t GetStealValue()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(15807, 16045)) };
 
 				return address;
 			}

@@ -46,6 +46,15 @@ namespace Skyrim
 		return function(this, attacker);
 	}
 
+	void Actor::ForceDetect(Actor* target)
+	{
+		auto* function{ reinterpret_cast<
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&Actor::ForceDetect)>::type>(
+			Addresses::Actor::ForceDetect()) };
+
+		return function(this, target);
+	}
+
 	float Actor::GetActorValueModifier(Utility::Enumeration<ActorValueModifier, std::uint32_t> actorValueModifier, Utility::Enumeration<ActorValue, std::uint32_t> actorValue) const
 	{
 		auto* function{ reinterpret_cast<
@@ -278,6 +287,11 @@ namespace Skyrim
 		return currentProcess ? currentProcess->IsDualCasting() : false;
 	}
 
+	bool Actor::IsKnockedOut() const
+	{
+		return this->actorState1.knockState != ActorState1::KnockState::kNormal;
+	}
+
 	bool Actor::IsNPC() const
 	{
 		auto* currentProcess = this->currentProcess;
@@ -346,6 +360,15 @@ namespace Skyrim
 		function(this, actorValueModifier, actorValue, value, source);
 	}
 
+	void Actor::PickpocketAlarm(TESObjectREFR* target, TESBoundObject* boundObject, std::int32_t boundObjectCount)
+	{
+		auto* function{ reinterpret_cast<
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&Actor::PickpocketAlarm)>::type>(
+			Addresses::Actor::PickpocketAlarm()) };
+
+		function(this, target, boundObject, boundObjectCount);
+	}
+
 	void Actor::RemoveActorValueModifiers(Utility::Enumeration<ActorValue, std::uint32_t> actorValue)
 	{
 		auto* function{ reinterpret_cast<
@@ -362,6 +385,15 @@ namespace Skyrim
 			Addresses::Actor::RemoveBasePerks()) };
 
 		function(this);
+	}
+
+	std::int32_t Actor::RequestDetectionLevel(Actor* target, Utility::Enumeration<DetectionPriority, std::uint32_t> detectionPriority) const
+	{
+		auto* function{ reinterpret_cast<
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&Actor::RequestDetectionLevel)>::type>(
+			Addresses::Actor::RequestDetectionLevel()) };
+
+		return function(this, target, detectionPriority);
 	}
 
 	void Actor::SetMaximumWardPower(float maximumWardPower)

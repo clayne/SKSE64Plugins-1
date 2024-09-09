@@ -161,10 +161,10 @@ namespace Skyrim
 			virtual ~EnchantConstructMenu() override; // 0
 
 			// Override (CraftingSubMenu)
-			virtual void Accept(FxDelegateHandler::CallbackProcessor* processor) override; // 1
-			virtual void Unknown4(CraftingSubMenu*) override;                              // 4
-			virtual void Unknown5(CraftingSubMenu*) override;                              // 5
-			virtual void Unknown7(CraftingSubMenu*) override;                              // 7
+			virtual void Accept(CallbackProcessor* callbackProcessor) override; // 1
+			virtual void Unknown4(CraftingSubMenu*) override;                   // 4
+			virtual void Unknown5(CraftingSubMenu*) override;                   // 5
+			virtual void Unknown7(CraftingSubMenu*) override;                   // 7
 
 			// Member variables
 			Utility::Enumeration<FilterFlag, std::uint32_t> disenchantFilterFlag;  // 100

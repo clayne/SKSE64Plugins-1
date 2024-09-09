@@ -16,7 +16,7 @@ namespace Skyrim
 		virtual ~LevelUpMenu() override; // 0
 
 		// Override (IMenu)
-		virtual void Accept(CallbackProcessor* callbackRegistrar) override; // 1
+		virtual void Accept(CallbackProcessor* callbackProcessor) override; // 1
 
 		// Member variables
 		bool          showingMessageBox; // 30

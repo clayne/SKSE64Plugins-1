@@ -90,7 +90,7 @@ namespace ScrambledBugs::Fixes
 					continue;
 				}
 
-				auto boundObjectWeight = boundObject->GetWeight();
+				auto boundObjectWeight = boundObject->GetFormWeight();
 
 				if (boundObjectWeight <= 0.0F)
 				{
@@ -152,7 +152,7 @@ namespace ScrambledBugs::Fixes
 					continue;
 				}
 
-				auto boundObjectWeight = boundObject->GetWeight();
+				auto boundObjectWeight = boundObject->GetFormWeight();
 
 				if (boundObjectWeight <= 0.0F)
 				{

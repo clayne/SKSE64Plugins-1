@@ -181,6 +181,19 @@ namespace Skyrim
 	};
 	static_assert(sizeof(GPointer<void*>) == 0x8);
 
+	template <class T, class... Arguments>
+	inline GPointer<T> make_gpointer(Arguments&&... arguments)
+	{
+		auto pointer = GPointer<T>{ new T(std::forward<Arguments>(arguments)...) };
+
+		if (pointer)
+		{
+			pointer->Release();
+		}
+
+		return pointer;
+	}
+
 	// Non-member functions
 	// 1
 	template <class T1, class T2>

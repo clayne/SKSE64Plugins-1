@@ -1824,6 +1824,108 @@
     <ClInclude Include="Include\Shared\Skyrim\B\BSCRC32.h">
       <Filter>Header Files\Shared\Skyrim\B</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\A\AIFormulas.h">
+      <Filter>Header Files\Shared\Skyrim\A</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\D\DetectionPriority.h">
+      <Filter>Header Files\Shared\Skyrim\D</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GIdentityHash.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GFixedSizeHash.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashSetEntry.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashSetCachedEntry.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashSetBase.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GMath.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashSet.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashSetLH.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashSetDH.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashSetUncached.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashSetUncachedLH.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashSetUncachedDH.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashNode.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashSetNodeEntry.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashSetCachedNodeEntry.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHash.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashLH.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashDH.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashUncached.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashUncachedLH.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashUncachedDH.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashIdentity.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashIdentityLH.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GHashIdentityDH.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GFxExternalInterface.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\F\FxResponseArgumentsList.h">
+      <Filter>Header Files\Shared\Skyrim\F</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\F\FxDelegate.h">
+      <Filter>Header Files\Shared\Skyrim\F</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\A\AddCallbackVisitor.h">
+      <Filter>Header Files\Shared\Skyrim\A</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\R\RemoveCallbackVisitor.h">
+      <Filter>Header Files\Shared\Skyrim\R</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\P\Pickpocket.h">
+      <Filter>Header Files\Shared\Skyrim\P</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\P\PickpocketToMiscStatHandler.h">
+      <Filter>Header Files\Shared\Skyrim\P</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\G\GameplayFormulas.h">
+      <Filter>Header Files\Shared\Skyrim\G</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Shared\PrecompiledHeader.cpp">
@@ -1926,9 +2028,6 @@
       <Filter>Source Files\Shared\Skyrim\S</Filter>
     </ClCompile>
     <ClCompile Include="Source\Shared\Skyrim\T\TES.cpp">
-      <Filter>Source Files\Shared\Skyrim\T</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Shared\Skyrim\T\TESBoundObject.cpp">
       <Filter>Source Files\Shared\Skyrim\T</Filter>
     </ClCompile>
     <ClCompile Include="Source\Shared\Skyrim\T\TESCondition.cpp">
@@ -2094,9 +2193,6 @@
       <Filter>Source Files\Shared\Skyrim\G</Filter>
     </ClCompile>
     <ClCompile Include="Source\Shared\Skyrim\G\GFxValue.cpp">
-      <Filter>Source Files\Shared\Skyrim\G</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Shared\Skyrim\G\GFxState.cpp">
       <Filter>Source Files\Shared\Skyrim\G</Filter>
     </ClCompile>
     <ClCompile Include="Source\Shared\Skyrim\G\GFxStateBag.cpp">
@@ -2287,6 +2383,21 @@
     </ClCompile>
     <ClCompile Include="Source\Shared\SKSE\ScaleformInterface.cpp">
       <Filter>Source Files\Shared\SKSE</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shared\Skyrim\A\AIFormulas.cpp">
+      <Filter>Source Files\Shared\Skyrim\A</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shared\Skyrim\F\FxDelegate.cpp">
+      <Filter>Source Files\Shared\Skyrim\F</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shared\Skyrim\P\Pickpocket.cpp">
+      <Filter>Source Files\Shared\Skyrim\P</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shared\Skyrim\G\GameplayFormulas.cpp">
+      <Filter>Source Files\Shared\Skyrim\G</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shared\Skyrim\I\ItemCard.cpp">
+      <Filter>Source Files\Shared\Skyrim\I</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

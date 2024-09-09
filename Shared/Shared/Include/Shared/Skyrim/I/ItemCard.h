@@ -11,10 +11,14 @@
 namespace Skyrim
 {
 	class GFxMovieView;
+	class InventoryEntryData;
 
 	struct ItemCard
 	{
 	public:
+		// Member functions
+		void PopulateInformation(InventoryEntryData* inventoryEntryData, bool isInContainer);
+
 		// Member variables
 		GFxValue               object;          // 0
 		BSString               informationText; // 18

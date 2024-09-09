@@ -72,81 +72,81 @@ namespace Utility
 			return *this;
 		}
 
-		friend constexpr Enumeration& operator&=(Enumeration& left, Enumeration right) noexcept
+		constexpr Enumeration& operator&=(Enumeration right) noexcept
 		{
-			left.underlying_ &= right.underlying();
+			this->underlying_ &= right.underlying();
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr Enumeration& operator&=(Enumeration& left, enumeration_type right) noexcept
+		constexpr Enumeration& operator&=(enumeration_type right) noexcept
 		{
-			left.underlying_ &= static_cast<underlying_type>(right);
+			this->underlying_ &= static_cast<underlying_type>(right);
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr Enumeration& operator&=(Enumeration& left, underlying_type right) noexcept
+		constexpr Enumeration& operator&=(underlying_type right) noexcept
 		{
-			left.underlying_ &= right;
+			this->underlying_ &= right;
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr Enumeration& operator|=(Enumeration& left, Enumeration right) noexcept
+		constexpr Enumeration& operator|=(Enumeration right) noexcept
 		{
-			left.underlying_ |= right.underlying();
+			this->underlying_ |= right.underlying();
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr Enumeration& operator|=(Enumeration& left, enumeration_type right) noexcept
+		constexpr Enumeration& operator|=(enumeration_type right) noexcept
 		{
-			left.underlying_ |= static_cast<underlying_type>(right);
+			this->underlying_ |= static_cast<underlying_type>(right);
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr Enumeration& operator|=(Enumeration& left, underlying_type right) noexcept
+		constexpr Enumeration& operator|=(underlying_type right) noexcept
 		{
-			left.underlying_ |= right;
+			this->underlying_ |= right;
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr Enumeration& operator^=(Enumeration& left, Enumeration right) noexcept
+		constexpr Enumeration& operator^=(Enumeration right) noexcept
 		{
-			left.underlying_ ^= right.underlying();
+			this->underlying_ ^= right.underlying();
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr Enumeration& operator^=(Enumeration& left, enumeration_type right) noexcept
+		constexpr Enumeration& operator^=(enumeration_type right) noexcept
 		{
-			left.underlying_ ^= static_cast<underlying_type>(right);
+			this->underlying_ ^= static_cast<underlying_type>(right);
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr Enumeration& operator^=(Enumeration& left, underlying_type right) noexcept
+		constexpr Enumeration& operator^=(underlying_type right) noexcept
 		{
-			left.underlying_ ^= right;
+			this->underlying_ ^= right;
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr Enumeration& operator<<=(Enumeration& left, std::size_t right) noexcept
+		constexpr Enumeration& operator<<=(std::size_t right) noexcept
 		{
-			left.underlying_ <<= right;
+			this->underlying_ <<= right;
 
-			return left;
+			return *this;
 		}
 
-		friend constexpr Enumeration& operator>>=(Enumeration& left, std::size_t right) noexcept
+		constexpr Enumeration& operator>>=(std::size_t right) noexcept
 		{
-			left.underlying_ >>= right;
+			this->underlying_ >>= right;
 
-			return left;
+			return *this;
 		}
 
 		// Comparison operators

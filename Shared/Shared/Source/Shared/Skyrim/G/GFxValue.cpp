@@ -334,6 +334,15 @@ namespace Skyrim
 		return function(this, data, name, isDisplayObject);
 	}
 
+	void GFxValue::ObjectInterface::VisitMembers(void* data, ObjVisitor* objectVisitor, bool isDisplayObject) const
+	{
+		auto* function{ reinterpret_cast<
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&GFxValue::ObjectInterface::VisitMembers)>::type>(
+			Addresses::GFxValue::ObjectInterface::VisitMembers()) };
+
+		function(this, data, objectVisitor, isDisplayObject);
+	}
+
 	std::uint32_t GFxValue::ObjectInterface::GetArraySize(void* data) const
 	{
 		auto* function{ reinterpret_cast<
@@ -406,11 +415,29 @@ namespace Skyrim
 		return function(this, data, displayInformation);
 	}
 
+	bool GFxValue::ObjectInterface::GetText(void* data, GFxValue* value, bool isHTML) const
+	{
+		auto* function{ reinterpret_cast<
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&GFxValue::ObjectInterface::GetText)>::type>(
+			Addresses::GFxValue::ObjectInterface::GetText()) };
+
+		return function(this, data, value, isHTML);
+	}
+
 	bool GFxValue::ObjectInterface::SetText(void* data, const char* text, bool isHTML)
 	{
 		auto* function{ reinterpret_cast<
 			Utility::TypeTraits::MakeFunctionPointer<decltype(&GFxValue::ObjectInterface::SetText)>::type>(
 			Addresses::GFxValue::ObjectInterface::SetText()) };
+
+		return function(this, data, text, isHTML);
+	}
+
+	bool GFxValue::ObjectInterface::SetTextW(void* data, const wchar_t* text, bool isHTML)
+	{
+		auto* function{ reinterpret_cast<
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&GFxValue::ObjectInterface::SetTextW)>::type>(
+			Addresses::GFxValue::ObjectInterface::SetTextW()) };
 
 		return function(this, data, text, isHTML);
 	}
@@ -588,7 +615,7 @@ namespace Skyrim
 		return *this;
 	}
 
-	bool GFxValue::operator==(const GFxValue& right)
+	bool GFxValue::operator==(const GFxValue& right) const
 	{
 		if (this->valueType_ != right.valueType_)
 		{
@@ -795,6 +822,11 @@ namespace Skyrim
 		return this->objectInterface_->DeleteMember(this->value_.object, name, this->IsDisplayObject());
 	}
 
+	void GFxValue::VisitMembers(ObjectVisitor* objectVisitor) const
+	{
+		return this->objectInterface_->VisitMembers(this->value_.object, objectVisitor, this->IsDisplayObject());
+	}
+
 	std::uint32_t GFxValue::GetArraySize() const
 	{
 		return this->objectInterface_->GetArraySize(this->value_.object);
@@ -845,14 +877,34 @@ namespace Skyrim
 		return this->objectInterface_->SetDisplayInformation(this->value_.object, displayInformation);
 	}
 
+	bool GFxValue::GetText(GFxValue* value) const
+	{
+		return this->objectInterface_->GetText(this->value_.object, value, false);
+	}
+
+	bool GFxValue::GetTextHTML(GFxValue* value) const
+	{
+		return this->objectInterface_->GetText(this->value_.object, value, true);
+	}
+
 	bool GFxValue::SetText(const char* text)
 	{
 		return this->objectInterface_->SetText(this->value_.object, text, false);
 	}
 
+	bool GFxValue::SetText(const wchar_t* text)
+	{
+		return this->objectInterface_->SetTextW(this->value_.object, text, false);
+	}
+
 	bool GFxValue::SetTextHTML(const char* html)
 	{
 		return this->objectInterface_->SetText(this->value_.object, html, true);
+	}
+
+	bool GFxValue::SetTextHTML(const wchar_t* html)
+	{
+		return this->objectInterface_->SetTextW(this->value_.object, html, true);
 	}
 
 	bool GFxValue::AttachMovie(GFxValue* movieClip, const char* symbolName, const char* instanceName, std::int32_t depth, const GFxValue* initializeObject)

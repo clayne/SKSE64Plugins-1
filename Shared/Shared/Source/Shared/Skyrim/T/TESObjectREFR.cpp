@@ -123,6 +123,15 @@ namespace Skyrim
 		return race ? race->shieldBipedObjectSlot.get() : BipedObjectSlot::kNone;
 	}
 
+	std::int32_t TESObjectREFR::GetStealValue(InventoryEntryData* inventoryEntryData, std::int32_t count, bool assumeOwnership) const
+	{
+		auto* function{ reinterpret_cast<
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&TESObjectREFR::GetStealValue)>::type>(
+			Addresses::TESObjectREFR::GetStealValue()) };
+
+		return function(this, inventoryEntryData, count, assumeOwnership);
+	}
+
 	bool TESObjectREFR::Is3DLoaded() const
 	{
 		return this->GetThirdPerson3D();

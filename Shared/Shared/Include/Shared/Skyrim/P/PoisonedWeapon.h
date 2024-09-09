@@ -20,7 +20,7 @@ namespace Skyrim
 		static_assert(offsetof(Event, poisonHandle) == 0x0);
 		static_assert(sizeof(Event) == 0x4);
 
-		// Non-member functions
-		static BSTEventSource<PoisonedWeapon::Event>* GetEventSource();
+		// Namespace functions
+		BSTEventSource<PoisonedWeapon::Event>* GetEventSource();
 	}
 }

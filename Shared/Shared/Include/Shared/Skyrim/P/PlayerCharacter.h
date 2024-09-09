@@ -94,15 +94,59 @@ namespace Skyrim
 		};
 		static_assert(sizeof(CharacterGenerationFlags) == 0x1);
 
-		enum class FlagsBE3 : std::uint8_t
+		struct PlayerCharacterFlags
 		{
-			kNone                                    = 0,
-			kThirdPerson                             = 1U << 0,
-			kShownInsufficientChargeMessageLeftHand  = 1U << 2,
-			kShownInsufficientChargeMessageRightHand = 1U << 3,
-			kInCombat                                = 1U << 5
+		public:
+			// Member variables
+			bool          unknown0Bit0                            : 1; // 0 (0, 0)
+			bool          unknown0Bit1                            : 1; // 0 (0, 1)
+			bool          unknown0Bit2                            : 1; // 0 (0, 2)
+			bool          unknown0Bit3                            : 1; // 0 (0, 3)
+			bool          unknown0Bit4                            : 1; // 0 (0, 4)
+			bool          unknown0Bit5                            : 1; // 0 (0, 5)
+			bool          escaping                                : 1; // 0 (0, 6)
+			bool          unknown0Bit7                            : 1; // 0 (0, 7)
+			bool          unknown1Bit0                            : 1; // 1 (1, 0)
+			bool          unknown1Bit1                            : 1; // 1 (1, 1)
+			bool          unknown1Bit2                            : 1; // 1 (1, 2)
+			bool          unknown1Bit3                            : 1; // 1 (1, 3)
+			bool          unknown1Bit4                            : 1; // 1 (1, 4)
+			bool          unknown1Bit5                            : 1; // 1 (1, 5)
+			bool          unknown1Bit6                            : 1; // 1 (1, 6)
+			bool          unknown1Bit7                            : 1; // 1 (1, 7)
+			bool          unknown2Bit0                            : 1; // 2 (2, 0)
+			bool          unknown2Bit1                            : 1; // 2 (2, 1)
+			bool          unknown2Bit2                            : 1; // 2 (2, 2)
+			bool          unknown2Bit3                            : 1; // 2 (2, 3)
+			bool          unknown2Bit4                            : 1; // 2 (2, 4)
+			bool          unknown2Bit5                            : 1; // 2 (2, 5)
+			bool          unknown2Bit6                            : 1; // 2 (2, 6)
+			bool          unknown2Bit7                            : 1; // 2 (2, 7)
+			bool          inThirdPerson                           : 1; // 3 (3, 0)
+			bool          unknown3Bit1                            : 1; // 3 (3, 1)
+			bool          shownInsufficientChargeMessageLeftHand  : 1; // 3 (3, 2)
+			bool          shownInsufficientChargeMessageRightHand : 1; // 3 (3, 3)
+			bool          unknown3Bit4                            : 1; // 3 (3, 4)
+			bool          inCombat                                : 1; // 3 (3, 5)
+			bool          unknown3Bit6                            : 1; // 3 (3, 6)
+			bool          unknown3Bit7                            : 1; // 3 (3, 7)
+			bool          unknown4Bit0                            : 1; // 4 (4, 0)
+			bool          unknown4Bit1                            : 1; // 4 (4, 1)
+			bool          unknown4Bit2                            : 1; // 4 (4, 2)
+			bool          unknown4Bit3                            : 1; // 4 (4, 3)
+			bool          unknown4Bit4                            : 1; // 4 (4, 4)
+			bool          unknown4Bit5                            : 1; // 4 (4, 5)
+			bool          unknown4Bit6                            : 1; // 4 (4, 6)
+			bool          unknown4Bit7                            : 1; // 4 (4, 7)
+			bool          unknown5Bit0                            : 1; // 5 (5, 0)
+			bool          unknown5Bit1                            : 1; // 5 (5, 1)
+			bool          unknown5Bit2                            : 1; // 5 (5, 2)
+			bool          unknown5Bit3                            : 1; // 5 (5, 3)
+			bool          unknown5Bit4                            : 1; // 5 (5, 4)
+			std::uint8_t  padding5Bit5                            : 3; // 5 (5, 5)
+			std::uint16_t padding6;                                    // 6
 		};
-		static_assert(sizeof(FlagsBE3) == 0x1);
+		static_assert(sizeof(PlayerCharacterFlags) == 0x8);
 
 		// Override
 		virtual ~PlayerCharacter() override; // 0
@@ -185,7 +229,7 @@ namespace Skyrim
 		virtual void                              UnknownF0(Actor*) override;                                                                                                                                              // F0
 		virtual void                              UnknownF5(Actor*) override;                                                                                                                                              // F5
 		virtual void                              UnknownF6(Actor*) override;                                                                                                                                              // F6
-		virtual void                              UnknownF7(Actor*) override;                                                                                                                                              // F7
+		virtual void                              UseSkill(Utility::Enumeration<ActorValue, std::uint32_t> actorValue, float skillUse, TESForm* advanceForm, std::uint32_t advanceAction) override;                        // F7
 		virtual void                              UnknownF9(Actor*) override;                                                                                                                                              // F9
 		virtual void                              ForEachPerk(PerkEntryVisitor& perkEntryVisitor) const override;                                                                                                          // FA
 		virtual void                              UnknownFB(Actor*) override;                                                                                                                                              // FB
@@ -414,7 +458,7 @@ namespace Skyrim
 		float                                                        powerAttackTimer;                  // 904, 90C
 		std::uint32_t                                                unknown910;                        // 908, 910
 		std::int32_t                                                 amountStolenSold;                  // 90C, 914
-		std::uint32_t                                                unknown918;                        // 910, 918
+		std::int32_t                                                 stolenValue;                       // 910, 918
 		ActorHandle                                                  lastRiddenMountHandle;             // 914, 91C
 		std::uint64_t                                                unknown920;                        // 918, 920
 		std::uint64_t                                                unknown928;                        // 920, 928
@@ -442,7 +486,7 @@ namespace Skyrim
 		std::uint64_t                                                unknown9D0;                        // 9C8, 9D0
 		std::uint64_t                                                unknown9D8;                        // 9D0, 9D8
 		BSTArray<ActorHandle>                                        hudEnemyHandles;                   // 9D8, 9E0
-		std::uint64_t                                                unknown9F8;                        // 9F0, 9F8
+		TESForm*                                                     advanceForm;                       // 9F0, 9F8
 		std::uint64_t                                                unknownA00;                        // 9F8, A00
 		std::uint64_t                                                unknownA08;                        // A00, A08
 		std::uint32_t                                                teammateCount;                     // A08, A10
@@ -476,7 +520,8 @@ namespace Skyrim
 		float                                                        favorRequestWaitTimer;             // AD8, AE0
 		std::uint32_t                                                unknownAE4;                        // ADC, AE4
 		std::uint64_t                                                unknownAE8;                        // AE0, AE8
-		std::uint64_t                                                unknownAF0;                        // AE8, AF0
+		Utility::Enumeration<ActorValue, std::uint32_t>              advanceSkill;                      // AE8, AF0
+		std::uint32_t                                                advanceAction;                     // AEC, AF4
 		std::uint32_t                                                unknownAF8;                        // AF0, AF8
 		Utility::Enumeration<GrabType, std::uint32_t>                grabType;                          // AF4, AFC
 		Utility::Enumeration<Difficulty, std::uint32_t>              difficulty;                        // AF8, B00
@@ -510,10 +555,7 @@ namespace Skyrim
 		std::uint64_t                                                unknownBC8;                        // BC0, BC8
 		std::uint64_t                                                unknownBD0;                        // BC8, BD0
 		std::uint64_t                                                unknownBD8;                        // BD0, BD8
-		std::uint16_t                                                unknownBE0;                        // BD8, BE0
-		std::uint8_t                                                 unknownBE2;                        // BDA, BE2
-		Utility::Enumeration<FlagsBE3, std::uint8_t>                 flagsBE3;                          // BDB, BE3
-		std::uint32_t                                                unknownBE4;                        // BDC, BE4
+		PlayerCharacterFlags                                         playerCharacterFlags;              // BD8, BE0
 	};
 	static_assert(offsetof(PlayerCharacter, crimeGold) == SKYRIM_RELOCATE(0x3E0, 0x3E8));
 	static_assert(offsetof(PlayerCharacter, stolenItemValue) == SKYRIM_RELOCATE(0x410, 0x418));
@@ -540,16 +582,20 @@ namespace Skyrim
 	static_assert(offsetof(PlayerCharacter, overencumberedTimer) == SKYRIM_RELOCATE(0x900, 0x908));
 	static_assert(offsetof(PlayerCharacter, powerAttackTimer) == SKYRIM_RELOCATE(0x904, 0x90C));
 	static_assert(offsetof(PlayerCharacter, amountStolenSold) == SKYRIM_RELOCATE(0x90C, 0x914));
+	static_assert(offsetof(PlayerCharacter, stolenValue) == SKYRIM_RELOCATE(0x910, 0x918));
 	static_assert(offsetof(PlayerCharacter, lastRiddenMountHandle) == SKYRIM_RELOCATE(0x914, 0x91C));
 	static_assert(offsetof(PlayerCharacter, pendingWeaponPoison) == SKYRIM_RELOCATE(0x968, 0x970));
 	static_assert(offsetof(PlayerCharacter, firstPersonLight) == SKYRIM_RELOCATE(0x998, 0x9A0));
 	static_assert(offsetof(PlayerCharacter, thirdPersonLight) == SKYRIM_RELOCATE(0x9A0, 0x9A8));
 	static_assert(offsetof(PlayerCharacter, automaticAimActorHandle) == SKYRIM_RELOCATE(0x9B8, 0x9C0));
 	static_assert(offsetof(PlayerCharacter, hudEnemyHandles) == SKYRIM_RELOCATE(0x9D8, 0x9E0));
+	static_assert(offsetof(PlayerCharacter, advanceForm) == SKYRIM_RELOCATE(0x9F0, 0x9F8));
 	static_assert(offsetof(PlayerCharacter, teammateCount) == SKYRIM_RELOCATE(0xA08, 0xA10));
 	static_assert(offsetof(PlayerCharacter, currentLocation) == SKYRIM_RELOCATE(0xAC8, 0xAD0));
 	static_assert(offsetof(PlayerCharacter, telekinesisDistance) == SKYRIM_RELOCATE(0xAD4, 0xADC));
 	static_assert(offsetof(PlayerCharacter, favorRequestWaitTimer) == SKYRIM_RELOCATE(0xAD8, 0xAE0));
+	static_assert(offsetof(PlayerCharacter, advanceSkill) == SKYRIM_RELOCATE(0xAE8, 0xAF0));
+	static_assert(offsetof(PlayerCharacter, advanceAction) == SKYRIM_RELOCATE(0xAEC, 0xAF4));
 	static_assert(offsetof(PlayerCharacter, grabType) == SKYRIM_RELOCATE(0xAF4, 0xAFC));
 	static_assert(offsetof(PlayerCharacter, difficulty) == SKYRIM_RELOCATE(0xAF8, 0xB00));
 	static_assert(offsetof(PlayerCharacter, perkCount) == SKYRIM_RELOCATE(0xB01, 0xB09));
@@ -558,6 +604,6 @@ namespace Skyrim
 	static_assert(offsetof(PlayerCharacter, overlayTintMasks) == SKYRIM_RELOCATE(0xB28, 0xB30));
 	static_assert(offsetof(PlayerCharacter, complexion) == SKYRIM_RELOCATE(0xB30, 0xB38));
 	static_assert(offsetof(PlayerCharacter, characterGenerationRace) == SKYRIM_RELOCATE(0xB38, 0xB40));
-	static_assert(offsetof(PlayerCharacter, flagsBE3) == SKYRIM_RELOCATE(0xBDB, 0xBE3));
+	static_assert(offsetof(PlayerCharacter, playerCharacterFlags) == SKYRIM_RELOCATE(0xBD8, 0xBE0));
 	static_assert(sizeof(PlayerCharacter) == SKYRIM_RELOCATE(0xBE0, 0xBE8));
 }

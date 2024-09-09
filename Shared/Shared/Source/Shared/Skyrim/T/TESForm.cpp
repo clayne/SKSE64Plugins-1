@@ -48,6 +48,15 @@ namespace Skyrim
 		return function(this);
 	}
 
+	float TESForm::GetFormWeight() const
+	{
+		auto* function{ reinterpret_cast<
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&TESForm::GetFormWeight)>::type>(
+			Addresses::TESForm::GetFormWeight()) };
+
+		return function(this);
+	}
+
 	std::uint16_t TESForm::GetMaximumCharge(ExtraDataList* extraDataList) const
 	{
 		auto* function{ reinterpret_cast<

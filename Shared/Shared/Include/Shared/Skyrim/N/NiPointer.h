@@ -183,6 +183,12 @@ namespace Skyrim
 	};
 	static_assert(sizeof(NiPointer<void*>) == 0x8);
 
+	template <class T, class... Arguments>
+	inline NiPointer<T> make_net_immerse_pointer(Arguments&&... arguments)
+	{
+		return NiPointer<T>{ new T(std::forward<Arguments>(arguments)...) };
+	}
+
 	// Non-member functions
 	// 1
 	template <class T1, class T2>

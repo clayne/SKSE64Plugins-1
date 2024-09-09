@@ -179,6 +179,7 @@ namespace Skyrim
 			bool SetMember(void* data, const char* name, const GFxValue& value, bool isDisplayObject);
 			bool Invoke(void* data, GFxValue* result, const char* name, const GFxValue* arguments, UPInt argumentCount, bool isDisplayObject);
 			bool DeleteMember(void* data, const char* name, bool isDisplayObject);
+			void VisitMembers(void* data, ObjVisitor* objectVisitor, bool isDisplayObject) const;
 
 			std::uint32_t GetArraySize(void* data) const;
 			bool          SetArraySize(void* data, std::uint32_t size);
@@ -190,7 +191,9 @@ namespace Skyrim
 			bool GetDisplayInformation(void* data, DisplayInformation* displayInformation) const;
 			bool SetDisplayInformation(void* data, const DisplayInformation& displayInformation);
 
+			bool GetText(void* data, GFxValue* value, bool isHTML) const;
 			bool SetText(void* data, const char* text, bool isHTML);
+			bool SetTextW(void* data, const wchar_t* text, bool isHTML);
 
 			bool AttachMovie(void* data, GFxValue* movieClip, const char* symbolName, const char* instanceName, std::int32_t depth, const GFxValue* initializeObject);
 			bool GotoAndPlay(void* data, const char* frame, bool stop);
@@ -228,7 +231,7 @@ namespace Skyrim
 		GFxValue& operator=(const wchar_t* stringW);
 		GFxValue& operator=(std::nullptr_t);
 
-		bool operator==(const GFxValue& right);
+		bool operator==(const GFxValue& right) const;
 
 		// Member functions
 		GString ToString() const;
@@ -269,6 +272,7 @@ namespace Skyrim
 		bool Invoke(const char* name, GFxValue* result, const GFxValue* arguments, UPInt argumentCount);
 		bool Invoke(const char* name, GFxValue* result = nullptr);
 		bool DeleteMember(const char* name);
+		void VisitMembers(ObjectVisitor* objectVisitor) const;
 
 		// AS Array support
 		std::uint32_t GetArraySize() const;
@@ -285,8 +289,12 @@ namespace Skyrim
 		bool SetDisplayInformation(const DisplayInformation& displayInformation);
 
 		// AS TextField support
+		bool GetText(GFxValue* value) const;
+		bool GetTextHTML(GFxValue* value) const;
 		bool SetText(const char* text);
+		bool SetText(const wchar_t* text);
 		bool SetTextHTML(const char* html);
+		bool SetTextHTML(const wchar_t* html);
 
 		// AS MovieClip support
 		bool AttachMovie(GFxValue* movieClip, const char* symbolName, const char* instanceName, std::int32_t depth = -1, const GFxValue* initializeObject = nullptr);
