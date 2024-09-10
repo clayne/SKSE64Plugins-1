@@ -6,27 +6,26 @@
 
 namespace PickpocketChanceFix
 {
+	QuantitySliderChange::QuantitySliderChange(Skyrim::ContainerMenu* containerMenu) :
+		containerMenu_(containerMenu)
+	{
+	}
+
 	void QuantitySliderChange::Call(Parameters& parameters)
 	{
-		if (parameters.argumentCount < 1 || !parameters.arguments[0].IsObject())
+		if (this->containerMenu_ && this->containerMenu_->itemCard)
 		{
-			return;
+			if (parameters.argumentCount >= 1 && parameters.arguments[0].IsObject())
+			{
+				const auto& event = parameters.arguments[0];
+
+				Skyrim::GFxValue value;
+
+				if (event.GetMember("value", std::addressof(value)) && value.IsNumber())
+				{
+					this->containerMenu_->itemCard->object.SetMember("quantitySliderChange", value);
+				}
+			}
 		}
-
-		const auto& event = parameters.arguments[0];
-
-		Skyrim::GFxValue value;
-
-		if (!event.GetMember("value", std::addressof(value)) || !value.IsNumber())
-		{
-			return;
-		}
-
-		std::array<Skyrim::GFxValue, 2> arguments = { /* methodName */ "QuantitySliderChange", /* parameters */ {} };
-
-		parameters.movieView->CreateArray(std::addressof(arguments[1]));
-		arguments[1].PushBack(value);
-
-		parameters.movieView->Invoke("gfx.io.GameDelegate.call", nullptr, arguments.data(), static_cast<std::uint32_t>(arguments.size()));
 	}
 }
