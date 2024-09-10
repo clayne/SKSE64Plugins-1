@@ -70,17 +70,14 @@ namespace PickpocketChanceFix
 
 	void ContainerMenu::AdvanceMovie(Skyrim::ContainerMenu* containerMenu, float interval, std::uint32_t currentTime)
 	{
-		if (containerMenu)
+		auto pickpocketChance = ContainerMenu::GetPickpocketChance(containerMenu);
+
+		// Skyrim Souls RE sets pickpocket chance before ContainerMenu::AdvanceMovie
+		ContainerMenu::advanceMovie_(containerMenu, interval, currentTime);
+
+		if (pickpocketChance.has_value())
 		{
-			auto pickpocketChance = ContainerMenu::GetPickpocketChance(containerMenu);
-
-			// Skyrim Souls RE sets pickpocket chance before ContainerMenu::AdvanceMovie
-			ContainerMenu::advanceMovie_(containerMenu, interval, currentTime);
-
-			if (pickpocketChance.has_value())
-			{
-				ContainerMenu::SetPickpocketChance(containerMenu, pickpocketChance.value().first, pickpocketChance.value().second);
-			}
+			ContainerMenu::SetPickpocketChance(containerMenu, pickpocketChance.value().first, pickpocketChance.value().second);
 		}
 	}
 
