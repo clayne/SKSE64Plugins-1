@@ -36,6 +36,7 @@ namespace Skyrim
 		kReference           = 0x3D, // TESObjectREFR
 		kActor               = 0x3E, // Actor, Character, PlayerCharacter
 		kImpactDataSet       = 0x65, // BGSImpactDataSet
+		kShout               = 0x77, // TESShout
 		kTotal               = 0x8A
 	};
 }

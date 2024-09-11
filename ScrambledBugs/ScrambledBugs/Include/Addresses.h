@@ -101,6 +101,15 @@ namespace ScrambledBugs::Addresses
 			inline const std::uintptr_t GetArrowPower{ Relocation::AddressLibrary::GetSingleton().GetAddress(26435) }; // ArrowProjectile::GetArrowPower
 		}
 
+		namespace ScrollEquipState
+		{
+			namespace Actor
+			{
+				/// <summary>1.5.97.0: SkyrimSE.exe + 0x88B6B0, 1.6.318.0: SkyrimSE.exe + 0x8BAA10</summary>
+				inline const std::uintptr_t GetEquipState{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(50945, 51822)) };
+			}
+		}
+
 		namespace TerrainImpactEffects
 		{
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x271BE0 + 0xE7 (18711), 1.6.318.0: SkyrimSE.exe + 0x27FC50</summary>

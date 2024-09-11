@@ -13,6 +13,7 @@
 #include "Shared/Skyrim/T/TESObjectARMO.h"
 #include "Shared/Skyrim/T/TESObjectWEAP.h"
 #include "Shared/Skyrim/T/TESRace.h"
+#include "Shared/Skyrim/T/TESShout.h"
 #include "Shared/Utility/TypeTraits.h"
 
 
@@ -129,6 +130,13 @@ namespace Skyrim
 		auto shieldBipedObject = thirdPersonBiped->GetShieldBipedObject();
 
 		return shieldBipedObject ? static_cast<TESObjectARMO*>(shieldBipedObject->boundObject) : nullptr;
+	}
+
+	TESShout* Actor::GetEquippedShout() const
+	{
+		auto* selectedPower = this->selectedPower;
+
+		return selectedPower && selectedPower->formType == FormType::kShout ? static_cast<TESShout*>(selectedPower) : nullptr;
 	}
 
 	TESObjectWEAP* Actor::GetEquippedWeapon(bool leftHand) const

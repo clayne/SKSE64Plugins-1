@@ -425,6 +425,28 @@ namespace Skyrim
 			}
 		}
 
+		namespace BGSEquipSlot
+		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x3314E0, 1.6.318.0: SkyrimSE.exe + 0x346DE0</summary>
+			std::uintptr_t CheckForSlotConflict()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(23148, 23605)) };
+
+				return address;
+			}
+		}
+
+		namespace BGSEquipType
+		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x186D60, 1.6.318.0: SkyrimSE.exe + 0x190BE0</summary>
+			std::uintptr_t GetFormAsEquipType()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(14123, 14218)) };
+
+				return address;
+			}
+		}
+
 		namespace BGSFootstepManager
 		{
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x2F27150, 1.6.318.0: SkyrimSE.exe + 0x2FC1C20</summary>
@@ -2270,6 +2292,17 @@ namespace Skyrim
 			std::uintptr_t VirtualFunctionTable()
 			{
 				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(257988, 206072)) };
+
+				return address;
+			}
+		}
+
+		namespace StandardItemData
+		{
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x16ABAF0, 1.6.318.0: SkyrimSE.exe + 0x179ED90</summary>
+			std::uintptr_t VirtualFunctionTable()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(267990, 214924)) };
 
 				return address;
 			}

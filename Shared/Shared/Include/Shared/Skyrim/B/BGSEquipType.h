@@ -9,6 +9,7 @@
 namespace Skyrim
 {
 	class BGSEquipSlot;
+	class TESForm;
 
 	class BGSEquipType :
 		public BaseFormComponent // 0
@@ -25,6 +26,9 @@ namespace Skyrim
 		// Add
 		virtual BGSEquipSlot* GetEquipSlot() const;                  // 4
 		virtual void          SetEquipSlot(BGSEquipSlot* equipSlot); // 5
+
+		// Non-member functions
+		static BGSEquipType* GetFormAsEquipType(TESForm* form);
 
 		// Member variables
 		BGSEquipSlot* equipSlot; // 8

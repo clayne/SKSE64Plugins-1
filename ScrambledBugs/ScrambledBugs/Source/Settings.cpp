@@ -17,6 +17,7 @@
 #include "Fixes/PowerCooldowns.h"
 #include "Fixes/ProjectileFadeDuration.h"
 #include "Fixes/QuickShot.h"
+#include "Fixes/ScrollEquipState.h"
 #include "Fixes/TerrainImpactEffects.h"
 #include "Fixes/TrainingMenu.h"
 #include "Fixes/WeaponCharge.h"
@@ -81,6 +82,7 @@ namespace ScrambledBugs
 		Settings::Deserialize(directory / "OpenEffectArchetype.json", this->openEffectArchetype);
 		Settings::Deserialize(directory / "PowerCooldowns.json", this->powerCooldowns);
 		Settings::Deserialize(directory / "ProjectileFadeDuration.json", this->projectileFadeDuration);
+		Settings::Deserialize(directory / "ScrollEquipState.json", this->scrollEquipState);
 		Settings::Deserialize(directory / "TerrainImpactEffects.json", this->terrainImpactEffects);
 		Settings::Deserialize(directory / "TrainingMenu.json", this->trainingMenu);
 		Settings::Deserialize(directory / "WeaponCharge.json", this->weaponCharge);
@@ -108,6 +110,7 @@ namespace ScrambledBugs
 		json["openEffectArchetype"]             = this->openEffectArchetype;
 		json["powerCooldowns"]                  = this->powerCooldowns;
 		json["projectileFadeDuration"]          = this->projectileFadeDuration;
+		json["scrollEquipState"]                = this->scrollEquipState;
 		json["terrainImpactEffects"]            = this->terrainImpactEffects;
 		json["trainingMenu"]                    = this->trainingMenu;
 		json["weaponCharge"]                    = this->weaponCharge;
@@ -364,6 +367,11 @@ namespace ScrambledBugs
 		if (this->fixes.projectileFadeDuration)
 		{
 			ScrambledBugs::Fixes::ProjectileFadeDuration::Fix(this->fixes.projectileFadeDuration);
+		}
+
+		if (this->fixes.scrollEquipState)
+		{
+			ScrambledBugs::Fixes::ScrollEquipState::Fix(this->fixes.scrollEquipState);
 		}
 
 		if (this->fixes.terrainImpactEffects)

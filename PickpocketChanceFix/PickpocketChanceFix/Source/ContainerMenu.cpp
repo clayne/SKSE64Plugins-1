@@ -3,6 +3,7 @@
 #include "ContainerMenu.h"
 
 #include "GFxFunctionHandler.h"
+#include "Shared/Utility/Memory.h"
 
 
 

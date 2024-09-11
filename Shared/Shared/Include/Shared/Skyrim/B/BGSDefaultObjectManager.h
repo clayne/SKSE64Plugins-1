@@ -14,8 +14,8 @@ namespace Skyrim
 {
 	enum class DefaultObject : std::uint32_t
 	{
-		kLeftHandEquip  = 19,
-		kRightHandEquip = 20,
+		kLeftHandEquipSlot  = 19,
+		kRightHandEquipSlot = 20,
 #ifdef SKYRIM_ANNIVERSARY_EDITION
 		kHelpManualInstalledContent                   = 363,
 		kHelpManualInstalledContentAnniversaryEdition = 364,

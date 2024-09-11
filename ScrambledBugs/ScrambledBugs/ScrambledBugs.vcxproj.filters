@@ -159,6 +159,9 @@
     <ClInclude Include="Include\Fixes\OpenEffectArchetype.h">
       <Filter>Header Files\Fixes</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Fixes\ScrollEquipState.h">
+      <Filter>Header Files\Fixes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Fixes\ActivateFurniture.cpp">
@@ -285,6 +288,9 @@
       <Filter>Source Files\Fixes</Filter>
     </ClCompile>
     <ClCompile Include="Source\Fixes\OpenEffectArchetype.cpp">
+      <Filter>Source Files\Fixes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Fixes\ScrollEquipState.cpp">
       <Filter>Source Files\Fixes</Filter>
     </ClCompile>
   </ItemGroup>

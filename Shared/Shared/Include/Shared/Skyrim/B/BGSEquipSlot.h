@@ -30,6 +30,9 @@ namespace Skyrim
 		virtual bool Load(TESFile* file) override; // 6
 		virtual void Unknown13(TESForm*) override; // 13
 
+		// Member functions
+		bool CheckForSlotConflict(const BGSEquipSlot* right) const;
+
 		// Member variables
 		BSTArray<BGSEquipSlot*>                    slotParents;    // 20
 		Utility::Enumeration<Flags, std::uint32_t> equipSlotFlags; // 38

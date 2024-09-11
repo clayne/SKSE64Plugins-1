@@ -1926,6 +1926,9 @@
     <ClInclude Include="Include\Shared\Skyrim\G\GameplayFormulas.h">
       <Filter>Header Files\Shared\Skyrim\G</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Shared\Skyrim\E\EquipState.h">
+      <Filter>Header Files\Shared\Skyrim\E</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Shared\PrecompiledHeader.cpp">
@@ -2398,6 +2401,12 @@
     </ClCompile>
     <ClCompile Include="Source\Shared\Skyrim\I\ItemCard.cpp">
       <Filter>Source Files\Shared\Skyrim\I</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shared\Skyrim\B\BGSEquipSlot.cpp">
+      <Filter>Source Files\Shared\Skyrim\B</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shared\Skyrim\B\BGSEquipType.cpp">
+      <Filter>Source Files\Shared\Skyrim\B</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

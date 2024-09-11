@@ -125,6 +125,16 @@ namespace Skyrim
 			std::uintptr_t VirtualFunctionTable();
 		}
 
+		namespace BGSEquipSlot
+		{
+			std::uintptr_t CheckForSlotConflict();
+		}
+
+		namespace BGSEquipType
+		{
+			std::uintptr_t GetFormAsEquipType();
+		}
+
 		namespace BGSFootstepManager
 		{
 			std::uintptr_t Singleton();
@@ -775,6 +785,11 @@ namespace Skyrim
 		}
 
 		namespace StaggerEffect
+		{
+			std::uintptr_t VirtualFunctionTable();
+		}
+
+		namespace StandardItemData
 		{
 			std::uintptr_t VirtualFunctionTable();
 		}

@@ -243,6 +243,7 @@
     <ClInclude Include="Include\Shared\Skyrim\E\EffectSetting.h" />
     <ClInclude Include="Include\Shared\Skyrim\E\EnchantConstructMenu.h" />
     <ClInclude Include="Include\Shared\Skyrim\E\EnchantmentItem.h" />
+    <ClInclude Include="Include\Shared\Skyrim\E\EquipState.h" />
     <ClInclude Include="Include\Shared\Skyrim\E\EventNotifyControl.h" />
     <ClInclude Include="Include\Shared\Skyrim\E\ExtraCharge.h" />
     <ClInclude Include="Include\Shared\Skyrim\E\ExtraCount.h" />
@@ -662,6 +663,8 @@
     <ClCompile Include="Source\Shared\Skyrim\B\BGSDefaultObjectManager.cpp" />
     <ClCompile Include="Source\Shared\Skyrim\B\BGSEntryPoint.cpp" />
     <ClCompile Include="Source\Shared\Skyrim\B\BGSEntryPointFunction.cpp" />
+    <ClCompile Include="Source\Shared\Skyrim\B\BGSEquipSlot.cpp" />
+    <ClCompile Include="Source\Shared\Skyrim\B\BGSEquipType.cpp" />
     <ClCompile Include="Source\Shared\Skyrim\B\BGSFootstepManager.cpp" />
     <ClCompile Include="Source\Shared\Skyrim\B\BGSImpactDataSet.cpp" />
     <ClCompile Include="Source\Shared\Skyrim\B\BGSImpactManager.cpp" />

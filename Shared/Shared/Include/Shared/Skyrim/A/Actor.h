@@ -35,6 +35,7 @@ namespace Skyrim
 	class TESObjectARMO;
 	class TESObjectWEAP;
 	class TESRace;
+	class TESShout;
 
 	class Actor :
 		public TESObjectREFR,                             // 0
@@ -382,6 +383,7 @@ namespace Skyrim
 		bool                    GetControllingActor(NiPointer<Actor>& controllingActor);
 		InventoryEntryData*     GetEquippedAmmunitionInventoryEntryData() const;
 		TESObjectARMO*          GetEquippedShield() const;
+		TESShout*               GetEquippedShout() const;
 		TESObjectWEAP*          GetEquippedWeapon(bool leftHand) const;
 		InventoryEntryData*     GetEquippedWeaponInventoryEntryData(bool leftHand) const;
 		NiAVObject*             GetHeadNode() const;

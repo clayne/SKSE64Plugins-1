@@ -40,6 +40,7 @@ namespace ScrambledBugs
 			bool      openEffectArchetype{};
 			bool      powerCooldowns{};
 			bool      projectileFadeDuration{};
+			bool      scrollEquipState{};
 			bool      terrainImpactEffects{};
 			bool      trainingMenu{};
 			bool      weaponCharge{};

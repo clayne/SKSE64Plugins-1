@@ -187,6 +187,7 @@
 #include "Shared/Skyrim/E/EffectSetting.h"
 #include "Shared/Skyrim/E/EnchantConstructMenu.h"
 #include "Shared/Skyrim/E/EnchantmentItem.h"
+#include "Shared/Skyrim/E/EquipState.h"
 #include "Shared/Skyrim/E/EventNotifyControl.h"
 #include "Shared/Skyrim/E/ExtraCharge.h"
 #include "Shared/Skyrim/E/ExtraCount.h"

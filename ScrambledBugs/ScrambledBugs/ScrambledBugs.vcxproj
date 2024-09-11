@@ -51,6 +51,7 @@
     <ClInclude Include="Include\Fixes\PowerCooldowns.h" />
     <ClInclude Include="Include\Fixes\ProjectileFadeDuration.h" />
     <ClInclude Include="Include\Fixes\QuickShot.h" />
+    <ClInclude Include="Include\Fixes\ScrollEquipState.h" />
     <ClInclude Include="Include\Fixes\TerrainImpactEffects.h" />
     <ClInclude Include="Include\Fixes\TrainingMenu.h" />
     <ClInclude Include="Include\Fixes\WeaponCharge.h" />
@@ -94,6 +95,7 @@
     <ClCompile Include="Source\Fixes\PowerCooldowns.cpp" />
     <ClCompile Include="Source\Fixes\ProjectileFadeDuration.cpp" />
     <ClCompile Include="Source\Fixes\QuickShot.cpp" />
+    <ClCompile Include="Source\Fixes\ScrollEquipState.cpp" />
     <ClCompile Include="Source\Fixes\TerrainImpactEffects.cpp" />
     <ClCompile Include="Source\Fixes\TrainingMenu.cpp" />
     <ClCompile Include="Source\Fixes\WeaponCharge.cpp" />
