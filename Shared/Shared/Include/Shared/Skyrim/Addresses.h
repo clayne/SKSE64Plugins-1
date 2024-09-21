@@ -37,12 +37,13 @@ namespace Skyrim
 			}
 
 			std::uintptr_t AddSpellItem();
-			std::uintptr_t AdjustHealthDamageToDifficulty();
-			std::uintptr_t CanBeKilledBy();
+			std::uintptr_t CanKillMe();
+			std::uintptr_t DifficultyLevelAdjustHealthModifier();
 			std::uintptr_t ForceDetect();
 			std::uintptr_t GetActorValueModifier();
 			std::uintptr_t GetArmorRating();
 			std::uintptr_t GetControllingActor();
+			std::uintptr_t GetEquipState();
 			std::uintptr_t GetLineOfSightLocation();
 			std::uintptr_t GetSoulLevel();
 			std::uintptr_t GetWeaponDamage();
@@ -116,7 +117,7 @@ namespace Skyrim
 
 		namespace BGSEntryPointFunction
 		{
-			std::uintptr_t EntryPointFunctionArgumentCount();
+			std::uintptr_t EntryPointFunctionArgumentCounts();
 			std::uintptr_t ExecuteFunction();
 		}
 
@@ -405,6 +406,7 @@ namespace Skyrim
 		namespace GameplayFormulas
 		{
 			std::uintptr_t CalculatePickpocketSkillUse();
+			std::uintptr_t GetDifficultyMultiplier();
 		}
 
 		namespace GameSettingCollection
@@ -695,7 +697,6 @@ namespace Skyrim
 				std::uintptr_t VirtualFunctionTable();
 			}
 
-			std::uintptr_t GetDifficultyMultiplier();
 			std::uintptr_t Singleton();
 			std::uintptr_t VirtualFunctionTable();
 		}

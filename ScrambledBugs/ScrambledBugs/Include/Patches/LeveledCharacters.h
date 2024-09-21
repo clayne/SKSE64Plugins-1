@@ -9,7 +9,7 @@ namespace ScrambledBugs::Patches
 	class LeveledCharacters
 	{
 	public:
-		static void Patch(bool& leveledCharacters);
+		static void Load(bool& leveledCharacters);
 
 	private:
 		static Skyrim::TESLeveledList::AllBelowForce GetAllBelowForce(Skyrim::ExtraLevCreaModifier* extraLeveledCreatureModifier);

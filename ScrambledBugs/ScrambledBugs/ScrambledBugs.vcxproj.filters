@@ -141,9 +141,6 @@
     <ClInclude Include="Include\Serialization.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Settings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Fixes\PowerCooldowns.h">
       <Filter>Header Files\Fixes</Filter>
     </ClInclude>
@@ -161,6 +158,12 @@
     </ClInclude>
     <ClInclude Include="Include\Fixes\ScrollEquipState.h">
       <Filter>Header Files\Fixes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ScrambledBugsInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Settings.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -272,9 +275,6 @@
     <ClCompile Include="Source\Serialization.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Settings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Fixes\PowerCooldowns.cpp">
       <Filter>Source Files\Fixes</Filter>
     </ClCompile>
@@ -292,6 +292,9 @@
     </ClCompile>
     <ClCompile Include="Source\Fixes\ScrollEquipState.cpp">
       <Filter>Source Files\Fixes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Settings.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

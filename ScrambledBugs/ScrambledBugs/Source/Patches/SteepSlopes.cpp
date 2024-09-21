@@ -10,7 +10,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void SteepSlopes::Patch(bool& steepSlopes)
+	void SteepSlopes::Load(bool& steepSlopes)
 	{
 		if (!Patterns::Patches::SteepSlopes::GetScale())
 		{

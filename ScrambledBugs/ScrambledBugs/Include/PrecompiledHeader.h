@@ -2,11 +2,13 @@
 
 #include <algorithm>  // std::find, std::max, std::min
 #include <cmath>      // std::abs, std::floor, std::round
-#include <cstddef>    // offsetof
+#include <cstdarg>    // Variadic arguments
+#include <cstddef>    // Type support
 #include <cstdint>    // Fixed width integer types
 #include <exception>  // std::exception
 #include <filesystem> // Filesystem library
 #include <fstream>    // std::ifstream
+#include <limits>     // std::numeric_limits
 #include <memory>     // std::addressof
 #include <optional>   // std::make_optional, std::nullopt, std::optional
 #include <span>       // std::span

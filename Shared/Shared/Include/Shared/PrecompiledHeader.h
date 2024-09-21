@@ -8,8 +8,8 @@
 #include <cmath>           // std::abs, std::atanf, std::logf, std::pow, std::sqrt, std::tanf
 #include <compare>         // std::strong_ordering
 #include <concepts>        // Concepts library
-#include <cstdarg>         // Variadic functions
-#include <cstddef>         // offsetof, std::byte, std::nullptr_t, std::ptrdiff_t, std::size_t
+#include <cstdarg>         // Variadic arguments
+#include <cstddef>         // Type support
 #include <cstdint>         // Fixed width integer types
 #include <cstdio>          // std::snprintf
 #include <cstring>         // std::memcpy, std::memmove, std::memset, std::strcmp, std::strlen

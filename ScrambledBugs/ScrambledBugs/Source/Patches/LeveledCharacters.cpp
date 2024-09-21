@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void LeveledCharacters::Patch(bool& leveledCharacters)
+	void LeveledCharacters::Load(bool& leveledCharacters)
 	{
 		Utility::Memory::SafeWriteAbsoluteJump(
 			Addresses::Patches::LeveledCharacters::GetAllBelowForce,

@@ -12,7 +12,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void KillCamera::Fix(bool& killCamera)
+	void KillCamera::Load(bool& killCamera)
 	{
 		if (!Patterns::Fixes::KillCamera::ApplyCombatHitSpell() ||
 			!Patterns::Fixes::KillCamera::GetWeapon())
@@ -41,13 +41,21 @@ namespace ScrambledBugs::Fixes
 			reinterpret_cast<std::uintptr_t>(std::addressof(KillCamera::ApplyCombatHitSpell)));
 	}
 
-	void KillCamera::ApplyCombatHitSpell(
-		Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint,
-		Skyrim::Actor*                                                         perkOwner,
-		Skyrim::TESObjectWEAP*                                                 weapon,
-		Skyrim::Actor*                                                         target,
-		Skyrim::SpellItem**                                                    result)
+	/* Apply Combat Hit Spell
+	* Perk Owner
+	* Weapon
+	* Target */
+	void KillCamera::ApplyCombatHitSpell(Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint, Skyrim::Actor* perkOwner, ...)
 	{
+		std::va_list variadicArguments;
+		va_start(variadicArguments, perkOwner);
+
+		auto*  weapon = va_arg(variadicArguments, Skyrim::TESObjectWEAP*);
+		auto*  target = va_arg(variadicArguments, Skyrim::Actor*);
+		auto** result = va_arg(variadicArguments, Skyrim::SpellItem**);
+
+		va_end(variadicArguments);
+
 		auto* arrowProjectile = reinterpret_cast<Skyrim::ArrowProjectile*>(weapon);
 
 		if (arrowProjectile->projectileFlags.all(Skyrim::Projectile::Flags::k3DLoaded) && arrowProjectile->weaponSource)

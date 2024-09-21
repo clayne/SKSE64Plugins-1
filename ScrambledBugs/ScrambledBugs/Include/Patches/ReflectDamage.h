@@ -9,6 +9,6 @@ namespace ScrambledBugs::Patches
 	class ReflectDamage
 	{
 	public:
-		static void Patch(bool& reflectDamage);
+		static void Load(bool& reflectDamage);
 	};
 }

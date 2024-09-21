@@ -8,7 +8,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void EnchantmentEffectPower::Patch(bool& enchantmentEffectPower)
+	void EnchantmentEffectPower::Load(bool& enchantmentEffectPower)
 	{
 		Utility::Memory::SafeWriteVirtualFunction(
 			Skyrim::Addresses::CraftingSubMenus::EnchantConstructMenu::CreateEffectFunctor::VirtualFunctionTable(),

@@ -8,7 +8,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void ScrollExperience::Patch(bool& scrollExperience)
+	void ScrollExperience::Load(bool& scrollExperience)
 	{
 		Utility::Memory::SafeWriteVirtualFunction(
 			Skyrim::Addresses::ScrollItem::VirtualFunctionTable(),

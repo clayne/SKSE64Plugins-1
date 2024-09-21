@@ -51,6 +51,7 @@ namespace Skyrim
 			std::uint8_t                                                entryPointFunctionArgumentCount,
 			void**                                                      entryPointFunctionArguments,
 			BGSEntryPointFunctionData*                                  entryPointFunctionData);
-		std::uint32_t GetEntryPointFunctionArgumentCount(Utility::Enumeration<EntryPointFunctionType, std::uint32_t> entryPointFunctionType);
+		std::uint32_t  GetEntryPointFunctionArgumentCount(Utility::Enumeration<EntryPointFunctionType, std::uint32_t> entryPointFunctionType);
+		std::uint32_t* GetEntryPointFunctionArgumentCounts();
 	}
 }

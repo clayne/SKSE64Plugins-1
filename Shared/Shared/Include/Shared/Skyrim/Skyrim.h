@@ -178,7 +178,7 @@
 #include "Shared/Skyrim/D/DecalData.h"
 #include "Shared/Skyrim/D/DetectionPriority.h"
 #include "Shared/Skyrim/D/DeviceConnectEvent.h"
-#include "Shared/Skyrim/D/Difficulty.h"
+#include "Shared/Skyrim/D/DifficultyLevel.h"
 #include "Shared/Skyrim/D/DirectionalAmbientLighting.h"
 #include "Shared/Skyrim/D/DualValueModifierEffect.h"
 #include "Shared/Skyrim/E/EffectArchetypes.h"

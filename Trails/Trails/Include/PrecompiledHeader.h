@@ -1,7 +1,7 @@
 #pragma once
 
 #include <algorithm>   // std::max, std::min
-#include <cstddef>     // std::size_t
+#include <cstddef>     // Type support
 #include <cstdint>     // Fixed width integer types
 #include <filesystem>  // Filesystem library
 #include <fstream>     // std::ifstream

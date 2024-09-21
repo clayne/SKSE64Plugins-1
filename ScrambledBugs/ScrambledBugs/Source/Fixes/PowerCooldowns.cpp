@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void PowerCooldowns::Fix(bool& powerCooldowns)
+	void PowerCooldowns::Load(bool& powerCooldowns)
 	{
 		Utility::Memory::SafeWriteAbsoluteJump(Addresses::Fixes::PowerCooldowns::SaveCastPowerItems, reinterpret_cast<std::uintptr_t>(std::addressof(PowerCooldowns::SaveCastPowerItems)));
 	}

@@ -9,7 +9,7 @@ namespace ScrambledBugs::Fixes
 	class IsCurrentSpell
 	{
 	public:
-		static void Fix(bool& isCurrentSpell);
+		static void Load(bool& isCurrentSpell);
 
 	private:
 		static Skyrim::ScriptFunction::ConditionFunction IsCurrentSpellConditionFunction;

@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void HitEffectRaceCondition::Fix(bool& hitEffectRaceCondition)
+	void HitEffectRaceCondition::Load(bool& hitEffectRaceCondition)
 	{
 		Utility::Memory::SafeWriteAbsoluteJump(
 			Addresses::Fixes::HitEffectRaceCondition::ShouldUpdate,

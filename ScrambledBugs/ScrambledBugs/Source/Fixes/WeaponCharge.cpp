@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void WeaponCharge::Fix(bool& weaponCharge)
+	void WeaponCharge::Load(bool& weaponCharge)
 	{
 		Utility::Memory::SafeWriteAbsoluteJump(
 			Addresses::Fixes::WeaponCharge::RefreshEquippedActorValueCharge,

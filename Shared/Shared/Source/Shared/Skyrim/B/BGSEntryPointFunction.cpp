@@ -26,9 +26,14 @@ namespace Skyrim
 
 		std::uint32_t GetEntryPointFunctionArgumentCount(Utility::Enumeration<EntryPointFunctionType, std::uint32_t> entryPointFunctionType)
 		{
-			auto* singleton{ reinterpret_cast<std::uint32_t*>(Addresses::BGSEntryPointFunction::EntryPointFunctionArgumentCount()) };
+			return BGSEntryPointFunction::GetEntryPointFunctionArgumentCounts()[entryPointFunctionType.underlying()];
+		}
 
-			return *singleton;
+		std::uint32_t* GetEntryPointFunctionArgumentCounts()
+		{
+			auto* singleton{ reinterpret_cast<std::uint32_t*>(Addresses::BGSEntryPointFunction::EntryPointFunctionArgumentCounts()) };
+
+			return singleton;
 		}
 	}
 }

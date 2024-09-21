@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void DeferredHitEffects::Patch(bool& deferredHitEffects)
+	void DeferredHitEffects::Load(bool& deferredHitEffects)
 	{
 		Utility::Memory::SafeWriteAbsoluteJump(
 			Addresses::Patches::DeferredHitEffects::AllowHitEffects,

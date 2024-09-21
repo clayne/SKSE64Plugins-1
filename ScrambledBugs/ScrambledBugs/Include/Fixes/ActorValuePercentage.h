@@ -11,7 +11,7 @@ namespace ScrambledBugs::Fixes
 	class ActorValuePercentage
 	{
 	public:
-		static void Fix(bool& actorValuePercentage);
+		static void Load(bool& actorValuePercentage);
 
 	private:
 		static float GetActorValuePercentage(Skyrim::Actor* actor, Utility::Enumeration<Skyrim::ActorValue, std::uint32_t> actorValue);

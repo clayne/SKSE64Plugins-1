@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void ModifyArmorWeightPerkEntryPoint::Fix(bool& modifyArmorWeightPerkEntryPoint)
+	void ModifyArmorWeightPerkEntryPoint::Load(bool& modifyArmorWeightPerkEntryPoint)
 	{
 		Utility::Memory::SafeWriteAbsoluteJump(
 			Addresses::Fixes::ModifyArmorWeightPerkEntryPoint::GetInventoryWeight,

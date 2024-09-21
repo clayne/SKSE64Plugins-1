@@ -9,6 +9,6 @@ namespace ScrambledBugs::Fixes
 	class ProjectileFadeDuration
 	{
 	public:
-		static void Fix(bool& projectileFadeDuration);
+		static void Load(bool& projectileFadeDuration);
 	};
 }

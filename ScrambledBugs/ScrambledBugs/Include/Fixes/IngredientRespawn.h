@@ -9,7 +9,7 @@ namespace ScrambledBugs::Fixes
 	class IngredientRespawn
 	{
 	public:
-		static void Fix(bool& ingredientRespawn);
+		static void Load(bool& ingredientRespawn);
 
 	private:
 		static void SetEmpty(Skyrim::TESObjectREFR* reference, bool empty);

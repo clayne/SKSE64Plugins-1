@@ -6,7 +6,7 @@
 
 namespace Skyrim
 {
-	enum class Difficulty
+	enum class DifficultyLevel
 	{
 		kNovice     = 0,
 		kApprentice = 1,

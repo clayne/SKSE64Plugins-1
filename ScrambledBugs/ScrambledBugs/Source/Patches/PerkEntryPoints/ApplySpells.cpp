@@ -11,7 +11,7 @@
 
 namespace ScrambledBugs::Patches::PerkEntryPoints
 {
-	void ApplySpells::Patch(bool& applySpells, bool& castSpells)
+	void ApplySpells::Load(bool& applySpells, bool& castSpells)
 	{
 		if (!Patterns::Patches::PerkEntryPoints::ApplySpells::ApplyBashingSpell() ||
 			!Patterns::Patches::PerkEntryPoints::ApplySpells::ApplyCombatHitSpell() ||
@@ -43,15 +43,15 @@ namespace ScrambledBugs::Patches::PerkEntryPoints
 	/* Apply Bashing Spell
 	* Perk Owner
 	* Target */
-	void ApplySpells::ApplyBashingSpell(
-		Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint,
-		Skyrim::Actor*                                                         perkOwner,
-		Skyrim::Actor*                                                         target,
-		Skyrim::SpellItem**                                                    result)
+	void ApplySpells::ApplyBashingSpell(Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint, Skyrim::Actor* perkOwner, ...)
 	{
-		// perkOwner != nullptr
-		// target != nullptr
-		// result != nullptr
+		std::va_list variadicArguments;
+		va_start(variadicArguments, perkOwner);
+
+		auto*  target = va_arg(variadicArguments, Skyrim::Actor*);
+		auto** result = va_arg(variadicArguments, Skyrim::SpellItem**);
+
+		va_end(variadicArguments);
 
 		auto bashingSpellItems = ApplySpells::HandleEntryPoint(entryPoint, perkOwner, std::vector<Skyrim::TESForm*>{ perkOwner, target });
 
@@ -68,17 +68,16 @@ namespace ScrambledBugs::Patches::PerkEntryPoints
 	* Perk Owner
 	* Weapon
 	* Target */
-	void ApplySpells::ApplyCombatHitSpell(
-		Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint,
-		Skyrim::Actor*                                                         perkOwner,
-		Skyrim::TESObjectWEAP*                                                 weapon,
-		Skyrim::Actor*                                                         target,
-		Skyrim::SpellItem**                                                    result)
+	void ApplySpells::ApplyCombatHitSpell(Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint, Skyrim::Actor* perkOwner, ...)
 	{
-		// perkOwner != nullptr
-		// weapon != nullptr
-		// target != nullptr
-		// result != nullptr
+		std::va_list variadicArguments;
+		va_start(variadicArguments, perkOwner);
+
+		auto*  weapon = va_arg(variadicArguments, Skyrim::TESObjectWEAP*);
+		auto*  target = va_arg(variadicArguments, Skyrim::Actor*);
+		auto** result = va_arg(variadicArguments, Skyrim::SpellItem**);
+
+		va_end(variadicArguments);
 
 		auto combatHitSpellItems = ApplySpells::HandleEntryPoint(entryPoint, perkOwner, std::vector<Skyrim::TESForm*>{ perkOwner, weapon, target });
 
@@ -95,17 +94,16 @@ namespace ScrambledBugs::Patches::PerkEntryPoints
 	* Perk Owner
 	* Spell
 	* Target */
-	void ApplySpells::ApplyReanimateSpell(
-		Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint,
-		Skyrim::Actor*                                                         perkOwner,
-		Skyrim::SpellItem*                                                     spellItem,
-		Skyrim::Actor*                                                         target,
-		Skyrim::SpellItem**                                                    result)
+	void ApplySpells::ApplyReanimateSpell(Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint, Skyrim::Actor* perkOwner, ...)
 	{
-		// perkOwner != nullptr
-		// spellItem != nullptr
-		// target != nullptr
-		// result != nullptr
+		std::va_list variadicArguments;
+		va_start(variadicArguments, perkOwner);
+
+		auto*  spellItem = va_arg(variadicArguments, Skyrim::SpellItem*);
+		auto*  target    = va_arg(variadicArguments, Skyrim::Actor*);
+		auto** result    = va_arg(variadicArguments, Skyrim::SpellItem**);
+
+		va_end(variadicArguments);
 
 		auto reanimateSpellItems = ApplySpells::HandleEntryPoint(entryPoint, perkOwner, std::vector<Skyrim::TESForm*>{ perkOwner, spellItem, target });
 
@@ -120,13 +118,14 @@ namespace ScrambledBugs::Patches::PerkEntryPoints
 
 	/* Apply Sneaking Spell
 	* Perk Owner */
-	void ApplySpells::ApplySneakingSpell(
-		Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint,
-		Skyrim::Actor*                                                         perkOwner,
-		Skyrim::SpellItem**                                                    result)
+	void ApplySpells::ApplySneakingSpell(Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint, Skyrim::Actor* perkOwner, ...)
 	{
-		// perkOwner != nullptr
-		// result != nullptr
+		std::va_list variadicArguments;
+		va_start(variadicArguments, perkOwner);
+
+		auto** result = va_arg(variadicArguments, Skyrim::SpellItem**);
+
+		va_end(variadicArguments);
 
 		auto sneakingSpellItems = ApplySpells::HandleEntryPoint(entryPoint, perkOwner, std::vector<Skyrim::TESForm*>{ perkOwner });
 
@@ -143,17 +142,16 @@ namespace ScrambledBugs::Patches::PerkEntryPoints
 	* Perk Owner
 	* Attacker
 	* Attacker Weapon */
-	void ApplySpells::ApplyWeaponSwingSpell(
-		Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint,
-		Skyrim::Actor*                                                         perkOwner,
-		Skyrim::Actor*                                                         attacker,
-		Skyrim::TESObjectWEAP*                                                 attackerWeapon,
-		Skyrim::SpellItem**                                                    result)
+	void ApplySpells::ApplyWeaponSwingSpell(Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint, Skyrim::Actor* perkOwner, ...)
 	{
-		// perkOwner != nullptr
-		// attacker != nullptr
-		// attackerWeapon != nullptr
-		// result != nullptr
+		std::va_list variadicArguments;
+		va_start(variadicArguments, perkOwner);
+
+		auto*  attacker       = va_arg(variadicArguments, Skyrim::Actor*);
+		auto*  attackerWeapon = va_arg(variadicArguments, Skyrim::TESObjectWEAP*);
+		auto** result         = va_arg(variadicArguments, Skyrim::SpellItem**);
+
+		va_end(variadicArguments);
 
 		auto weaponSwingSpellItems = ApplySpells::HandleEntryPoint(entryPoint, perkOwner, std::vector<Skyrim::TESForm*>{ perkOwner, attacker, attackerWeapon });
 
@@ -175,31 +173,19 @@ namespace ScrambledBugs::Patches::PerkEntryPoints
 		{
 			if (perkOwner && perkOwner->HasPerkEntries(entryPoint.get()))
 			{
-				auto conditionFilterArgumentCount = Skyrim::BGSEntryPoint::GetEntryPoint(entryPoint)->conditionFilterArgumentCount;
-
-				if (conditionFilterArguments.size() == conditionFilterArgumentCount)
+				if (conditionFilterArguments.size() == Skyrim::BGSEntryPoint::GetEntryPoint(entryPoint)->conditionFilterArgumentCount)
 				{
-					auto entryPointFunctionType          = Skyrim::BGSEntryPoint::GetEntryPoint(entryPoint)->entryPointFunctionType;
-					auto entryPointFunctionArgumentCount = Skyrim::BGSEntryPointFunction::GetEntryPointFunctionArgumentCount(entryPointFunctionType.get());
+					std::vector<void*> entryPointFunctionArguments = { std::numeric_limits<std::uint8_t>::max(), nullptr };
 
-					/* If the last spell item is a null pointer then all spell items have been found
-					* Increment the size of the vector in each iteration */
-					std::vector<void*> entryPointFunctionArguments{};
+					Skyrim::HandleEntryPointVisitor handleEntryPointVisitor(
+						Skyrim::BGSEntryPoint::GetEntryPoint(entryPoint)->entryPointFunctionType.get(),
+						conditionFilterArguments.empty() ? nullptr : conditionFilterArguments.data(),
+						entryPointFunctionArguments.empty() ? nullptr : entryPointFunctionArguments.data(),
+						perkOwner,
+						static_cast<std::uint8_t>(conditionFilterArguments.size()),
+						static_cast<std::uint8_t>(entryPointFunctionArguments.size()));
 
-					do
-					{
-						entryPointFunctionArguments = { entryPointFunctionArgumentCount++, nullptr };
-
-						Skyrim::HandleEntryPointVisitor handleEntryPointVisitor(
-							entryPointFunctionType.get(),
-							conditionFilterArguments.empty() ? nullptr : conditionFilterArguments.data(),
-							entryPointFunctionArguments.empty() ? nullptr : entryPointFunctionArguments.data(),
-							perkOwner,
-							static_cast<std::uint8_t>(conditionFilterArguments.size()),
-							static_cast<std::uint8_t>(entryPointFunctionArguments.size()));
-
-						perkOwner->ForEachPerkEntry(entryPoint.get(), handleEntryPointVisitor);
-					} while (std::find(entryPointFunctionArguments.begin(), entryPointFunctionArguments.end(), nullptr) == entryPointFunctionArguments.end());
+					perkOwner->ForEachPerkEntry(entryPoint.get(), handleEntryPointVisitor);
 
 					std::erase(entryPointFunctionArguments, nullptr);
 
@@ -232,7 +218,7 @@ namespace ScrambledBugs::Patches::PerkEntryPoints
 			return;
 		}
 
-		if (entryPointFunctionData->GetEntryPointFunctionDataType() != Skyrim::BGSEntryPointFunctionData::EntryPointFunctionData::kSpellItem)
+		if (!entryPointFunctionData || entryPointFunctionData->GetEntryPointFunctionDataType() != Skyrim::BGSEntryPointFunctionData::EntryPointFunctionData::kSpellItem)
 		{
 			return;
 		}

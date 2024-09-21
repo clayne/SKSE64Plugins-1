@@ -9,7 +9,7 @@ namespace ScrambledBugs::Patches
 	class EquipBestAmmunition
 	{
 	public:
-		static void Patch(bool& equipBestAmmunition);
+		static void Load(bool& equipBestAmmunition);
 
 	private:
 		static Skyrim::InventoryEntryData* GetBestAmmunition(Skyrim::InventoryChanges* inventoryChanges, bool crossbow);

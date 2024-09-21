@@ -9,7 +9,7 @@ namespace ScrambledBugs::Fixes
 	class MagicEffectFlags
 	{
 	public:
-		static void Fix(bool& magicEffectFlags);
+		static void Load(bool& magicEffectFlags);
 
 	private:
 		static void Adjust(Skyrim::ActiveEffect* activeEffect, float effectiveness, bool requiresHostility);

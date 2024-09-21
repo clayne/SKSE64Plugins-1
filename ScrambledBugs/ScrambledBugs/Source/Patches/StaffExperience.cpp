@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void StaffExperience::Patch(bool& staffExperience, bool& ignoreEnchantmentCost)
+	void StaffExperience::Load(bool& staffExperience, bool& ignoreEnchantmentCost)
 	{
 		StaffExperience::ignoreEnchantmentCost_ = ignoreEnchantmentCost;
 

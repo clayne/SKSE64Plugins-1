@@ -3,7 +3,6 @@
 #include "Shared/PrecompiledHeader.h"
 
 #include "Shared/Relocation/PreprocessorDirectives.h"
-#include "Shared/Skyrim/A/ActorValue.h"
 #include "Shared/Skyrim/A/AITimeStamp.h"
 #include "Shared/Skyrim/B/BSPointerHandle.h"
 #include "Shared/Skyrim/B/BSSimpleList.h"
@@ -12,10 +11,9 @@
 #include "Shared/Skyrim/B/BSTEventSource.h"
 #include "Shared/Skyrim/B/BSTHashMap.h"
 #include "Shared/Skyrim/C/Character.h"
-#include "Shared/Skyrim/D/Difficulty.h"
+#include "Shared/Skyrim/D/DifficultyLevel.h"
 #include "Shared/Skyrim/H/hkReferencePointer.h"
 #include "Shared/Skyrim/N/NiPointer.h"
-#include "Shared/Utility/Enumeration.h"
 
 
 
@@ -298,13 +296,12 @@ namespace Skyrim
 		virtual void Unknown12E(PlayerCharacter*); // 12E
 
 		// Non-member functions
-		static float            GetDifficultyMultiplier(Utility::Enumeration<Difficulty, std::uint32_t> difficulty, Utility::Enumeration<ActorValue, std::uint32_t> actorValue, bool isPlayer);
 		static PlayerCharacter* GetSingleton();
 
 		// Member functions
-		Actor* GetActorDoingPlayerCommand() const;
-		bool   GetAutomaticAimActor(NiPointer<Actor>& automaticAimActor) const;
-		void   ResetInsufficientChargeMessage(bool leftHand);
+		NiPointer<Actor> GetActorDoingPlayerCommand() const;
+		bool             GetAutomaticAimActor(NiPointer<Actor>& automaticAimActor) const;
+		void             ResetInsufficientChargeMessage(bool leftHand);
 
 		// Member variables
 		std::uint64_t                                                unknown3E0;                        // 3D8, 3E0
@@ -524,7 +521,7 @@ namespace Skyrim
 		std::uint32_t                                                advanceAction;                     // AEC, AF4
 		std::uint32_t                                                unknownAF8;                        // AF0, AF8
 		Utility::Enumeration<GrabType, std::uint32_t>                grabType;                          // AF4, AFC
-		Utility::Enumeration<Difficulty, std::uint32_t>              difficulty;                        // AF8, B00
+		Utility::Enumeration<DifficultyLevel, std::uint32_t>         difficultyLevel;                   // AF8, B00
 		std::uint32_t                                                unknownB04;                        // AFC, B04
 		std::uint8_t                                                 unknownB08;                        // B00, B08
 		std::int8_t                                                  perkCount;                         // B01, B09
@@ -597,7 +594,7 @@ namespace Skyrim
 	static_assert(offsetof(PlayerCharacter, advanceSkill) == SKYRIM_RELOCATE(0xAE8, 0xAF0));
 	static_assert(offsetof(PlayerCharacter, advanceAction) == SKYRIM_RELOCATE(0xAEC, 0xAF4));
 	static_assert(offsetof(PlayerCharacter, grabType) == SKYRIM_RELOCATE(0xAF4, 0xAFC));
-	static_assert(offsetof(PlayerCharacter, difficulty) == SKYRIM_RELOCATE(0xAF8, 0xB00));
+	static_assert(offsetof(PlayerCharacter, difficultyLevel) == SKYRIM_RELOCATE(0xAF8, 0xB00));
 	static_assert(offsetof(PlayerCharacter, perkCount) == SKYRIM_RELOCATE(0xB01, 0xB09));
 	static_assert(offsetof(PlayerCharacter, characterGenerationFlags) == SKYRIM_RELOCATE(0xB02, 0xB0A));
 	static_assert(offsetof(PlayerCharacter, tintMasks) == SKYRIM_RELOCATE(0xB10, 0xB18));

@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void EquipBestAmmunition::Patch(bool& equipBestAmmunition)
+	void EquipBestAmmunition::Load(bool& equipBestAmmunition)
 	{
 		Utility::Memory::SafeWriteAbsoluteJump(
 			Addresses::Patches::EquipBestAmmunition::GetWorstAmmunition,

@@ -10,7 +10,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void PowerAttackStamina::Patch(bool& powerAttackStamina)
+	void PowerAttackStamina::Load(bool& powerAttackStamina)
 	{
 		if (!Patterns::Patches::PowerAttackStamina::GetAttackStaminaActor() ||
 			!Patterns::Patches::PowerAttackStamina::GetAttackStaminaPlayerCharacter() ||

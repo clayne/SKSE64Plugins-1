@@ -8,7 +8,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void PoisonResistance::Patch(bool& poisonResistance)
+	void PoisonResistance::Load(bool& poisonResistance)
 	{
 		Utility::Memory::SafeWriteVirtualFunction(Skyrim::Addresses::Actor::MagicTarget::VirtualFunctionTable(), 0xA, reinterpret_cast<std::uintptr_t>(std::addressof(PoisonResistance::CheckResistance)));
 		Utility::Memory::SafeWriteVirtualFunction(Skyrim::Addresses::Character::MagicTarget::VirtualFunctionTable(), 0xA, reinterpret_cast<std::uintptr_t>(std::addressof(PoisonResistance::CheckResistance)));

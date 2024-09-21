@@ -10,45 +10,45 @@
 
 namespace ScrambledBugs::Patches
 {
-	void AttachHitEffectArt::Patch(bool& attachHitEffectArt)
+	void AttachHitEffectArt::Load(bool& attachHitEffectArt)
 	{
-		if (!Patterns::Patches::AttachHitEffectArt::SetCastPermanentMagicFunctorFlags())
+		if (!Patterns::Patches::AttachHitEffectArt::CastPermanentMagicFunctor::SetFlags())
 		{
 			attachHitEffectArt = false;
 
 			return;
 		}
 
-		/* Do not set a CastPermanentMagicFunctor flag that sets a ActiveEffect flag to not attach hit effect art */
+		/* Reset a CastPermanentMagicFunctor flag that sets an ActiveEffect flag to not attach hit effect art */
 		Utility::Memory::SafeWrite(
-			Addresses::Patches::AttachHitEffectArt::SetCastPermanentMagicFunctorFlags,
+			Addresses::Patches::AttachHitEffectArt::CastPermanentMagicFunctor::SetFlags,
 			std::optional<std::uint8_t>{}, 0xF8ui8, // and al, F8
 			std::optional<std::uint8_t>{}, 0x00ui8  // or al, 0
 		);
 
-		AttachHitEffectArt::pop_ = reinterpret_cast<decltype(AttachHitEffectArt::pop_)>(Utility::Memory::ReadVirtualFunction(Skyrim::Addresses::ModelReferenceEffect::VirtualFunctionTable(), 0x35));
+		ModelReferenceEffect::pop_ = reinterpret_cast<decltype(ModelReferenceEffect::pop_)>(Utility::Memory::ReadVirtualFunction(Skyrim::Addresses::ModelReferenceEffect::VirtualFunctionTable(), 0x35));
 
-		Utility::Memory::SafeWriteVirtualFunction(Skyrim::Addresses::ModelReferenceEffect::VirtualFunctionTable(), 0x32, reinterpret_cast<std::uintptr_t>(std::addressof(AttachHitEffectArt::GetStackable)));
-		Utility::Memory::SafeWriteVirtualFunction(Skyrim::Addresses::ModelReferenceEffect::VirtualFunctionTable(), 0x33, reinterpret_cast<std::uintptr_t>(std::addressof(AttachHitEffectArt::GetStackableMatch)));
-		Utility::Memory::SafeWriteVirtualFunction(Skyrim::Addresses::ModelReferenceEffect::VirtualFunctionTable(), 0x35, reinterpret_cast<std::uintptr_t>(std::addressof(AttachHitEffectArt::Pop)));
+		Utility::Memory::SafeWriteVirtualFunction(Skyrim::Addresses::ModelReferenceEffect::VirtualFunctionTable(), 0x32, reinterpret_cast<std::uintptr_t>(std::addressof(ModelReferenceEffect::GetStackable)));
+		Utility::Memory::SafeWriteVirtualFunction(Skyrim::Addresses::ModelReferenceEffect::VirtualFunctionTable(), 0x33, reinterpret_cast<std::uintptr_t>(std::addressof(ModelReferenceEffect::GetStackableMatch)));
+		Utility::Memory::SafeWriteVirtualFunction(Skyrim::Addresses::ModelReferenceEffect::VirtualFunctionTable(), 0x35, reinterpret_cast<std::uintptr_t>(std::addressof(ModelReferenceEffect::Pop)));
 	}
 
-	bool AttachHitEffectArt::GetStackable(Skyrim::ModelReferenceEffect* modelReferenceEffect)
+	bool AttachHitEffectArt::ModelReferenceEffect::GetStackable(Skyrim::ModelReferenceEffect* modelReferenceEffect)
 	{
 		return true;
 	}
 
-	bool AttachHitEffectArt::GetStackableMatch(Skyrim::ModelReferenceEffect* left, Skyrim::BSTempEffect* right)
+	bool AttachHitEffectArt::ModelReferenceEffect::GetStackableMatch(Skyrim::ModelReferenceEffect* left, Skyrim::BSTempEffect* right)
 	{
 		return true;
 	}
 
-	void AttachHitEffectArt::Pop(Skyrim::ModelReferenceEffect* modelReferenceEffect)
+	void AttachHitEffectArt::ModelReferenceEffect::Pop(Skyrim::ModelReferenceEffect* modelReferenceEffect)
 	{
-		AttachHitEffectArt::pop_(modelReferenceEffect);
+		ModelReferenceEffect::pop_(modelReferenceEffect);
 
 		modelReferenceEffect->SwitchFirstThirdPerson();
 	}
 
-	decltype(AttachHitEffectArt::Pop)* AttachHitEffectArt::pop_{ nullptr };
+	decltype(AttachHitEffectArt::ModelReferenceEffect::Pop)* AttachHitEffectArt::ModelReferenceEffect::pop_{ nullptr };
 }

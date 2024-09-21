@@ -534,7 +534,7 @@
     <ClInclude Include="Include\Shared\Skyrim\D\DecalData.h">
       <Filter>Header Files\Shared\Skyrim\D</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Shared\Skyrim\D\Difficulty.h">
+    <ClInclude Include="Include\Shared\Skyrim\D\DifficultyLevel.h">
       <Filter>Header Files\Shared\Skyrim\D</Filter>
     </ClInclude>
     <ClInclude Include="Include\Shared\Skyrim\D\DirectionalAmbientLighting.h">

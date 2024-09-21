@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void LeftHandPowerAttacks::Fix(bool& leftHandPowerAttacks)
+	void LeftHandPowerAttacks::Load(bool& leftHandPowerAttacks)
 	{
 		Utility::Memory::SafeWriteAbsoluteJump(
 			Addresses::Fixes::LeftHandPowerAttacks::GetAttackStamina,

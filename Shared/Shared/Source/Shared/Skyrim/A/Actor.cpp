@@ -29,22 +29,22 @@ namespace Skyrim
 		return function(this, spellItem);
 	}
 
-	float Actor::AdjustHealthDamageToDifficulty(float damage, float onlyReduceDamage) const
+	bool Actor::CanKillMe(Actor* attacker) const
 	{
 		auto* function{ reinterpret_cast<
-			Utility::TypeTraits::MakeFunctionPointer<decltype(&Actor::AdjustHealthDamageToDifficulty)>::type>(
-			Addresses::Actor::AdjustHealthDamageToDifficulty()) };
-
-		return function(this, damage, onlyReduceDamage);
-	}
-
-	bool Actor::CanBeKilledBy(Actor* attacker) const
-	{
-		auto* function{ reinterpret_cast<
-			Utility::TypeTraits::MakeFunctionPointer<decltype(&Actor::CanBeKilledBy)>::type>(
-			Addresses::Actor::CanBeKilledBy()) };
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&Actor::CanKillMe)>::type>(
+			Addresses::Actor::CanKillMe()) };
 
 		return function(this, attacker);
+	}
+
+	float Actor::DifficultyLevelAdjustHealthModifier(float damage, float onlyReduceDamage) const
+	{
+		auto* function{ reinterpret_cast<
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&Actor::DifficultyLevelAdjustHealthModifier)>::type>(
+			Addresses::Actor::DifficultyLevelAdjustHealthModifier()) };
+
+		return function(this, damage, onlyReduceDamage);
 	}
 
 	void Actor::ForceDetect(Actor* target)
@@ -165,6 +165,15 @@ namespace Skyrim
 		auto* boundObject = inventoryEntryData->boundObject;
 
 		return (boundObject && boundObject->formType == FormType::kWeapon) ? inventoryEntryData : nullptr;
+	}
+
+	EquipState Actor::GetEquipState(TESForm* form, ExtraDataList* rightHandExtraDataList, ExtraDataList* leftHandExtraDataList) const
+	{
+		auto* function{ reinterpret_cast<
+			Utility::TypeTraits::MakeFunctionPointer<decltype(&Actor::GetEquipState)>::type>(
+			Addresses::Actor::GetEquipState()) };
+
+		return function(this, form, rightHandExtraDataList, leftHandExtraDataList);
 	}
 
 	NiAVObject* Actor::GetHeadNode() const

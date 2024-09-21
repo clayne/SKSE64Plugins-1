@@ -57,7 +57,10 @@ namespace ScrambledBugs::Patterns
 
 		namespace AttachHitEffectArt
 		{
-			bool SetCastPermanentMagicFunctorFlags();
+			namespace CastPermanentMagicFunctor
+			{
+				bool SetFlags();
+			}
 		}
 
 		namespace CloakHitEffects

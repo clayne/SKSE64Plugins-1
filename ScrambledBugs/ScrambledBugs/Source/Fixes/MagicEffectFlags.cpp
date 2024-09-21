@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void MagicEffectFlags::Fix(bool& magicEffectFlags)
+	void MagicEffectFlags::Load(bool& magicEffectFlags)
 	{
 		Utility::Memory::SafeWriteAbsoluteJump(Addresses::Fixes::MagicEffectFlags::Adjust, reinterpret_cast<std::uintptr_t>(std::addressof(MagicEffectFlags::Adjust)));
 		Utility::Memory::SafeWriteAbsoluteJump(Addresses::Fixes::MagicEffectFlags::Restart, reinterpret_cast<std::uintptr_t>(std::addressof(MagicEffectFlags::Restart)));

@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void EnchantmentCost::Fix(bool& enchantmentCost)
+	void EnchantmentCost::Load(bool& enchantmentCost)
 	{
 		if (!Patterns::Fixes::EnchantmentCost::Compare())
 		{

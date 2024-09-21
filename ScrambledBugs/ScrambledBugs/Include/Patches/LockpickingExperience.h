@@ -9,6 +9,6 @@ namespace ScrambledBugs::Patches
 	class LockpickingExperience
 	{
 	public:
-		static void Patch(bool& lockpickingExperience);
+		static void Load(bool& lockpickingExperience);
 	};
 }

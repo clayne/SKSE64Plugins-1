@@ -10,7 +10,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void ProjectileFadeDuration::Fix(bool& projectileFadeDuration)
+	void ProjectileFadeDuration::Load(bool& projectileFadeDuration)
 	{
 		if (!Patterns::Fixes::ProjectileFadeDuration::HasFaded() ||
 			!Patterns::Fixes::ProjectileFadeDuration::HasProcessedImpacts())

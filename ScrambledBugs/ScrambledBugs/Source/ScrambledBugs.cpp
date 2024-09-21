@@ -1,8 +1,10 @@
 #include "PrecompiledHeader.h"
 
+#include "ScrambledBugsInterface.h"
 #include "Serialization.h"
 #include "Settings.h"
 #include "Shared/Relocation/Module.h"
+#include "Shared/Utility/Conversion.h"
 
 
 
@@ -25,7 +27,13 @@ namespace ScrambledBugs
 
 	void PostLoad()
 	{
-		Settings::GetSingleton().PostLoad();
+		auto& settings = Settings::GetSingleton();
+
+		SPDLOG_INFO("Post Loading...\n{}", settings.Serialize().dump(1, '\t'));
+
+		settings.PostLoad();
+
+		SPDLOG_INFO("Post Loaded.\n{}", settings.Serialize().dump(1, '\t'));
 	}
 
 	void MessageHandler(SKSE::MessagingInterface::Message* message)
@@ -54,13 +62,19 @@ namespace ScrambledBugs
 		serializationInterface->SetLoadCallback(std::addressof(Serialization::LoadGame));
 		serializationInterface->SetSaveCallback(std::addressof(Serialization::SaveGame));
 
-		Settings::GetSingleton().Load();
+		auto& settings = Settings::GetSingleton();
+
+		SPDLOG_INFO("Loading...\n{}", settings.Serialize().dump(1, '\t'));
+
+		settings.Load();
+
+		SPDLOG_INFO("Loaded.\n{}", settings.Serialize().dump(1, '\t'));
 	}
 }
 
 #ifdef SKYRIM_ANNIVERSARY_EDITION
 extern "C" __declspec(dllexport) constinit SKSE::PluginVersionData SKSEPlugin_Version{
-	.pluginVersion   = 21,
+	.pluginVersion   = Utility::Conversion::ToUnderlying(ScrambledBugs::Interface::Version::Version22),
 	.pluginName      = "Scrambled Bugs",
 	.author          = "KernalsEgg",
 	.addressLibrary  = true,

@@ -10,7 +10,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void ImpactEffectCrash::Fix(bool& impactEffectCrash)
+	void ImpactEffectCrash::Load(bool& impactEffectCrash)
 	{
 		if (!Patterns::Fixes::ImpactEffectCrash::DecalApplier() ||
 			!Patterns::Fixes::ImpactEffectCrash::UpdateDecals())

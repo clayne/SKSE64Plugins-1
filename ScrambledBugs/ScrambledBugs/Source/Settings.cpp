@@ -46,10 +46,20 @@
 
 namespace ScrambledBugs
 {
+	float& Settings::Fixes::QuickShot::GetPlaybackSpeed()
+	{
+		return this->playbackSpeed;
+	}
+
+	bool& Settings::Fixes::QuickShot::GetQuickShot()
+	{
+		return this->quickShot;
+	}
+
 	Settings::Fixes::QuickShot& Settings::Fixes::QuickShot::Deserialize(const std::filesystem::path& directory)
 	{
-		Settings::Deserialize(directory / "PlaybackSpeed.json", this->playbackSpeed);
-		Settings::Deserialize(directory / "QuickShot.json", this->quickShot);
+		this->playbackSpeed = Settings::Parse<float>(directory / "PlaybackSpeed.json");
+		this->quickShot     = Settings::Parse<bool>(directory / "QuickShot.json");
 
 		return *this;
 	}
@@ -64,28 +74,135 @@ namespace ScrambledBugs
 		return json;
 	}
 
+	void Settings::Fixes::QuickShot::Load()
+	{
+		if (this->quickShot)
+		{
+			ScrambledBugs::Fixes::QuickShot::Load(this->quickShot, this->playbackSpeed);
+		}
+	}
+
+	void Settings::Fixes::QuickShot::PostLoad()
+	{
+	}
+
+	Settings::Fixes::QuickShot& Settings::Fixes::GetQuickShot()
+	{
+		return this->quickShot;
+	}
+
+	bool& Settings::Fixes::GetActivateFurniture()
+	{
+		return this->activateFurniture;
+	}
+
+	bool& Settings::Fixes::GetActorValuePercentage()
+	{
+		return this->actorValuePercentage;
+	}
+
+	bool& Settings::Fixes::GetEnchantmentCost()
+	{
+		return this->enchantmentCost;
+	}
+
+	bool& Settings::Fixes::GetHitEffectRaceCondition()
+	{
+		return this->hitEffectRaceCondition;
+	}
+
+	bool& Settings::Fixes::GetImpactEffectCrash()
+	{
+		return this->impactEffectCrash;
+	}
+
+	bool& Settings::Fixes::GetIngredientRespawn()
+	{
+		return this->ingredientRespawn;
+	}
+
+	bool& Settings::Fixes::GetIsCurrentSpell()
+	{
+		return this->isCurrentSpell;
+	}
+
+	bool& Settings::Fixes::GetKillCamera()
+	{
+		return this->killCamera;
+	}
+
+	bool& Settings::Fixes::GetLeftHandPowerAttacks()
+	{
+		return this->leftHandPowerAttacks;
+	}
+
+	bool& Settings::Fixes::GetMagicEffectFlags()
+	{
+		return this->magicEffectFlags;
+	}
+
+	bool& Settings::Fixes::GetModifyArmorWeightPerkEntryPoint()
+	{
+		return this->modifyArmorWeightPerkEntryPoint;
+	}
+
+	bool& Settings::Fixes::GetOpenEffectArchetype()
+	{
+		return this->openEffectArchetype;
+	}
+
+	bool& Settings::Fixes::GetPowerCooldowns()
+	{
+		return this->powerCooldowns;
+	}
+
+	bool& Settings::Fixes::GetProjectileFadeDuration()
+	{
+		return this->projectileFadeDuration;
+	}
+
+	bool& Settings::Fixes::GetScrollEquipState()
+	{
+		return this->scrollEquipState;
+	}
+
+	bool& Settings::Fixes::GetTerrainImpactEffects()
+	{
+		return this->terrainImpactEffects;
+	}
+
+	bool& Settings::Fixes::GetTrainingMenu()
+	{
+		return this->trainingMenu;
+	}
+
+	bool& Settings::Fixes::GetWeaponCharge()
+	{
+		return this->weaponCharge;
+	}
+
 	Settings::Fixes& Settings::Fixes::Deserialize(const std::filesystem::path& directory)
 	{
 		this->quickShot.Deserialize(directory / "QuickShot");
 
-		Settings::Deserialize(directory / "ActivateFurniture.json", this->activateFurniture);
-		Settings::Deserialize(directory / "ActorValuePercentage.json", this->actorValuePercentage);
-		Settings::Deserialize(directory / "EnchantmentCost.json", this->enchantmentCost);
-		Settings::Deserialize(directory / "HitEffectRaceCondition.json", this->hitEffectRaceCondition);
-		Settings::Deserialize(directory / "ImpactEffectCrash.json", this->impactEffectCrash);
-		Settings::Deserialize(directory / "IngredientRespawn.json", this->ingredientRespawn);
-		Settings::Deserialize(directory / "IsCurrentSpell.json", this->isCurrentSpell);
-		Settings::Deserialize(directory / "KillCamera.json", this->killCamera);
-		Settings::Deserialize(directory / "LeftHandPowerAttacks.json", this->leftHandPowerAttacks);
-		Settings::Deserialize(directory / "MagicEffectFlags.json", this->magicEffectFlags);
-		Settings::Deserialize(directory / "ModifyArmorWeightPerkEntryPoint.json", this->modifyArmorWeightPerkEntryPoint);
-		Settings::Deserialize(directory / "OpenEffectArchetype.json", this->openEffectArchetype);
-		Settings::Deserialize(directory / "PowerCooldowns.json", this->powerCooldowns);
-		Settings::Deserialize(directory / "ProjectileFadeDuration.json", this->projectileFadeDuration);
-		Settings::Deserialize(directory / "ScrollEquipState.json", this->scrollEquipState);
-		Settings::Deserialize(directory / "TerrainImpactEffects.json", this->terrainImpactEffects);
-		Settings::Deserialize(directory / "TrainingMenu.json", this->trainingMenu);
-		Settings::Deserialize(directory / "WeaponCharge.json", this->weaponCharge);
+		this->activateFurniture               = Settings::Parse<bool>(directory / "ActivateFurniture.json");
+		this->actorValuePercentage            = Settings::Parse<bool>(directory / "ActorValuePercentage.json");
+		this->enchantmentCost                 = Settings::Parse<bool>(directory / "EnchantmentCost.json");
+		this->hitEffectRaceCondition          = Settings::Parse<bool>(directory / "HitEffectRaceCondition.json");
+		this->impactEffectCrash               = Settings::Parse<bool>(directory / "ImpactEffectCrash.json");
+		this->ingredientRespawn               = Settings::Parse<bool>(directory / "IngredientRespawn.json");
+		this->isCurrentSpell                  = Settings::Parse<bool>(directory / "IsCurrentSpell.json");
+		this->killCamera                      = Settings::Parse<bool>(directory / "KillCamera.json");
+		this->leftHandPowerAttacks            = Settings::Parse<bool>(directory / "LeftHandPowerAttacks.json");
+		this->magicEffectFlags                = Settings::Parse<bool>(directory / "MagicEffectFlags.json");
+		this->modifyArmorWeightPerkEntryPoint = Settings::Parse<bool>(directory / "ModifyArmorWeightPerkEntryPoint.json");
+		this->openEffectArchetype             = Settings::Parse<bool>(directory / "OpenEffectArchetype.json");
+		this->powerCooldowns                  = Settings::Parse<bool>(directory / "PowerCooldowns.json");
+		this->projectileFadeDuration          = Settings::Parse<bool>(directory / "ProjectileFadeDuration.json");
+		this->scrollEquipState                = Settings::Parse<bool>(directory / "ScrollEquipState.json");
+		this->terrainImpactEffects            = Settings::Parse<bool>(directory / "TerrainImpactEffects.json");
+		this->trainingMenu                    = Settings::Parse<bool>(directory / "TrainingMenu.json");
+		this->weaponCharge                    = Settings::Parse<bool>(directory / "WeaponCharge.json");
 
 		return *this;
 	}
@@ -118,10 +235,121 @@ namespace ScrambledBugs
 		return json;
 	}
 
+	void Settings::Fixes::Load()
+	{
+		this->quickShot.Load();
+
+		if (this->activateFurniture)
+		{
+			ScrambledBugs::Fixes::ActivateFurniture::Load(this->activateFurniture);
+		}
+
+		if (this->actorValuePercentage)
+		{
+			ScrambledBugs::Fixes::ActorValuePercentage::Load(this->actorValuePercentage);
+		}
+
+		if (this->enchantmentCost)
+		{
+			ScrambledBugs::Fixes::EnchantmentCost::Load(this->enchantmentCost);
+		}
+
+		if (this->hitEffectRaceCondition)
+		{
+			ScrambledBugs::Fixes::HitEffectRaceCondition::Load(this->hitEffectRaceCondition);
+		}
+
+		if (this->impactEffectCrash)
+		{
+			ScrambledBugs::Fixes::ImpactEffectCrash::Load(this->impactEffectCrash);
+		}
+
+		if (this->ingredientRespawn)
+		{
+			ScrambledBugs::Fixes::IngredientRespawn::Load(this->ingredientRespawn);
+		}
+
+		if (this->isCurrentSpell)
+		{
+			ScrambledBugs::Fixes::IsCurrentSpell::Load(this->isCurrentSpell);
+		}
+
+		if (this->leftHandPowerAttacks)
+		{
+			ScrambledBugs::Fixes::LeftHandPowerAttacks::Load(this->leftHandPowerAttacks);
+		}
+
+		if (this->magicEffectFlags)
+		{
+			ScrambledBugs::Fixes::MagicEffectFlags::Load(this->magicEffectFlags);
+		}
+
+		if (this->modifyArmorWeightPerkEntryPoint)
+		{
+			ScrambledBugs::Fixes::ModifyArmorWeightPerkEntryPoint::Load(this->modifyArmorWeightPerkEntryPoint);
+		}
+
+		if (this->openEffectArchetype)
+		{
+			ScrambledBugs::Fixes::OpenEffectArchetype::Load(this->openEffectArchetype);
+		}
+
+		if (this->powerCooldowns)
+		{
+			ScrambledBugs::Fixes::PowerCooldowns::Load(this->powerCooldowns);
+		}
+
+		if (this->projectileFadeDuration)
+		{
+			ScrambledBugs::Fixes::ProjectileFadeDuration::Load(this->projectileFadeDuration);
+		}
+
+		if (this->scrollEquipState)
+		{
+			ScrambledBugs::Fixes::ScrollEquipState::Load(this->scrollEquipState);
+		}
+
+		if (this->terrainImpactEffects)
+		{
+			ScrambledBugs::Fixes::TerrainImpactEffects::Load(this->terrainImpactEffects);
+		}
+
+		if (this->trainingMenu)
+		{
+			ScrambledBugs::Fixes::TrainingMenu::Load(this->trainingMenu);
+		}
+
+		if (this->weaponCharge)
+		{
+			ScrambledBugs::Fixes::WeaponCharge::Load(this->weaponCharge);
+		}
+	}
+
+	void Settings::Fixes::PostLoad()
+	{
+		this->quickShot.PostLoad();
+
+		// Must be loaded after the Perk Entry Points: Apply Spells fix
+		if (this->killCamera)
+		{
+			ScrambledBugs::Fixes::KillCamera::Load(this->killCamera);
+		}
+	}
+
+	bool& Settings::Patches::DifficultyMultipliers::GetCommandedActors()
+	{
+		return this->commandedActors;
+	}
+
+	bool& Settings::Patches::DifficultyMultipliers::GetTeammates()
+	{
+		return this->teammates;
+	}
+
 	Settings::Patches::DifficultyMultipliers& Settings::Patches::DifficultyMultipliers::Deserialize(const std::filesystem::path& directory)
 	{
-		Settings::Deserialize(directory / "CommandedActors.json", this->commandedActors);
-		Settings::Deserialize(directory / "Teammates.json", this->teammates);
+		this->commandedActors = Settings::Parse<bool>(directory / "CommandedActors.json");
+		this->teammates       = Settings::Parse<bool>(directory / "Teammates.json");
 
 		return *this;
 	}
@@ -136,10 +364,32 @@ namespace ScrambledBugs
 		return json;
 	}
 
+	void Settings::Patches::DifficultyMultipliers::Load()
+	{
+		if (this->commandedActors || this->teammates)
+		{
+			ScrambledBugs::Patches::DifficultyMultipliers::Load(this->commandedActors, this->teammates);
+		}
+	}
+
+	void Settings::Patches::DifficultyMultipliers::PostLoad()
+	{
+	}
+
+	bool& Settings::Patches::PerkEntryPoints::GetApplySpells()
+	{
+		return this->applySpells;
+	}
+
+	bool& Settings::Patches::PerkEntryPoints::GetCastSpells()
+	{
+		return this->castSpells;
+	}
+
 	Settings::Patches::PerkEntryPoints& Settings::Patches::PerkEntryPoints::Deserialize(const std::filesystem::path& directory)
 	{
-		Settings::Deserialize(directory / "ApplySpells.json", this->applySpells);
-		Settings::Deserialize(directory / "CastSpells.json", this->castSpells);
+		this->applySpells = Settings::Parse<bool>(directory / "ApplySpells.json");
+		this->castSpells  = Settings::Parse<bool>(directory / "CastSpells.json");
 
 		return *this;
 	}
@@ -154,10 +404,36 @@ namespace ScrambledBugs
 		return json;
 	}
 
+	void Settings::Patches::PerkEntryPoints::Load()
+	{
+		if (this->applySpells)
+		{
+			ScrambledBugs::Patches::PerkEntryPoints::ApplySpells::Load(this->applySpells, this->castSpells);
+		}
+		else if (this->castSpells)
+		{
+			ScrambledBugs::Patches::PerkEntryPoints::CastSpells::Load(this->castSpells);
+		}
+	}
+
+	void Settings::Patches::PerkEntryPoints::PostLoad()
+	{
+	}
+
+	bool& Settings::Patches::SoulGems::GetBlack()
+	{
+		return this->black;
+	}
+
+	bool& Settings::Patches::SoulGems::GetUnderfilled()
+	{
+		return this->underfilled;
+	}
+
 	Settings::Patches::SoulGems& Settings::Patches::SoulGems::Deserialize(const std::filesystem::path& directory)
 	{
-		Settings::Deserialize(directory / "Black.json", this->black);
-		Settings::Deserialize(directory / "Underfilled.json", this->underfilled);
+		this->black       = Settings::Parse<bool>(directory / "Black.json");
+		this->underfilled = Settings::Parse<bool>(directory / "Underfilled.json");
 
 		return *this;
 	}
@@ -172,10 +448,32 @@ namespace ScrambledBugs
 		return json;
 	}
 
+	void Settings::Patches::SoulGems::Load()
+	{
+		if (this->black || this->underfilled)
+		{
+			ScrambledBugs::Patches::SoulGems::Load(this->black, this->underfilled);
+		}
+	}
+
+	void Settings::Patches::SoulGems::PostLoad()
+	{
+	}
+
+	bool& Settings::Patches::StaffExperience::GetIgnoreEnchantmentCost()
+	{
+		return this->ignoreEnchantmentCost;
+	}
+
+	bool& Settings::Patches::StaffExperience::GetStaffExperience()
+	{
+		return this->staffExperience;
+	}
+
 	Settings::Patches::StaffExperience& Settings::Patches::StaffExperience::Deserialize(const std::filesystem::path& directory)
 	{
-		Settings::Deserialize(directory / "IgnoreEnchantmentCost.json", this->ignoreEnchantmentCost);
-		Settings::Deserialize(directory / "StaffExperience.json", this->staffExperience);
+		this->ignoreEnchantmentCost = Settings::Parse<bool>(directory / "IgnoreEnchantmentCost.json");
+		this->staffExperience       = Settings::Parse<bool>(directory / "StaffExperience.json");
 
 		return *this;
 	}
@@ -190,6 +488,108 @@ namespace ScrambledBugs
 		return json;
 	}
 
+	void Settings::Patches::StaffExperience::Load()
+	{
+		if (this->staffExperience)
+		{
+			ScrambledBugs::Patches::StaffExperience::Load(this->staffExperience, this->ignoreEnchantmentCost);
+		}
+	}
+
+	void Settings::Patches::StaffExperience::PostLoad()
+	{
+	}
+
+	Settings::Patches::DifficultyMultipliers& Settings::Patches::GetDifficultyMultipliers()
+	{
+		return this->difficultyMultipliers;
+	}
+
+	Settings::Patches::PerkEntryPoints& Settings::Patches::GetPerkEntryPoints()
+	{
+		return this->perkEntryPoints;
+	}
+
+	Settings::Patches::SoulGems& Settings::Patches::GetSoulGems()
+	{
+		return this->soulGems;
+	}
+
+	Settings::Patches::StaffExperience& Settings::Patches::GetStaffExperience()
+	{
+		return this->staffExperience;
+	}
+
+	bool& Settings::Patches::GetAccumulatingMagnitude()
+	{
+		return this->accumulatingMagnitude;
+	}
+
+	bool& Settings::Patches::GetAlreadyCaughtPickpocketing()
+	{
+		return this->alreadyCaughtPickpocketing;
+	}
+
+	bool& Settings::Patches::GetAttachHitEffectArt()
+	{
+		return this->attachHitEffectArt;
+	}
+
+	bool& Settings::Patches::GetCloakHitEffects()
+	{
+		return this->cloakHitEffects;
+	}
+
+	bool& Settings::Patches::GetDeferredHitEffects()
+	{
+		return this->deferredHitEffects;
+	}
+
+	bool& Settings::Patches::GetEnchantmentEffectPower()
+	{
+		return this->enchantmentEffectPower;
+	}
+
+	bool& Settings::Patches::GetEquipBestAmmunition()
+	{
+		return this->equipBestAmmunition;
+	}
+
+	bool& Settings::Patches::GetLeveledCharacters()
+	{
+		return this->leveledCharacters;
+	}
+
+	bool& Settings::Patches::GetLockpickingExperience()
+	{
+		return this->lockpickingExperience;
+	}
+
+	bool& Settings::Patches::GetPoisonResistance()
+	{
+		return this->poisonResistance;
+	}
+
+	bool& Settings::Patches::GetPowerAttackStamina()
+	{
+		return this->powerAttackStamina;
+	}
+
+	bool& Settings::Patches::GetReflectDamage()
+	{
+		return this->reflectDamage;
+	}
+
+	bool& Settings::Patches::GetScrollExperience()
+	{
+		return this->scrollExperience;
+	}
+
+	bool& Settings::Patches::GetSteepSlopes()
+	{
+		return this->steepSlopes;
+	}
+
 	Settings::Patches& Settings::Patches::Deserialize(const std::filesystem::path& directory)
 	{
 		this->difficultyMultipliers.Deserialize(directory / "DifficultyMultipliers");
@@ -197,20 +597,20 @@ namespace ScrambledBugs
 		this->soulGems.Deserialize(directory / "SoulGems");
 		this->staffExperience.Deserialize(directory / "StaffExperience");
 
-		Settings::Deserialize(directory / "AccumulatingMagnitude.json", this->accumulatingMagnitude);
-		Settings::Deserialize(directory / "AlreadyCaughtPickpocketing.json", this->alreadyCaughtPickpocketing);
-		Settings::Deserialize(directory / "AttachHitEffectArt.json", this->attachHitEffectArt);
-		Settings::Deserialize(directory / "CloakHitEffects.json", this->cloakHitEffects);
-		Settings::Deserialize(directory / "DeferredHitEffects.json", this->deferredHitEffects);
-		Settings::Deserialize(directory / "EnchantmentEffectPower.json", this->enchantmentEffectPower);
-		Settings::Deserialize(directory / "EquipBestAmmunition.json", this->equipBestAmmunition);
-		Settings::Deserialize(directory / "LeveledCharacters.json", this->leveledCharacters);
-		Settings::Deserialize(directory / "LockpickingExperience.json", this->lockpickingExperience);
-		Settings::Deserialize(directory / "PoisonResistance.json", this->poisonResistance);
-		Settings::Deserialize(directory / "PowerAttackStamina.json", this->powerAttackStamina);
-		Settings::Deserialize(directory / "ReflectDamage.json", this->reflectDamage);
-		Settings::Deserialize(directory / "ScrollExperience.json", this->scrollExperience);
-		Settings::Deserialize(directory / "SteepSlopes.json", this->steepSlopes);
+		this->accumulatingMagnitude      = Settings::Parse<bool>(directory / "AccumulatingMagnitude.json");
+		this->alreadyCaughtPickpocketing = Settings::Parse<bool>(directory / "AlreadyCaughtPickpocketing.json");
+		this->attachHitEffectArt         = Settings::Parse<bool>(directory / "AttachHitEffectArt.json");
+		this->cloakHitEffects            = Settings::Parse<bool>(directory / "CloakHitEffects.json");
+		this->deferredHitEffects         = Settings::Parse<bool>(directory / "DeferredHitEffects.json");
+		this->enchantmentEffectPower     = Settings::Parse<bool>(directory / "EnchantmentEffectPower.json");
+		this->equipBestAmmunition        = Settings::Parse<bool>(directory / "EquipBestAmmunition.json");
+		this->leveledCharacters          = Settings::Parse<bool>(directory / "LeveledCharacters.json");
+		this->lockpickingExperience      = Settings::Parse<bool>(directory / "LockpickingExperience.json");
+		this->poisonResistance           = Settings::Parse<bool>(directory / "PoisonResistance.json");
+		this->powerAttackStamina         = Settings::Parse<bool>(directory / "PowerAttackStamina.json");
+		this->reflectDamage              = Settings::Parse<bool>(directory / "ReflectDamage.json");
+		this->scrollExperience           = Settings::Parse<bool>(directory / "ScrollExperience.json");
+		this->steepSlopes                = Settings::Parse<bool>(directory / "SteepSlopes.json");
 
 		return *this;
 	}
@@ -242,6 +642,93 @@ namespace ScrambledBugs
 		return json;
 	}
 
+	void Settings::Patches::Load()
+	{
+		this->difficultyMultipliers.Load();
+		this->perkEntryPoints.Load();
+		this->soulGems.Load();
+		this->staffExperience.Load();
+
+		if (this->accumulatingMagnitude)
+		{
+			ScrambledBugs::Patches::AccumulatingMagnitude::Load(this->accumulatingMagnitude);
+		}
+
+		if (this->alreadyCaughtPickpocketing)
+		{
+			ScrambledBugs::Patches::AlreadyCaughtPickpocketing::Load(this->alreadyCaughtPickpocketing);
+		}
+
+		if (this->attachHitEffectArt)
+		{
+			ScrambledBugs::Patches::AttachHitEffectArt::Load(this->attachHitEffectArt);
+		}
+
+		if (this->cloakHitEffects)
+		{
+			ScrambledBugs::Patches::CloakHitEffects::Load(this->cloakHitEffects);
+		}
+
+		if (this->deferredHitEffects)
+		{
+			ScrambledBugs::Patches::DeferredHitEffects::Load(this->deferredHitEffects);
+		}
+
+		if (this->equipBestAmmunition)
+		{
+			ScrambledBugs::Patches::EquipBestAmmunition::Load(this->equipBestAmmunition);
+		}
+
+		if (this->leveledCharacters)
+		{
+			ScrambledBugs::Patches::LeveledCharacters::Load(this->leveledCharacters);
+		}
+
+		if (this->lockpickingExperience)
+		{
+			ScrambledBugs::Patches::LockpickingExperience::Load(this->lockpickingExperience);
+		}
+
+		if (this->poisonResistance)
+		{
+			ScrambledBugs::Patches::PoisonResistance::Load(this->poisonResistance);
+		}
+
+		if (this->powerAttackStamina)
+		{
+			ScrambledBugs::Patches::PowerAttackStamina::Load(this->powerAttackStamina);
+		}
+
+		if (this->reflectDamage)
+		{
+			ScrambledBugs::Patches::ReflectDamage::Load(this->reflectDamage);
+		}
+
+		if (this->scrollExperience)
+		{
+			ScrambledBugs::Patches::ScrollExperience::Load(this->scrollExperience);
+		}
+
+		if (this->steepSlopes)
+		{
+			ScrambledBugs::Patches::SteepSlopes::Load(this->steepSlopes);
+		}
+	}
+
+	void Settings::Patches::PostLoad()
+	{
+		this->difficultyMultipliers.PostLoad();
+		this->perkEntryPoints.PostLoad();
+		this->soulGems.PostLoad();
+		this->staffExperience.PostLoad();
+
+		// Must be loaded after the Conditions Target Magic Effects plugin
+		if (this->enchantmentEffectPower)
+		{
+			ScrambledBugs::Patches::EnchantmentEffectPower::Load(this->enchantmentEffectPower);
+		}
+	}
+
 	Settings::Settings(const std::filesystem::path& directory)
 	{
 		try
@@ -256,18 +743,14 @@ namespace ScrambledBugs
 		}
 	}
 
-	void Settings::Deserialize(const std::filesystem::path& path, bool& boolean)
+	Settings::Fixes& Settings::GetFixes()
 	{
-		SPDLOG_INFO("Deserializing... \"{}\"", path.string());
-
-		nlohmann::json::parse(std::ifstream(path)).at("boolean").get_to(boolean);
+		return this->fixes;
 	}
 
-	void Settings::Deserialize(const std::filesystem::path& path, float& number)
+	Settings::Patches& Settings::GetPatches()
 	{
-		SPDLOG_INFO("Deserializing... \"{}\"", path.string());
-
-		nlohmann::json::parse(std::ifstream(path)).at("number").get_to(number);
+		return this->patches;
 	}
 
 	Settings& Settings::GetSingleton()
@@ -297,206 +780,28 @@ namespace ScrambledBugs
 
 	void Settings::Load()
 	{
-		SPDLOG_INFO("Loading...\n{}", this->Serialize().dump(1, '\t'));
-
-		if (this->fixes.quickShot.quickShot)
-		{
-			ScrambledBugs::Fixes::QuickShot::Fix(this->fixes.quickShot.quickShot, this->fixes.quickShot.playbackSpeed);
-		}
-
-		if (this->fixes.activateFurniture)
-		{
-			ScrambledBugs::Fixes::ActivateFurniture::Fix(this->fixes.activateFurniture);
-		}
-
-		if (this->fixes.actorValuePercentage)
-		{
-			ScrambledBugs::Fixes::ActorValuePercentage::Fix(this->fixes.actorValuePercentage);
-		}
-
-		if (this->fixes.enchantmentCost)
-		{
-			ScrambledBugs::Fixes::EnchantmentCost::Fix(this->fixes.enchantmentCost);
-		}
-
-		if (this->fixes.hitEffectRaceCondition)
-		{
-			ScrambledBugs::Fixes::HitEffectRaceCondition::Fix(this->fixes.hitEffectRaceCondition);
-		}
-
-		if (this->fixes.impactEffectCrash)
-		{
-			ScrambledBugs::Fixes::ImpactEffectCrash::Fix(this->fixes.impactEffectCrash);
-		}
-
-		if (this->fixes.ingredientRespawn)
-		{
-			ScrambledBugs::Fixes::IngredientRespawn::Fix(this->fixes.ingredientRespawn);
-		}
-
-		if (this->fixes.isCurrentSpell)
-		{
-			ScrambledBugs::Fixes::IsCurrentSpell::Fix(this->fixes.isCurrentSpell);
-		}
-
-		if (this->fixes.leftHandPowerAttacks)
-		{
-			ScrambledBugs::Fixes::LeftHandPowerAttacks::Fix(this->fixes.leftHandPowerAttacks);
-		}
-
-		if (this->fixes.magicEffectFlags)
-		{
-			ScrambledBugs::Fixes::MagicEffectFlags::Fix(this->fixes.magicEffectFlags);
-		}
-
-		if (this->fixes.modifyArmorWeightPerkEntryPoint)
-		{
-			ScrambledBugs::Fixes::ModifyArmorWeightPerkEntryPoint::Fix(this->fixes.modifyArmorWeightPerkEntryPoint);
-		}
-
-		if (this->fixes.openEffectArchetype)
-		{
-			ScrambledBugs::Fixes::OpenEffectArchetype::Fix(this->fixes.openEffectArchetype);
-		}
-
-		if (this->fixes.powerCooldowns)
-		{
-			ScrambledBugs::Fixes::PowerCooldowns::Fix(this->fixes.powerCooldowns);
-		}
-
-		if (this->fixes.projectileFadeDuration)
-		{
-			ScrambledBugs::Fixes::ProjectileFadeDuration::Fix(this->fixes.projectileFadeDuration);
-		}
-
-		if (this->fixes.scrollEquipState)
-		{
-			ScrambledBugs::Fixes::ScrollEquipState::Fix(this->fixes.scrollEquipState);
-		}
-
-		if (this->fixes.terrainImpactEffects)
-		{
-			ScrambledBugs::Fixes::TerrainImpactEffects::Fix(this->fixes.terrainImpactEffects);
-		}
-
-		if (this->fixes.trainingMenu)
-		{
-			ScrambledBugs::Fixes::TrainingMenu::Fix(this->fixes.trainingMenu);
-		}
-
-		if (this->fixes.weaponCharge)
-		{
-			ScrambledBugs::Fixes::WeaponCharge::Fix(this->fixes.weaponCharge);
-		}
-
-		if (this->patches.difficultyMultipliers.commandedActors || this->patches.difficultyMultipliers.teammates)
-		{
-			ScrambledBugs::Patches::DifficultyMultipliers::Patch(this->patches.difficultyMultipliers.commandedActors, this->patches.difficultyMultipliers.teammates);
-		}
-
-		if (this->patches.perkEntryPoints.applySpells)
-		{
-			ScrambledBugs::Patches::PerkEntryPoints::ApplySpells::Patch(this->patches.perkEntryPoints.applySpells, this->patches.perkEntryPoints.castSpells);
-		}
-		else if (this->patches.perkEntryPoints.castSpells)
-		{
-			ScrambledBugs::Patches::PerkEntryPoints::CastSpells::Patch(this->patches.perkEntryPoints.castSpells);
-		}
-
-		if (this->patches.soulGems.black || this->patches.soulGems.underfilled)
-		{
-			ScrambledBugs::Patches::SoulGems::Patch(this->patches.soulGems.black, this->patches.soulGems.underfilled);
-		}
-
-		if (this->patches.staffExperience.staffExperience)
-		{
-			ScrambledBugs::Patches::StaffExperience::Patch(this->patches.staffExperience.staffExperience, this->patches.staffExperience.ignoreEnchantmentCost);
-		}
-
-		if (this->patches.accumulatingMagnitude)
-		{
-			ScrambledBugs::Patches::AccumulatingMagnitude::Patch(this->patches.accumulatingMagnitude);
-		}
-
-		if (this->patches.alreadyCaughtPickpocketing)
-		{
-			ScrambledBugs::Patches::AlreadyCaughtPickpocketing::Patch(this->patches.alreadyCaughtPickpocketing);
-		}
-
-		if (this->patches.attachHitEffectArt)
-		{
-			ScrambledBugs::Patches::AttachHitEffectArt::Patch(this->patches.attachHitEffectArt);
-		}
-
-		if (this->patches.cloakHitEffects)
-		{
-			ScrambledBugs::Patches::CloakHitEffects::Patch(this->patches.cloakHitEffects);
-		}
-
-		if (this->patches.deferredHitEffects)
-		{
-			ScrambledBugs::Patches::DeferredHitEffects::Patch(this->patches.deferredHitEffects);
-		}
-
-		if (this->patches.equipBestAmmunition)
-		{
-			ScrambledBugs::Patches::EquipBestAmmunition::Patch(this->patches.equipBestAmmunition);
-		}
-
-		if (this->patches.leveledCharacters)
-		{
-			ScrambledBugs::Patches::LeveledCharacters::Patch(this->patches.leveledCharacters);
-		}
-
-		if (this->patches.lockpickingExperience)
-		{
-			ScrambledBugs::Patches::LockpickingExperience::Patch(this->patches.lockpickingExperience);
-		}
-
-		if (this->patches.poisonResistance)
-		{
-			ScrambledBugs::Patches::PoisonResistance::Patch(this->patches.poisonResistance);
-		}
-
-		if (this->patches.powerAttackStamina)
-		{
-			ScrambledBugs::Patches::PowerAttackStamina::Patch(this->patches.powerAttackStamina);
-		}
-
-		if (this->patches.reflectDamage)
-		{
-			ScrambledBugs::Patches::ReflectDamage::Patch(this->patches.reflectDamage);
-		}
-
-		if (this->patches.scrollExperience)
-		{
-			ScrambledBugs::Patches::ScrollExperience::Patch(this->patches.scrollExperience);
-		}
-
-		if (this->patches.steepSlopes)
-		{
-			ScrambledBugs::Patches::SteepSlopes::Patch(this->patches.steepSlopes);
-		}
-
-		SPDLOG_INFO("Loaded.\n{}", this->Serialize().dump(1, '\t'));
+		this->fixes.Load();
+		this->patches.Load();
 	}
 
 	void Settings::PostLoad()
 	{
-		SPDLOG_INFO("Post Loading...\n{}", this->Serialize().dump(1, '\t'));
+		this->fixes.PostLoad();
+		this->patches.PostLoad();
+	}
+}
 
-		// Must be fixed after the Perk Entry Points: Apply Spells fix
-		if (this->fixes.killCamera)
+ScrambledBugs::Interface::Settings<ScrambledBugs::Interface::Version::Version22>* __cdecl GetSettings(ScrambledBugs::Interface::Version version)
+{
+	switch (version)
+	{
+		case ScrambledBugs::Interface::Version::Version22:
 		{
-			ScrambledBugs::Fixes::KillCamera::Fix(this->fixes.killCamera);
+			return std::addressof(ScrambledBugs::Settings::GetSingleton());
 		}
-
-		// Must be patched after the Conditions Target Magic Effects plugin
-		if (this->patches.enchantmentEffectPower)
+		default:
 		{
-			ScrambledBugs::Patches::EnchantmentEffectPower::Patch(this->patches.enchantmentEffectPower);
+			return nullptr;
 		}
-
-		SPDLOG_INFO("Post Loaded.\n{}", this->Serialize().dump(1, '\t'));
 	}
 }

@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Patches::PerkEntryPoints
 {
-	void CastSpells::Patch(bool& castSpells)
+	void CastSpells::Load(bool& castSpells)
 	{
 		if (!Patterns::Patches::PerkEntryPoints::CastSpells::ApplyBashingSpell() ||
 			!Patterns::Patches::PerkEntryPoints::CastSpells::ApplyCombatHitSpell() ||

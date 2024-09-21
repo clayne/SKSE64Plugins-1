@@ -11,7 +11,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void TerrainImpactEffects::Fix(bool& terrainImpactEffects)
+	void TerrainImpactEffects::Load(bool& terrainImpactEffects)
 	{
 		if (!Patterns::Fixes::TerrainImpactEffects::FreeCellMopp())
 		{

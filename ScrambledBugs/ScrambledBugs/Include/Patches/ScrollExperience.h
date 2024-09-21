@@ -9,6 +9,6 @@ namespace ScrambledBugs::Patches
 	class ScrollExperience
 	{
 	public:
-		static void Patch(bool& scrollExperience);
+		static void Load(bool& scrollExperience);
 	};
 }

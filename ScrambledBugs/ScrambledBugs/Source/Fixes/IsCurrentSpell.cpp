@@ -9,7 +9,7 @@
 namespace ScrambledBugs::Fixes
 {
 	/* The IsCurrentSpell condition and console command treat the spell item as the casting source and the casting source as the spell item */
-	void IsCurrentSpell::Fix(bool& isCurrentSpell)
+	void IsCurrentSpell::Load(bool& isCurrentSpell)
 	{
 		auto* isCurrentSpellScriptFunction = Skyrim::ScriptCompiler::GetFunctionDefinition(Skyrim::ScriptOutput::kIsCurrentSpell);
 

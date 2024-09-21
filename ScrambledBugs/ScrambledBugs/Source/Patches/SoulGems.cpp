@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void SoulGems::Patch(bool& black, bool& underfilled)
+	void SoulGems::Load(bool& black, bool& underfilled)
 	{
 		SoulGems::black_       = black;
 		SoulGems::underfilled_ = underfilled;

@@ -9,7 +9,7 @@ namespace ScrambledBugs::Fixes
 	class ActivateFurniture
 	{
 	public:
-		static void Fix(bool& activateFurniture);
+		static void Load(bool& activateFurniture);
 
 	private:
 		static bool Activate(

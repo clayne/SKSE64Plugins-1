@@ -17,5 +17,13 @@ namespace Skyrim
 
 			return function(stealValue);
 		}
+
+		float GetDifficultyMultiplier(Utility::Enumeration<DifficultyLevel, std::uint32_t> difficultyLevel, Utility::Enumeration<ActorValue, std::uint32_t> actorValue, bool isPlayer)
+		{
+			auto* function{ reinterpret_cast<decltype(GameplayFormulas::GetDifficultyMultiplier)*>(
+				Addresses::GameplayFormulas::GetDifficultyMultiplier()) };
+
+			return function(difficultyLevel, actorValue, isPlayer);
+		}
 	}
 }

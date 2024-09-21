@@ -10,7 +10,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void AlreadyCaughtPickpocketing::Patch(bool& alreadyCaughtPickpocketing)
+	void AlreadyCaughtPickpocketing::Load(bool& alreadyCaughtPickpocketing)
 	{
 		if (!Patterns::Patches::AlreadyCaughtPickpocketing::IsAngryWithPlayer() ||
 			!Patterns::Patches::AlreadyCaughtPickpocketing::HasBeenPickpocketed())

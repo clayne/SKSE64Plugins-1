@@ -9,6 +9,6 @@ namespace ScrambledBugs::Fixes
 	class TerrainImpactEffects
 	{
 	public:
-		static void Fix(bool& terrainImpactEffects);
+		static void Load(bool& terrainImpactEffects);
 	};
 }

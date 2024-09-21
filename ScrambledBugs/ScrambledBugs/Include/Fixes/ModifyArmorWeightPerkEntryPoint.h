@@ -9,7 +9,7 @@ namespace ScrambledBugs::Fixes
 	class ModifyArmorWeightPerkEntryPoint
 	{
 	public:
-		static void Fix(bool& modifyArmorWeightPerkEntryPoint);
+		static void Load(bool& modifyArmorWeightPerkEntryPoint);
 
 	private:
 		static void ApplyPerkEntry(Skyrim::BGSEntryPointPerkEntry* entryPointPerkEntry, Skyrim::Actor* perkOwner);

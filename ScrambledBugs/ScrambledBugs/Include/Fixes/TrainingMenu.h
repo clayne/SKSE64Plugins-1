@@ -9,6 +9,6 @@ namespace ScrambledBugs::Fixes
 	class TrainingMenu
 	{
 	public:
-		static void Fix(bool& trainingMenu);
+		static void Load(bool& trainingMenu);
 	};
 }

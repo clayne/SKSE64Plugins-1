@@ -10,7 +10,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void TrainingMenu::Fix(bool& trainingMenu)
+	void TrainingMenu::Load(bool& trainingMenu)
 	{
 		if (!Patterns::Fixes::TrainingMenu::GetPermanentActorValue())
 		{

@@ -6,18 +6,15 @@
 
 namespace ScrambledBugs::Fixes
 {
+	// Special Edition
+	// Anniversary Edition
 	class KillCamera
 	{
 	public:
-		static void Fix(bool& killCamera);
+		static void Load(bool& killCamera);
 
 	private:
-		static void ApplyCombatHitSpell(
-			Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint,
-			Skyrim::Actor*                                                         perkOwner,
-			Skyrim::TESObjectWEAP*                                                 weapon,
-			Skyrim::Actor*                                                         target,
-			Skyrim::SpellItem**                                                    result);
+		static void ApplyCombatHitSpell(Utility::Enumeration<Skyrim::BGSEntryPoint::EntryPoint, std::uint32_t> entryPoint, Skyrim::Actor* perkOwner, ...);
 
 		static decltype(KillCamera::ApplyCombatHitSpell)* applyCombatHitSpell_;
 	};

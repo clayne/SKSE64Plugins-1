@@ -11,7 +11,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void ReflectDamage::Patch(bool& reflectDamage)
+	void ReflectDamage::Load(bool& reflectDamage)
 	{
 		if (!Patterns::Patches::ReflectDamage::CompareReflectDamage())
 		{

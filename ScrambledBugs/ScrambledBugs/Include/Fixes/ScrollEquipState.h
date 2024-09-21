@@ -6,10 +6,12 @@
 
 namespace ScrambledBugs::Fixes
 {
+	// Special Edition
+	// Anniversary Edition
 	class ScrollEquipState
 	{
 	public:
-		static void Fix(bool& scrollEquipState);
+		static void Load(bool& scrollEquipState);
 
 	private:
 		class Actor

@@ -84,18 +84,18 @@ namespace Skyrim
 				return address;
 			}
 
-			/// <summary>1.5.97.0: SkyrimSE.exe + 0x5E4800, 1.6.318.0: SkyrimSE.exe + 0x60A730</summary>
-			std::uintptr_t AdjustHealthDamageToDifficulty()
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x5D0F40, 1.6.318.0: SkyrimSE.exe + 0x5F5520</summary>
+			std::uintptr_t CanKillMe()
 			{
-				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(36506, 37506)) };
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(36247, 37229)) };
 
 				return address;
 			}
 
-			/// <summary>1.5.97.0: SkyrimSE.exe + 0x5D0F40, 1.6.318.0: SkyrimSE.exe + 0x5F5520</summary>
-			std::uintptr_t CanBeKilledBy()
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x5E4800, 1.6.318.0: SkyrimSE.exe + 0x60A730</summary>
+			std::uintptr_t DifficultyLevelAdjustHealthModifier()
 			{
-				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(36247, 37229)) };
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(36506, 37506)) };
 
 				return address;
 			}
@@ -128,6 +128,14 @@ namespace Skyrim
 			std::uintptr_t GetControllingActor()
 			{
 				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(37762, 38707)) };
+
+				return address;
+			}
+
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x88B6B0, 1.6.318.0: SkyrimSE.exe + 0x8BAA10</summary>
+			std::uintptr_t GetEquipState()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(50945, 51822)) };
 
 				return address;
 			}
@@ -398,7 +406,7 @@ namespace Skyrim
 		namespace BGSEntryPointFunction
 		{
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x1DD3BA0, 1.6.318.0: SkyrimSE.exe + 0x1E67C90</summary>
-			std::uintptr_t EntryPointFunctionArgumentCount()
+			std::uintptr_t EntryPointFunctionArgumentCounts()
 			{
 				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(502187, 369210)) };
 
@@ -1134,6 +1142,14 @@ namespace Skyrim
 			std::uintptr_t CalculatePickpocketSkillUse()
 			{
 				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(25919, 26502)) };
+
+				return address;
+			}
+
+			/// <summary>1.5.97.0: SkyrimSE.exe + 0x3C1200, 1.6.318.0: SkyrimSE.exe + 0x3D8C80</summary>
+			std::uintptr_t GetDifficultyMultiplier()
+			{
+				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(25920, 26503)) };
 
 				return address;
 			}
@@ -2051,14 +2067,6 @@ namespace Skyrim
 
 					return address;
 				}
-			}
-
-			/// <summary>1.5.97.0: SkyrimSE.exe + 0x3C1200, 1.6.318.0: SkyrimSE.exe + 0x3D8C80</summary>
-			std::uintptr_t GetDifficultyMultiplier()
-			{
-				static auto address{ Relocation::AddressLibrary::GetSingleton().GetAddress(SKYRIM_RELOCATE(25920, 26503)) };
-
-				return address;
 			}
 
 			/// <summary>1.5.97.0: SkyrimSE.exe + 0x2F26EF8, 1.6.318.0: SkyrimSE.exe + 0x2FC19C8</summary>

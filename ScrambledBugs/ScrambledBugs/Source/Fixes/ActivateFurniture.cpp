@@ -8,7 +8,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void ActivateFurniture::Fix(bool& activateFurniture)
+	void ActivateFurniture::Load(bool& activateFurniture)
 	{
 		ActivateFurniture::activate_ = reinterpret_cast<decltype(ActivateFurniture::activate_)>(
 			Utility::Memory::ReadVirtualFunction(

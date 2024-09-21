@@ -233,7 +233,7 @@
     <ClInclude Include="Include\Shared\Skyrim\D\DecalData.h" />
     <ClInclude Include="Include\Shared\Skyrim\D\DetectionPriority.h" />
     <ClInclude Include="Include\Shared\Skyrim\D\DeviceConnectEvent.h" />
-    <ClInclude Include="Include\Shared\Skyrim\D\Difficulty.h" />
+    <ClInclude Include="Include\Shared\Skyrim\D\DifficultyLevel.h" />
     <ClInclude Include="Include\Shared\Skyrim\D\DirectionalAmbientLighting.h" />
     <ClInclude Include="Include\Shared\Skyrim\D\DualValueModifierEffect.h" />
     <ClInclude Include="Include\Shared\Skyrim\Events.h" />

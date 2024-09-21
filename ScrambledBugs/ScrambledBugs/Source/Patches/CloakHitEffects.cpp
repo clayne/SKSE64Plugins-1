@@ -10,7 +10,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void CloakHitEffects::Patch(bool& cloakHitEffects)
+	void CloakHitEffects::Load(bool& cloakHitEffects)
 	{
 		if (!Patterns::Patches::CloakHitEffects::IsNotCostliestEffect())
 		{

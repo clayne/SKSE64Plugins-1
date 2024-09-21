@@ -6,7 +6,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void OpenEffectArchetype::Fix(bool& openEffectArchetype)
+	void OpenEffectArchetype::Load(bool& openEffectArchetype)
 	{
 		reinterpret_cast<decltype(OpenEffectArchetype::CheckTarget)**>(Skyrim::Addresses::ActiveEffectFactory::CheckTargetFunctions())[Utility::Conversion::ToUnderlying(Skyrim::EffectArchetypes::ArchetypeID::kLock)] = std::addressof(OpenEffectArchetype::CheckTarget);
 		reinterpret_cast<decltype(OpenEffectArchetype::CheckTarget)**>(Skyrim::Addresses::ActiveEffectFactory::CheckTargetFunctions())[Utility::Conversion::ToUnderlying(Skyrim::EffectArchetypes::ArchetypeID::kOpen)] = std::addressof(OpenEffectArchetype::CheckTarget);

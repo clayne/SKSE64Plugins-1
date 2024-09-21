@@ -9,7 +9,7 @@ namespace ScrambledBugs::Patches
 	class SteepSlopes
 	{
 	public:
-		static void Patch(bool& steepSlopes);
+		static void Load(bool& steepSlopes);
 
 	private:
 		static float GetScale(Skyrim::Actor* actor);

@@ -8,6 +8,7 @@
 #include "Shared/Skyrim/B/BGSEntryPoint.h"
 #include "Shared/Skyrim/B/BSTEventSink.h"
 #include "Shared/Skyrim/D/DetectionPriority.h"
+#include "Shared/Skyrim/E/EquipState.h"
 #include "Shared/Skyrim/I/IPostAnimationChannelUpdateFunctor.h"
 #include "Shared/Skyrim/M/MagicTarget.h"
 #include "Shared/Skyrim/N/NiPointer.h"
@@ -373,8 +374,8 @@ namespace Skyrim
 
 		// Member functions
 		bool                    AddSpellItem(SpellItem* spellItem);
-		float                   AdjustHealthDamageToDifficulty(float damage, float onlyReduceDamage) const;
-		bool                    CanBeKilledBy(Actor* attacker) const;
+		bool                    CanKillMe(Actor* attacker) const;
+		float                   DifficultyLevelAdjustHealthModifier(float damage, float onlyReduceDamage) const;
 		void                    ForceDetect(Actor* target);
 		float                   GetActorValueModifier(Utility::Enumeration<ActorValueModifier, std::uint32_t> actorValueModifier, Utility::Enumeration<ActorValue, std::uint32_t> actorValue) const;
 		float                   GetArmorRating(InventoryEntryData* inventoryEntryData) const;
@@ -386,6 +387,7 @@ namespace Skyrim
 		TESShout*               GetEquippedShout() const;
 		TESObjectWEAP*          GetEquippedWeapon(bool leftHand) const;
 		InventoryEntryData*     GetEquippedWeaponInventoryEntryData(bool leftHand) const;
+		EquipState              GetEquipState(TESForm* form, ExtraDataList* rightHandExtraDataList, ExtraDataList* leftHandExtraDataList) const;
 		NiAVObject*             GetHeadNode() const;
 		HitData*                GetLastHitData() const;
 		NiPoint3&               GetLineOfSightLocation(NiPoint3& result, Utility::Enumeration<LineOfSightLocation, std::uint32_t> lineOfSightLocation) const;

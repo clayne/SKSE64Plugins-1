@@ -75,9 +75,10 @@
     <ClInclude Include="Include\Patches\SteepSlopes.h" />
     <ClInclude Include="Include\Patches\SoulGems.h" />
     <ClInclude Include="Include\Patterns.h" />
-    <ClInclude Include="Include\PrecompiledHeader.h" />
-    <ClInclude Include="Include\Serialization.h" />
     <ClInclude Include="Include\Settings.h" />
+    <ClInclude Include="Include\PrecompiledHeader.h" />
+    <ClInclude Include="Include\ScrambledBugsInterface.h" />
+    <ClInclude Include="Include\Serialization.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Fixes\ActivateFurniture.cpp" />
@@ -119,6 +120,7 @@
     <ClCompile Include="Source\Patches\SteepSlopes.cpp" />
     <ClCompile Include="Source\Patches\SoulGems.cpp" />
     <ClCompile Include="Source\Patterns.cpp" />
+    <ClCompile Include="Source\Settings.cpp" />
     <ClCompile Include="Source\PrecompiledHeader.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseAnniversaryEdition|x64'">Create</PrecompiledHeader>
@@ -127,7 +129,6 @@
     </ClCompile>
     <ClCompile Include="Source\ScrambledBugs.cpp" />
     <ClCompile Include="Source\Serialization.cpp" />
-    <ClCompile Include="Source\Settings.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

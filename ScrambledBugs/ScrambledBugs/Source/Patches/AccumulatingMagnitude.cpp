@@ -13,7 +13,7 @@ namespace ScrambledBugs::Patches
 	* Swap the maximum magnitude and the accumulation rate (magnitude) of accumulating magnitude magic effects
 	* The power of accumulating magnitude magic effects then affects the maximum magnitude and not the accumulation rate (magnitude)
 	*/
-	void AccumulatingMagnitude::Patch(bool& accumulatingMagnitude)
+	void AccumulatingMagnitude::Load(bool& accumulatingMagnitude)
 	{
 		AccumulatingMagnitude::instantiate_ =
 			reinterpret_cast<decltype(AccumulatingMagnitude::instantiate_)*>(Skyrim::Addresses::ActiveEffectFactory::InstantiateFunctions())[Utility::Conversion::ToUnderlying(Skyrim::EffectArchetypes::ArchetypeID::kAccumulatingMagnitude)];

@@ -2,8 +2,8 @@
 
 #include <algorithm>  // std::count_if, std::none_of
 #include <cmath>      // std::floor, std::round
-#include <cstdarg>    // Variadic functions
-#include <cstddef>    // std::size_t
+#include <cstdarg>    // Variadic arguments
+#include <cstddef>    // Type support
 #include <cstdint>    // Fixed width integer types
 #include <filesystem> // Filesystem library
 #include <functional> // std::logical_not

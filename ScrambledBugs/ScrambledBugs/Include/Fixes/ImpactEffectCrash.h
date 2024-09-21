@@ -9,7 +9,7 @@ namespace ScrambledBugs::Fixes
 	class ImpactEffectCrash
 	{
 	public:
-		static void Fix(bool& impactEffectCrash);
+		static void Load(bool& impactEffectCrash);
 
 	private:
 		static bool DecalApplier(Skyrim::BSTempEffectSimpleDecal* temporaryEffectSimpleDecal);

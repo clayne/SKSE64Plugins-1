@@ -11,7 +11,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void IngredientRespawn::Fix(bool& ingredientRespawn)
+	void IngredientRespawn::Load(bool& ingredientRespawn)
 	{
 		if (!Patterns::Fixes::IngredientRespawn::SetEmpty())
 		{

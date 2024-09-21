@@ -9,7 +9,7 @@ namespace ScrambledBugs::Fixes
 	class HitEffectRaceCondition
 	{
 	public:
-		static void Fix(bool& hitEffectRaceCondition);
+		static void Load(bool& hitEffectRaceCondition);
 
 	private:
 		static bool ShouldUpdate(Skyrim::ActiveEffect* activeEffect);

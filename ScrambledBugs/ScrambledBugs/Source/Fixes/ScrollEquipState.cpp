@@ -2,7 +2,6 @@
 
 #include "Fixes/ScrollEquipState.h"
 
-#include "Addresses.h"
 #include "Shared/Utility/Conversion.h"
 #include "Shared/Utility/Memory.h"
 
@@ -10,17 +9,17 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void ScrollEquipState::Fix(bool& scrollEquipState)
+	void ScrollEquipState::Load(bool& scrollEquipState)
 	{
 		Utility::Memory::SafeWriteAbsoluteJump(
-			Addresses::Fixes::ScrollEquipState::Actor::GetEquipState,
-			reinterpret_cast<std::uintptr_t>(std::addressof(ScrollEquipState::Actor::GetEquipState)));
+			Skyrim::Addresses::Actor::GetEquipState(),
+			reinterpret_cast<std::uintptr_t>(std::addressof(Actor::GetEquipState)));
 
 #ifdef SKYRIM_ANNIVERSARY_EDITION
 		Utility::Memory::SafeWriteVirtualFunction(
 			Skyrim::Addresses::StandardItemData::VirtualFunctionTable(),
 			0x3,
-			reinterpret_cast<std::uintptr_t>(std::addressof(ScrollEquipState::StandardItemData::GetEquipState)));
+			reinterpret_cast<std::uintptr_t>(std::addressof(StandardItemData::GetEquipState)));
 #endif
 	}
 
@@ -38,14 +37,14 @@ namespace ScrambledBugs::Fixes
 			case Skyrim::FormType::kScroll:
 			case Skyrim::FormType::kSpell:
 			{
-				auto leftEquip  = actor->selectedMagicItems[Utility::Conversion::ToUnderlying(Skyrim::Actor::SlotType::kLeftHand)] == form;
-				auto rightEquip = actor->selectedMagicItems[Utility::Conversion::ToUnderlying(Skyrim::Actor::SlotType::kRightHand)] == form;
+				auto leftHand  = actor->selectedMagicItems[Utility::Conversion::ToUnderlying(Skyrim::Actor::SlotType::kLeftHand)] == form;
+				auto rightHand = actor->selectedMagicItems[Utility::Conversion::ToUnderlying(Skyrim::Actor::SlotType::kRightHand)] == form;
 
-				if (leftEquip)
+				if (leftHand)
 				{
-					return rightEquip ? Skyrim::EquipState::kLeftAndRightEquip : Skyrim::EquipState::kLeftEquip;
+					return rightHand ? Skyrim::EquipState::kLeftAndRightEquip : Skyrim::EquipState::kLeftEquip;
 				}
-				else if (rightEquip)
+				else if (rightHand)
 				{
 					return Skyrim::EquipState::kRightEquip;
 				}
@@ -101,20 +100,18 @@ namespace ScrambledBugs::Fixes
 
 	Skyrim::EquipState ScrollEquipState::StandardItemData::GetEquipState(Skyrim::StandardItemData* standardItemData)
 	{
-		auto equipState{ Skyrim::EquipState::kNone };
-
 		auto ownerReference = standardItemData->ownerHandle.get();
 
-		if (ownerReference && ownerReference->formType == Skyrim::FormType::kActor)
+		if (!ownerReference || ownerReference->formType != Skyrim::FormType::kActor)
 		{
-			auto* ownerActor             = static_cast<Skyrim::Actor*>(ownerReference.get());
-			auto* inventoryEntryData     = standardItemData->inventoryEntryData;
-			auto* rightHandExtraDataList = inventoryEntryData->GetWornExtraDataList(false, false);
-			auto* leftHandExtraDataList  = inventoryEntryData->GetWornExtraDataList(false, true);
-
-			equipState = Actor::GetEquipState(ownerActor, inventoryEntryData->boundObject, rightHandExtraDataList, leftHandExtraDataList);
+			return Skyrim::EquipState::kNone;
 		}
 
-		return equipState;
+		auto* ownerActor             = static_cast<Skyrim::Actor*>(ownerReference.get());
+		auto* inventoryEntryData     = standardItemData->inventoryEntryData;
+		auto* rightHandExtraDataList = inventoryEntryData->GetWornExtraDataList(false, false);
+		auto* leftHandExtraDataList  = inventoryEntryData->GetWornExtraDataList(false, true);
+
+		return ownerActor->GetEquipState(inventoryEntryData->boundObject, rightHandExtraDataList, leftHandExtraDataList);
 	}
 }

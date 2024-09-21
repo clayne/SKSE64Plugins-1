@@ -141,13 +141,16 @@ namespace ScrambledBugs::Patterns
 
 		namespace AttachHitEffectArt
 		{
-			bool SetCastPermanentMagicFunctorFlags()
+			namespace CastPermanentMagicFunctor
 			{
-				return Relocation::AddressLibrary::MatchPattern(
-					Addresses::Patches::AttachHitEffectArt::SetCastPermanentMagicFunctorFlags, // 2 + 2 = 0x4
-					0x24ui8, 0xF9ui8,                                                          // and al, F9
-					0x0Cui8, 0x01ui8                                                           // or al, 1
-				);
+				bool SetFlags()
+				{
+					return Relocation::AddressLibrary::MatchPattern(
+						Addresses::Patches::AttachHitEffectArt::CastPermanentMagicFunctor::SetFlags, // 2 + 2 = 0x4
+						0x24ui8, 0xF9ui8,                                                            // and al, F9
+						0x0Cui8, 0x01ui8                                                             // or al, 1
+					);
+				}
 			}
 		}
 

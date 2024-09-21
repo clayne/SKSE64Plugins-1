@@ -9,7 +9,7 @@
 
 namespace ScrambledBugs::Fixes
 {
-	void QuickShot::Fix(bool& quickShot, float& playbackSpeed)
+	void QuickShot::Load(bool& quickShot, float& playbackSpeed)
 	{
 		if (playbackSpeed <= 0.0F)
 		{

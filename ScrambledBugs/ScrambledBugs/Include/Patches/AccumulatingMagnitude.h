@@ -9,7 +9,7 @@ namespace ScrambledBugs::Patches
 	class AccumulatingMagnitude
 	{
 	public:
-		static void Patch(bool& accumulatingMagnitude);
+		static void Load(bool& accumulatingMagnitude);
 
 	private:
 		static float                                    FindMaximumWardPower(Skyrim::MagicTarget* magicTarget, Skyrim::ActiveEffect* finishedActiveEffect);

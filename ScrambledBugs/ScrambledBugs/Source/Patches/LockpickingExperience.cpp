@@ -10,7 +10,7 @@
 
 namespace ScrambledBugs::Patches
 {
-	void LockpickingExperience::Patch(bool& lockpickingExperience)
+	void LockpickingExperience::Load(bool& lockpickingExperience)
 	{
 		if (!Patterns::Patches::LockpickingExperience::HasNotBeenUnlocked())
 		{
